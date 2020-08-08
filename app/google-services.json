@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "291180154100",
+    "firebase_url": "https://arup-424ee.firebaseio.com",
+    "project_id": "arup-424ee",
+    "storage_bucket": "arup-424ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291180154100:android:90fd97312bea57e46562a1",
+        "android_client_info": {
+          "package_name": "com.example.arup_hotdesking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "291180154100-08du4e1o6tkv5vfjmdhgfcv2ss7jjkls.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPgazr-zqJPnsgsjQDckO2q5OOBOETP2s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "291180154100-08du4e1o6tkv5vfjmdhgfcv2ss7jjkls.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
