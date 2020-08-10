@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
@@ -19,10 +21,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView textView = findViewById(R.id.textView);
+        TextView textView1 = findViewById(R.id.textView2);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         assert user != null;
         textView.setText(user.getEmail());
+        textView1.setText(user.getDisplayName() == null ? "Arup Employee" : user.getDisplayName());
+
         Button button = findViewById(R.id.signOutButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,5 +41,6 @@ public class MainActivity extends AppCompatActivity {
     private void updateUI(){
         Intent intent = new Intent(MainActivity.this,LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 }

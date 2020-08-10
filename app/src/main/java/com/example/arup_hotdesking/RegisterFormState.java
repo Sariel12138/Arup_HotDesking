@@ -2,22 +2,26 @@ package com.example.arup_hotdesking;
 
 import androidx.annotation.Nullable;
 
-public class LoginFormState {
+public class RegisterFormState {
     @Nullable
     private Integer emailError;
     @Nullable
     private Integer passwordError;
+    @Nullable
+    private Integer confirmPasswordError;
     private boolean isDataValid;
 
-    LoginFormState(@Nullable Integer usernameError, @Nullable Integer passwordError) {
+    RegisterFormState(@Nullable Integer usernameError, @Nullable Integer passwordError, @Nullable Integer confirmPasswordError) {
         this.emailError = usernameError;
         this.passwordError = passwordError;
+        this.confirmPasswordError = confirmPasswordError;
         this.isDataValid = false;
     }
 
-    LoginFormState(boolean isDataValid) {
+    RegisterFormState(boolean isDataValid) {
         this.emailError = null;
         this.passwordError = null;
+        this.confirmPasswordError = null;
         this.isDataValid = isDataValid;
     }
 
@@ -30,6 +34,9 @@ public class LoginFormState {
     Integer getPasswordError() {
         return passwordError;
     }
+
+    @Nullable
+    public Integer getConfirmPasswordError() { return confirmPasswordError; }
 
     boolean isDataValid() {
         return isDataValid;

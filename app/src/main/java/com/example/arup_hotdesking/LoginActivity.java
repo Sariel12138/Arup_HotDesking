@@ -43,22 +43,13 @@ public class LoginActivity extends AppCompatActivity {
         ActivityLoginBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_login);
         binding.setData(loginViewModel);
         binding.setLifecycleOwner(this);
+        mAuth = FirebaseAuth.getInstance();
+
         final Button signInButton = binding.signInButton;
+        Button registerButton = binding.registerButton;
         final EditText emailEditText = binding.email;
         final EditText passwordEditText = binding.password;
         final ProgressBar progressBar = binding.progressBar;
-        mAuth = FirebaseAuth.getInstance();
-
-        /*signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText emailText = findViewById(R.id.email);
-                EditText passwordText = findViewById(R.id.password);
-                String email = emailText.getText().toString().trim();
-                String password = passwordText.getText().toString().trim();
-                signIn(email,password);
-            }
-        });*/
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -67,8 +58,8 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 signInButton.setEnabled(loginFormState.isDataValid());
-                if (loginFormState.getUsernameError() != null) {
-                    emailEditText.setError(getString(loginFormState.getUsernameError()));
+                if (loginFormState.getEmailError() != null) {
+                    emailEditText.setError(getString(loginFormState.getEmailError()));
                 }
                 if (loginFormState.getPasswordError() != null) {
                     passwordEditText.setError(getString(loginFormState.getPasswordError()));
@@ -100,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    progressBar.setVisibility(View.VISIBLE);
                     signIn(emailEditText.getText().toString(),
                             passwordEditText.getText().toString());
                 }
@@ -113,6 +105,13 @@ public class LoginActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
                 signIn(emailEditText.getText().toString(),
                         passwordEditText.getText().toString());
+            }
+        });
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToRegister();
             }
         });
     }
@@ -153,5 +152,11 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+    }
+
+    private void navigateToRegister(){
+        Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
