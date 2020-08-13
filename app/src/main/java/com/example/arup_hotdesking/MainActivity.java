@@ -11,8 +11,6 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Objects;
-
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
@@ -33,12 +31,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
-                updateUI();
+                signOutUI();
             }
         });
     }
 
-    private void updateUI(){
+    private void signOutUI(){
         Intent intent = new Intent(MainActivity.this,LoginActivity.class);
         startActivity(intent);
         finish();
