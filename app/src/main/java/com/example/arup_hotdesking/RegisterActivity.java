@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.multidex.MultiDex;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,26 +23,37 @@ import android.widget.Toast;
 
 import com.example.arup_hotdesking.databinding.ActivityRegisterBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "Register";
     private RegisterViewModel registerViewModel;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //MultiDex.install(this);
         //setContentView(R.layout.activity_register);
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
         ActivityRegisterBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_register);
         binding.setData(registerViewModel);
         binding.setLifecycleOwner(this);
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
 
         final EditText displayNameText = binding.displayName;
         final EditText emailText = binding.email;
@@ -113,7 +125,24 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void register(String email, String password, final String displayName) {
-        mAuth.createUserWithEmailAndPassword(email, password)
+
+        Map<String, Object> user = new HashMap<>();
+        user.put("email",email);
+        user.put("password",password);
+        db.collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Log.d("firestore","DocumentSnapshot added with ID: " + documentReference.getId());
+            }
+        })
+        .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w("firestore",e);
+            }
+        });
+
+        /*mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -131,7 +160,7 @@ public class RegisterActivity extends AppCompatActivity {
                             updateUI(null);
                         }
                     }
-                });
+                });*/
     }
 
     private void updateDisplayName(FirebaseUser user,String displayName) {
