@@ -27,11 +27,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
     private static final String TAG = "EmailPassword";
 
 
@@ -44,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         binding.setData(loginViewModel);
         binding.setLifecycleOwner(this);
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         final Button signInButton = binding.signInButton;
         Button registerButton = binding.registerButton;
@@ -123,7 +128,22 @@ public class LoginActivity extends AppCompatActivity {
         updateUI(currentUser);
     }
 
-    private void signIn(String email, String password){
+    private void signIn(final String email, final String password){
+        DocumentReference employees = db.collection("employees").document(email);
+        employees.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    if(documentSnapshot.exists()){
+                        authenticate(email,password);
+                    }
+                }
+            }
+        });
+    }
+
+    private void authenticate(String email, String password){
         Log.d(TAG, "signIn:" + email);
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override

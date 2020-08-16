@@ -95,7 +95,6 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Confirm Password"
-            android:imeOptions="actionDone"
             android:inputType="textPassword"
             app:layout_constraintBottom_toTopOf="@+id/guideline10"
             app:layout_constraintEnd_toEndOf="@+id/password"
