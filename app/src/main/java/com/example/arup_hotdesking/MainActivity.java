@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.arup_hotdesking.databinding.ActivityMainBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,15 +27,14 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private final String key = "ADMIN";
     private MainViewModel viewModel;
-    private ActivityMainBinding binding;
     private FirebaseFirestore db;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
-        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        setContentView(R.layout.activity_main);
+        /*viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
         binding.setData(viewModel);
         binding.setLifecycleOwner(this);
@@ -52,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
                 mAuth.signOut();
                 signOutUI();
             }
-        });
+        });*/
     }
 
-    @Override
+    /*@Override
     protected void onStart() {
         super.onStart();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -126,5 +124,5 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }
