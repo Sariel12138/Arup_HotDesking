@@ -2,9 +2,15 @@ package com.example.arup_hotdesking;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.SavedStateViewModelFactory;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,26 +20,46 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class MainActivity extends AppCompatActivity {
-    private FirebaseAuth mAuth;
-    private final String key = "ADMIN";
-    private MainViewModel viewModel;
-    private FirebaseFirestore db;
 
+public class MainActivity extends AppCompatActivity {
+//    private FirebaseAuth mAuth;
+//    private final String key = "ADMIN";
+//    private MainViewModel viewModel;
+//    private FirebaseFirestore db;
+
+    private DrawerLayout mDrawerLayout;
+    private NavigationView mNavigationView;
+    private NavController navController;
+    private AppBarConfiguration appBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        mDrawerLayout = findViewById(R.id.drawerlayout);
+        mNavigationView = findViewById(R.id.navigationview);
+        navController = Navigation.findNavController(this, R.id.fragment);
+        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph())
+                .setDrawerLayout(mDrawerLayout)
+                .build();
+
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        LoadNavItemSelListener();
+
+
         /*viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
         binding.setData(viewModel);
@@ -52,6 +78,38 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
     }
+
+    private void LoadNavItemSelListener() {
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case 1://home page
+                       // navController.navigate(R.id.....);
+                        break;
+                    case 2://book a seat
+                        //navController.navigate(R.id.....);
+                        break;
+                    case 3://manage users
+                        break;
+                    case 4://log out
+                        break;
+                }
+
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+
+                return true;
+            }
+        });
+
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavigationUI.navigateUp(navController, appBarConfiguration);
+        return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
+    }
+
 
     /*@Override
     protected void onStart() {
