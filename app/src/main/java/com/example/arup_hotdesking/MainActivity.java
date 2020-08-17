@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) this.findViewById(R.id.toolbar);
+        toolbar = (Toolbar) this.findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         mDrawerLayout = findViewById(R.id.drawerlayout);
@@ -51,16 +51,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
-                    case 1://home page
+                    case R.id.homepage://home page
                         navController.navigate(R.layout.fragment_profile);
                         break;
-                    case 2://book a seat
+                    case R.id.bookseat://book a seat
                         //navController.navigate(R.id.....);
                         break;
-                    case 3://manage users
+                    case R.id.manageuser://manage users
                         navController.navigate(R.layout.fragment_admin);
                         break;
-                    case 4://log out
+                    case R.id.logout://log out
                         FirebaseAuth.getInstance().signOut();
                         signOutUI();
                         break;
