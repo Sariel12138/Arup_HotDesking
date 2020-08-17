@@ -51,13 +51,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
-                    case R.id.homepage://home page
+                    case R.id.profileFragment://home page
                         navController.navigate(R.id.profileFragment);
                         break;
                     case R.id.bookseat://book a seat
                         //navController.navigate(R.id.....);
                         break;
-                    case R.id.manageuser://manage users
+                    case R.id.adminFragment://manage users
                         navController.navigate(R.id.adminFragment);
                         break;
                     case R.id.logout://log out
