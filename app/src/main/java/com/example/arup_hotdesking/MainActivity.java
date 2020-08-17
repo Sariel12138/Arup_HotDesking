@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                         //navController.navigate(R.id.....);
                         break;
                     case 3://manage users
+                        navController.navigate(R.id.action_profileFragment_to_adminFragment);
                         break;
                     case 4://log out
                         break;

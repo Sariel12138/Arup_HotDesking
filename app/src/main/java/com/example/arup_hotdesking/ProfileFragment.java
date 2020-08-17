@@ -68,7 +68,6 @@ public class ProfileFragment extends Fragment {
     }
 
     private void initUI(final FirebaseUser user){
-        final TextView adminText = binding.admintext;
         MainActivity mainActivity = (MainActivity) getActivity();
         final MenuItem adminMenuItem = mainActivity.getAdminMenuItem();
         if(user != null){
@@ -79,8 +78,6 @@ public class ProfileFragment extends Fragment {
                     if (task.isSuccessful()) {
                         DocumentSnapshot documentSnapshot = task.getResult();
                         if (documentSnapshot.exists() && documentSnapshot.getBoolean("admin")) {
-                            adminText.setVisibility(View.VISIBLE);
-                            //adminText.setClickable(true);
                             adminMenuItem.setVisible(true);
                         }
                     }
@@ -91,13 +88,6 @@ public class ProfileFragment extends Fragment {
             TextView textView1 = binding.textView2;
             textView.setText(user.getEmail());
             textView1.setText(user.getDisplayName() == null ? "Arup Employee" : user.getDisplayName());
-            /*adminText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    NavController controller = Navigation.findNavController(v);
-                    controller.navigate(R.id.action_profileFragment_to_adminFragment);
-                }
-            });*/
             Button signOutButton = binding.signOutButton;
             signOutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
