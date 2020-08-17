@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/homepage"
+        android:id="@+id/profileFragment"
         android:title="Homepage" />
     <item
         android:id="@+id/bookseat"
         android:title="Book a seat" />
     <item
-        android:id="@+id/manageuser"
+        android:id="@+id/adminFragment"
         android:title="Manage users"
         android:visible="false" />
     <item
