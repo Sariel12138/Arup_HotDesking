@@ -9,7 +9,8 @@
         android:title="Book a seat" />
     <item
         android:id="@+id/manageuser"
-        android:title="Manage users" />
+        android:title="Manage users"
+        android:visible="false" />
     <item
         android:id="@+id/logout"
         android:title="Log out" />

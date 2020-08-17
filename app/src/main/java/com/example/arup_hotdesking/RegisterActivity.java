@@ -138,22 +138,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        /*//write user into users
-        Map<String, Object> user = new HashMap<>();
-        user.put("email",email);
-        user.put("password",password);
-        db.collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Log.d("firestore","DocumentSnapshot added with ID: " + documentReference.getId());
-            }
-        })
-        .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.w("firestore",e);
-            }
-        });*/
     }
 
     private void authenticate(String email, String password, final String displayName){

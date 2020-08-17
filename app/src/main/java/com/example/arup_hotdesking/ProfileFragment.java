@@ -1,5 +1,6 @@
 package com.example.arup_hotdesking;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,6 +13,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -57,8 +59,8 @@ public class ProfileFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
-        //mViewModel = ViewModelProviders.of(this).get(AdminViewModel.class);
-        // TODO: Use the ViewModel
+
+
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -67,6 +69,8 @@ public class ProfileFragment extends Fragment {
 
     private void initUI(final FirebaseUser user){
         final TextView adminText = binding.admintext;
+        MainActivity mainActivity = (MainActivity) getActivity();
+        final MenuItem adminMenuItem = mainActivity.getAdminMenuItem();
         if(user != null){
             DocumentReference employees = db.collection("employees").document(user.getEmail());
             employees.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -77,6 +81,7 @@ public class ProfileFragment extends Fragment {
                         if (documentSnapshot.exists() && documentSnapshot.getBoolean("admin")) {
                             adminText.setVisibility(View.VISIBLE);
                             //adminText.setClickable(true);
+                            adminMenuItem.setVisible(true);
                         }
                     }
                 }
@@ -86,13 +91,13 @@ public class ProfileFragment extends Fragment {
             TextView textView1 = binding.textView2;
             textView.setText(user.getEmail());
             textView1.setText(user.getDisplayName() == null ? "Arup Employee" : user.getDisplayName());
-            adminText.setOnClickListener(new View.OnClickListener() {
+            /*adminText.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     NavController controller = Navigation.findNavController(v);
                     controller.navigate(R.id.action_profileFragment_to_adminFragment);
                 }
-            });
+            });*/
             Button signOutButton = binding.signOutButton;
             signOutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
