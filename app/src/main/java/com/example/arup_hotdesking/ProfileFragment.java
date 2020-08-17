@@ -88,20 +88,6 @@ public class ProfileFragment extends Fragment {
             TextView textView1 = binding.textView2;
             textView.setText(user.getEmail());
             textView1.setText(user.getDisplayName() == null ? "Arup Employee" : user.getDisplayName());
-            Button signOutButton = binding.signOutButton;
-            signOutButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mAuth.signOut();
-                    signOutUI();
-                }
-            });
         }
-    }
-
-    private void signOutUI(){
-        Intent intent = new Intent(getActivity(),LoginActivity.class);
-        startActivity(intent);
-        getActivity().finish();
     }
 }

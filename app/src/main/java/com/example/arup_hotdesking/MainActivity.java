@@ -10,9 +10,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,19 +47,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void LoadNavItemSelListener() {
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @SuppressLint("ResourceType")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case 1://home page
-                       // navController.navigate(R.id.....);
+                        navController.navigate(R.layout.fragment_profile);
                         break;
                     case 2://book a seat
                         //navController.navigate(R.id.....);
                         break;
                     case 3://manage users
-                        navController.navigate(R.id.action_profileFragment_to_adminFragment);
+                        navController.navigate(R.layout.fragment_admin);
                         break;
                     case 4://log out
+                        FirebaseAuth.getInstance().signOut();
+                        signOutUI();
                         break;
                 }
 
@@ -76,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
 
     public MenuItem getAdminMenuItem(){
         return mNavigationView.getMenu().getItem(2);
+    }
+
+    private void signOutUI(){
+        Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }
