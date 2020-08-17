@@ -41,7 +41,15 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        LoadNavItemSelListener();
+        //LoadNavItemSelListener();
+        mNavigationView.getMenu().getItem(R.id.logout).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                FirebaseAuth.getInstance().signOut();
+                signOutUI();
+                return true;
+            }
+        });
 
     }
 
