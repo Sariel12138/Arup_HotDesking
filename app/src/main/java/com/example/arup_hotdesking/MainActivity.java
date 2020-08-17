@@ -47,21 +47,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void LoadNavItemSelListener() {
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @SuppressLint("ResourceType")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()){
-                    case R.id.profileFragment://home page
-                        break;
-                    case R.id.bookseat://book a seat
-                        //navController.navigate(R.id.....);
-                        break;
-                    case R.id.adminFragment://manage users
-                        break;
-                    case R.id.logout://log out
-                        FirebaseAuth.getInstance().signOut();
-                        signOutUI();
-                        break;
+                if (menuItem.getItemId() == R.id.logout) {//log out
+                    FirebaseAuth.getInstance().signOut();
+                    signOutUI();
                 }
 
                 mDrawerLayout.closeDrawer(GravityCompat.START);
