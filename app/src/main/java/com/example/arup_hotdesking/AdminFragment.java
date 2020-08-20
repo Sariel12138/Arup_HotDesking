@@ -33,6 +33,7 @@ public class AdminFragment extends Fragment {
     }
 
     private AdminViewModel mViewModel;
+    private FirebaseFirestore db;
 
 
 
@@ -42,8 +43,18 @@ public class AdminFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater,R.layout.activity_main,container,false);
         binding.setData(mViewModel);
         binding.setLifecycleOwner(requireActivity());
-        final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(AdminViewModel.class);
+        //mViewModel = ViewModelProviders.of(this).get(AdminViewModel.class);
+        // TODO: Use the ViewModel
+        db = FirebaseFirestore.getInstance();
         final EditText editText = binding.newEmail;
         Button button = binding.Add;
         button.setOnClickListener(new View.OnClickListener() {
@@ -66,15 +77,6 @@ public class AdminFragment extends Fragment {
 
             }
         });
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(AdminViewModel.class);
-        //mViewModel = ViewModelProviders.of(this).get(AdminViewModel.class);
-        // TODO: Use the ViewModel
     }
 
 }
