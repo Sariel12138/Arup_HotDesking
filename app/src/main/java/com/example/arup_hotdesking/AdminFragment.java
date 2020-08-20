@@ -40,7 +40,7 @@ public class AdminFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater,R.layout.activity_main,container,false);
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_admin,container,false);
         binding.setData(mViewModel);
         binding.setLifecycleOwner(requireActivity());
 
