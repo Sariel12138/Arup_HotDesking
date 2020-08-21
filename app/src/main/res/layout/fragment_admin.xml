@@ -26,7 +26,7 @@
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.32" />
+            app:layout_constraintVertical_bias="0.198" />
 
         <Button
             android:id="@+id/Add"
@@ -38,6 +38,6 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.713" />
+            app:layout_constraintVertical_bias="0.754" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
