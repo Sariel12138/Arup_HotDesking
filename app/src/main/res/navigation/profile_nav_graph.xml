@@ -15,4 +15,9 @@
         android:name="com.example.arup_hotdesking.AdminFragment"
         android:label="fragment_admin"
         tools:layout="@layout/fragment_admin" />
+    <fragment
+        android:id="@+id/seatsFragment"
+        android:name="com.example.arup_hotdesking.seats"
+        android:label="fragment_seats"
+        tools:layout="@layout/fragment_seats" />
 </navigation>

@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                         navController.navigate(R.id.profileFragment);
                         break;
                     case R.id.bookseat://book a seat
-                        //navController.navigate(R.id.....);
+                        navController.navigate(R.id.seatsFragment);
                         break;
                     case R.id.adminFragment://manage users
                         navController.navigate(R.id.adminFragment);
