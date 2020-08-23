@@ -6,13 +6,13 @@
     <data>
         <variable
             name="data"
-            type="com.example.arup_hotdesking.ProfileViewModel" />
+            type="com.example.arup_hotdesking.model.UserViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ProfileFragment">
+        tools:context=".controller.ProfileFragment">
 
         <TextView
             android:id="@+id/textView"

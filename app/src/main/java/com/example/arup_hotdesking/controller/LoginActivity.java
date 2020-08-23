@@ -1,4 +1,4 @@
-package com.example.arup_hotdesking;
+package com.example.arup_hotdesking.controller;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,7 +21,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.arup_hotdesking.R;
 import com.example.arup_hotdesking.databinding.ActivityLoginBinding;
+import com.example.arup_hotdesking.model.LoginFormState;
+import com.example.arup_hotdesking.model.LoginRegisterViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -33,7 +36,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private LoginViewModel loginViewModel;
+    private LoginRegisterViewModel registerViewModel;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private static final String TAG = "EmailPassword";
@@ -43,9 +46,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
-        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-        ActivityLoginBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_login);
-        binding.setData(loginViewModel);
+        registerViewModel = new ViewModelProvider(this).get(LoginRegisterViewModel.class);
+        ActivityLoginBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        binding.setData(registerViewModel);
         binding.setLifecycleOwner(this);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -56,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = binding.password;
         final ProgressBar progressBar = binding.progressBar;
 
-        loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
+        registerViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
             public void onChanged(@Nullable LoginFormState loginFormState) {
                 if (loginFormState == null) {
@@ -85,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                loginViewModel.loginDataChanged(emailEditText.getText().toString(),
+                registerViewModel.loginDataChanged(emailEditText.getText().toString(),
                         passwordEditText.getText().toString());
             }
         };

@@ -1,4 +1,4 @@
-package com.example.arup_hotdesking;
+package com.example.arup_hotdesking.controller;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
@@ -15,10 +15,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.arup_hotdesking.R;
 import com.example.arup_hotdesking.databinding.FragmentAdminBinding;
+import com.example.arup_hotdesking.model.UserViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -32,7 +33,7 @@ public class AdminFragment extends Fragment {
         return new AdminFragment();
     }
 
-    private AdminViewModel mViewModel;
+    private UserViewModel mViewModel;
     private FirebaseFirestore db;
 
 
@@ -40,7 +41,7 @@ public class AdminFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_admin,container,false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin,container,false);
         binding.setData(mViewModel);
         binding.setLifecycleOwner(requireActivity());
 
@@ -51,7 +52,7 @@ public class AdminFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(AdminViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         //mViewModel = ViewModelProviders.of(this).get(AdminViewModel.class);
         // TODO: Use the ViewModel
         db = FirebaseFirestore.getInstance();

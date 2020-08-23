@@ -1,4 +1,4 @@
-package com.example.arup_hotdesking;
+package com.example.arup_hotdesking.model;
 
 import androidx.annotation.Nullable;
 
@@ -26,19 +26,19 @@ public class RegisterFormState {
     }
 
     @Nullable
-    Integer getEmailError() {
+    public Integer getEmailError() {
         return emailError;
     }
 
     @Nullable
-    Integer getPasswordError() {
+    public Integer getPasswordError() {
         return passwordError;
     }
 
     @Nullable
     public Integer getConfirmPasswordError() { return confirmPasswordError; }
 
-    boolean isDataValid() {
+    public boolean isDataValid() {
         return isDataValid;
     }
 }

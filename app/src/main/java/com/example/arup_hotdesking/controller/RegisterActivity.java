@@ -1,4 +1,4 @@
-package com.example.arup_hotdesking;
+package com.example.arup_hotdesking.controller;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +17,10 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.arup_hotdesking.R;
 import com.example.arup_hotdesking.databinding.ActivityRegisterBinding;
+import com.example.arup_hotdesking.model.LoginRegisterViewModel;
+import com.example.arup_hotdesking.model.RegisterFormState;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -30,7 +33,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "Register";
-    private RegisterViewModel registerViewModel;
+    private LoginRegisterViewModel registerViewModel;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
 
@@ -39,8 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //MultiDex.install(this);
         //setContentView(R.layout.activity_register);
-        registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
-        ActivityRegisterBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_register);
+        registerViewModel = new ViewModelProvider(this).get(LoginRegisterViewModel.class);
+        ActivityRegisterBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_register);
         binding.setData(registerViewModel);
         binding.setLifecycleOwner(this);
         mAuth = FirebaseAuth.getInstance();

@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.arup_hotdesking.ProfileFragment"
+        android:name="com.example.arup_hotdesking.controller.ProfileFragment"
         android:label="User profile"
         tools:layout="@layout/fragment_profile"/>
     <fragment
         android:id="@+id/adminFragment"
-        android:name="com.example.arup_hotdesking.AdminFragment"
+        android:name="com.example.arup_hotdesking.controller.AdminFragment"
         android:label="fragment_admin"
         tools:layout="@layout/fragment_admin" />
     <fragment
         android:id="@+id/seatsFragment"
-        android:name="com.example.arup_hotdesking.SeatFragment"
+        android:name="com.example.arup_hotdesking.controller.SeatFragment"
         android:label="fragment_seats"
         tools:layout="@layout/fragment_seats" />
 </navigation>
