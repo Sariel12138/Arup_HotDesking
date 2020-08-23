@@ -37,9 +37,14 @@ public class SeatFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_seats, container, false);
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+    }
 
 
-/*    @Override
+    /*    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final OptionPicker picker = new OptionPicker(this.getActivity(), list);

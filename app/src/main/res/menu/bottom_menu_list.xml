@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/planta1Fragment"
+        android:title="1F" />
+    <item
+        android:id="@+id/planta2Fragment"
+        android:title="2F" />
+    <item
+        android:id="@+id/planta3Fragment"
+        android:title="3F" />
+    <item
+        android:id="@+id/planta4Fragment"
+        android:title="4F" />
+    <item
+        android:id="@+id/planta5Fragment"
+        android:title="5F" />
+    <item
+        android:id="@+id/plantaBajaFragment"
+        android:title="Baja" />
+</menu>

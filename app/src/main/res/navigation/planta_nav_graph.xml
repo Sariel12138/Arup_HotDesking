@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/planta_nav_graph"
+    app:startDestination="@id/planta1Fragment">
+
+    <fragment
+        android:id="@+id/planta1Fragment"
+        android:name="com.example.arup_hotdesking.controller.Planta1Fragment"
+        android:label="planta_1"
+        tools:layout="@layout/planta_1" />
+    <fragment
+        android:id="@+id/planta2Fragment"
+        android:name="com.example.arup_hotdesking.controller.Planta2Fragment"
+        android:label="planta_2"
+        tools:layout="@layout/planta_2" />
+    <fragment
+        android:id="@+id/planta3Fragment"
+        android:name="com.example.arup_hotdesking.controller.Planta3Fragment"
+        android:label="planta_3"
+        tools:layout="@layout/planta_3" />
+    <fragment
+        android:id="@+id/planta4Fragment"
+        android:name="com.example.arup_hotdesking.controller.Planta4Fragment"
+        android:label="planta_4"
+        tools:layout="@layout/planta_4" />
+    <fragment
+        android:id="@+id/planta5Fragment"
+        android:name="com.example.arup_hotdesking.controller.Planta5Fragment"
+        android:label="planta_5"
+        tools:layout="@layout/planta_5" />
+    <fragment
+        android:id="@+id/plantaBajaFragment"
+        android:name="com.example.arup_hotdesking.controller.PlantaBajaFragment"
+        android:label="planta_baja"
+        tools:layout="@layout/planta_baja" />
+</navigation>
