@@ -3,20 +3,25 @@
 
     <item
         android:id="@+id/planta1Fragment"
+        android:icon="@drawable/ic_baseline_looks_one_24"
         android:title="1F" />
     <item
         android:id="@+id/planta2Fragment"
+        android:icon="@drawable/ic_baseline_looks_two_24"
         android:title="2F" />
     <item
         android:id="@+id/planta3Fragment"
+        android:icon="@drawable/ic_baseline_looks_3_24"
         android:title="3F" />
     <item
         android:id="@+id/planta4Fragment"
+        android:icon="@drawable/ic_baseline_looks_4_24"
         android:title="4F" />
     <item
         android:id="@+id/planta5Fragment"
+        android:icon="@drawable/ic_baseline_looks_5_24"
         android:title="5F" />
-    <item
-        android:id="@+id/plantaBajaFragment"
-        android:title="Baja" />
+<!--    <item-->
+<!--        android:id="@+id/plantaBajaFragment"-->
+<!--        android:title="Baja" />-->
 </menu>

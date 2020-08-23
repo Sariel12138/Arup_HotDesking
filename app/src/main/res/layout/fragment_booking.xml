@@ -7,8 +7,13 @@
     tools:context=".controller.BookingFragment">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        app:backgroundTint="#C6C6C6"
+        app:itemTextColor="#403C3C"
+        app:labelVisibilityMode="labeled"
+        app:layout_behavior=".utils.BottomNavigationBehavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
