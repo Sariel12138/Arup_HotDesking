@@ -20,4 +20,9 @@
         android:name="com.example.arup_hotdesking.controller.SeatFragment"
         android:label="fragment_seats"
         tools:layout="@layout/fragment_seats" />
+    <fragment
+        android:id="@+id/bookingFragment"
+        android:name="com.example.arup_hotdesking.controller.BookingFragment"
+        android:label="fragment_booking"
+        tools:layout="@layout/fragment_booking" />
 </navigation>

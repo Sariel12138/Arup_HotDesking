@@ -19,12 +19,12 @@ import cn.qqtheme.framework.picker.OptionPicker;
 
 public class SeatFragment extends Fragment {
 
-//    private String[] list = new String[]{"Planta 1", "Planta 2", "Planta 3", "Planta 4", "Planta 5", "Planta Baja"};
-//    Button selectPlanta;
-//    View map;
-//    TextView choosedPlanta;
-//    ViewGroup parent;
-//    int Cindex;
+    private String[] list = new String[]{"Planta 1", "Planta 2", "Planta 3", "Planta 4", "Planta 5", "Planta Baja"};
+    Button selectPlanta;
+    View map;
+    TextView choosedPlanta;
+    ViewGroup parent;
+    int Cindex;
 
     public SeatFragment() {
         // Required empty public constructor
@@ -37,14 +37,10 @@ public class SeatFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_seats, container, false);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-    }
 
 
-    /*    @Override
+
+        @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final OptionPicker picker = new OptionPicker(this.getActivity(), list);
@@ -106,5 +102,5 @@ public class SeatFragment extends Fragment {
         });
 
 
-    }*/
+    }
 }
