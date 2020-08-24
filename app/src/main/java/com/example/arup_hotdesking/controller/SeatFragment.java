@@ -69,7 +69,7 @@ public class SeatFragment extends Fragment {
                         switch (index){
                             case 0://planta 1
                                 parent.removeView(map);
-                                map = getLayoutInflater().inflate(R.layout.planta_1, parent, false);
+                                map = getLayoutInflater().inflate(R.layout.planta_recepcion, parent, false);
                                 parent.addView(map, Cindex);
                                 break;
                             case 1://planta 2

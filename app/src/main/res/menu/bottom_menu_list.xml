@@ -2,26 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/planta1Fragment"
+        android:id="@+id/recepcion"
         android:icon="@drawable/ic_baseline_looks_one_24"
-        android:title="1F" />
+        android:title="Recepcion" />
     <item
-        android:id="@+id/planta2Fragment"
+        android:id="@+id/workspace"
         android:icon="@drawable/ic_baseline_looks_two_24"
-        android:title="2F" />
-    <item
-        android:id="@+id/planta3Fragment"
-        android:icon="@drawable/ic_baseline_looks_3_24"
-        android:title="3F" />
-    <item
-        android:id="@+id/planta4Fragment"
-        android:icon="@drawable/ic_baseline_looks_4_24"
-        android:title="4F" />
-    <item
-        android:id="@+id/planta5Fragment"
-        android:icon="@drawable/ic_baseline_looks_5_24"
-        android:title="5F" />
+        android:title="WorkSpace" />
 <!--    <item-->
-<!--        android:id="@+id/plantaBajaFragment"-->
-<!--        android:title="Baja" />-->
+<!--        android:id="@+id/planta3Fragment"-->
+<!--        android:icon="@drawable/ic_baseline_looks_3_24"-->
+<!--        android:title="3F" />-->
+<!--    <item-->
+<!--        android:id="@+id/planta4Fragment"-->
+<!--        android:icon="@drawable/ic_baseline_looks_4_24"-->
+<!--        android:title="4F" />-->
+<!--    <item-->
+<!--        android:id="@+id/planta5Fragment"-->
+<!--        android:icon="@drawable/ic_baseline_looks_5_24"-->
+<!--        android:title="5F" />-->
+    <item
+        android:id="@+id/baja"
+        android:icon="@drawable/ic_baseline_local_dining_24"
+        android:title="Baja" />
 </menu>

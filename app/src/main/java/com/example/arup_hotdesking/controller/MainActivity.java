@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public boolean onSupportNavigateUp() {
         NavigationUI.navigateUp(navController, appBarConfiguration);

@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.arup_hotdesking.R;
 
-public class Planta1Fragment extends Fragment {
+public class PlantaRecepcionFragment extends Fragment {
 
-    public Planta1Fragment(){
+    public PlantaRecepcionFragment(){
     }
 
 
@@ -21,7 +21,7 @@ public class Planta1Fragment extends Fragment {
 
 
 
-        return inflater.inflate(R.layout.planta_1, container, false);
+        return inflater.inflate(R.layout.planta_recepcion, container, false);
 
     }
 
