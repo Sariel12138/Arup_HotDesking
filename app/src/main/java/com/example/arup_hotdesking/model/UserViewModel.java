@@ -13,8 +13,8 @@ public class UserViewModel extends ViewModel {
         return workSpaceIcon;
     }
 
-    public void setWorkSpaceIcon(MutableLiveData<Drawable> workSpaceIcon) {
-        this.workSpaceIcon = workSpaceIcon;
+    public void setWorkSpaceIcon(Drawable icon) {
+        this.workSpaceIcon.setValue(icon);
     }
 
     public int getWorkSpace() {

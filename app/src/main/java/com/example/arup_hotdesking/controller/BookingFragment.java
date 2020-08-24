@@ -119,27 +119,27 @@ public class BookingFragment extends Fragment {
         popupMenu.getMenuInflater().inflate(R.menu.popup_menu,popupMenu.getMenu());
         popupMenu.show();
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            private int planta;
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.planta2:
-                        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomSelectedListener(R.id.planta2Fragment));
-                        navController.navigate(R.id.planta2Fragment);
+                        planta = R.id.planta2Fragment;
                         break;
                     case R.id.planta3:
-                        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomSelectedListener(R.id.planta3Fragment));
-                        navController.navigate(R.id.planta3Fragment);
+                        planta = R.id.planta3Fragment;
                         break;
                     case R.id.planta4:
-                        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomSelectedListener(R.id.planta4Fragment));
-                        navController.navigate(R.id.planta4Fragment);
+                        planta = R.id.planta4Fragment;
                         break;
                     case R.id.planta5:
-                        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomSelectedListener(R.id.planta5Fragment));
-                        navController.navigate(R.id.planta5Fragment);
+                        planta = R.id.planta5Fragment;
                         break;
                 }
-                bottomNavigationView.getMenu().getItem(1).setIcon(menuItem.getIcon());
+                bottomNavigationView.setOnNavigationItemSelectedListener(new BottomSelectedListener(planta));
+                userViewModel.setWorkSpace(planta);
+                navController.navigate(planta);
+                userViewModel.setWorkSpaceIcon(menuItem.getIcon());
                 return true;
             }
         });
