@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private static final String TAG = "EmailPassword";
+    private ProgressBar progressBar;
 
 
     @Override
@@ -57,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         Button registerButton = binding.registerButton;
         final EditText emailEditText = binding.email;
         final EditText passwordEditText = binding.password;
-        final ProgressBar progressBar = binding.progressBar;
+        progressBar = binding.progressBar;
 
         registerViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -142,6 +143,10 @@ public class LoginActivity extends AppCompatActivity {
                         authenticate(email,password);
                     }
                 }
+                else {
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(LoginActivity.this,getString(R.string.signinFailedString),Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -160,8 +165,9 @@ public class LoginActivity extends AppCompatActivity {
                 else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.getException());
-                    Toast.makeText(LoginActivity.this, "Authentication failed.",
-                            Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(LoginActivity.this, getString(R.string.authFailedString),
+                            Toast.LENGTH_LONG).show();
                 }
             }
 
