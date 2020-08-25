@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -21,7 +20,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 
 import com.example.arup_hotdesking.R;
 import com.example.arup_hotdesking.databinding.FragmentBookingBinding;
@@ -90,14 +88,14 @@ public class BookingFragment extends Fragment {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()){
-                case R.id.recepcion:
-                    navController.navigate(R.id.plantaRecepcionFragment);
+                case R.id.baja:
+                    navController.navigate(R.id.plantaBajaFragment);
                     break;
                 case R.id.workspace:
                     navController.navigate(itemID);
                     break;
-                case R.id.baja:
-                    navController.navigate(R.id.plantaBajaFragment);
+                case R.id.canteen:
+                    navController.navigate(R.id.plantaCanteenFragment);
                     break;
             }
             return true;
@@ -123,6 +121,9 @@ public class BookingFragment extends Fragment {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()){
+                    case R.id.planta1:
+                        planta = R.id.planta1Fragment;
+                        break;
                     case R.id.planta2:
                         planta = R.id.planta2Fragment;
                         break;
@@ -131,9 +132,6 @@ public class BookingFragment extends Fragment {
                         break;
                     case R.id.planta4:
                         planta = R.id.planta4Fragment;
-                        break;
-                    case R.id.planta5:
-                        planta = R.id.planta5Fragment;
                         break;
                 }
                 bottomNavigationView.setOnNavigationItemSelectedListener(new BottomSelectedListener(planta));

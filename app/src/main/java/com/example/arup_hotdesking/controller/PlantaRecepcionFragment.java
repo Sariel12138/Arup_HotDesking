@@ -21,7 +21,7 @@ public class PlantaRecepcionFragment extends Fragment {
 
 
 
-        return inflater.inflate(R.layout.planta_recepcion, container, false);
+        return inflater.inflate(R.layout.planta_1, container, false);
 
     }
 

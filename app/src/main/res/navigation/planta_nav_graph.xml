@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/planta_nav_graph"
-    app:startDestination="@id/plantaRecepcionFragment">
+    app:startDestination="@id/plantaBajaFragment">
 
     <fragment
-        android:id="@+id/plantaRecepcionFragment"
+        android:id="@+id/planta1Fragment"
         android:name="com.example.arup_hotdesking.controller.PlantaRecepcionFragment"
         android:label="planta_1"
-        tools:layout="@layout/planta_recepcion" />
+        tools:layout="@layout/planta_1" />
     <fragment
         android:id="@+id/planta2Fragment"
         android:name="com.example.arup_hotdesking.controller.Planta2Fragment"
@@ -26,10 +26,10 @@
         android:label="planta_4"
         tools:layout="@layout/planta_4" />
     <fragment
-        android:id="@+id/planta5Fragment"
+        android:id="@+id/plantaCanteenFragment"
         android:name="com.example.arup_hotdesking.controller.Planta5Fragment"
         android:label="planta_5"
-        tools:layout="@layout/planta_5" />
+        tools:layout="@layout/canteen" />
     <fragment
         android:id="@+id/plantaBajaFragment"
         android:name="com.example.arup_hotdesking.controller.PlantaBajaFragment"

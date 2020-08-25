@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +64,7 @@ public class SeatFragment extends Fragment {
                         switch (index){
                             case 0://planta 1
                                 parent.removeView(map);
-                                map = getLayoutInflater().inflate(R.layout.planta_recepcion, parent, false);
+                                map = getLayoutInflater().inflate(R.layout.planta_1, parent, false);
                                 parent.addView(map, Cindex);
                                 break;
                             case 1://planta 2
@@ -85,7 +84,7 @@ public class SeatFragment extends Fragment {
                                 break;
                             case 4://planta 5
                                 parent.removeView(map);
-                                map = getLayoutInflater().inflate(R.layout.planta_5, parent, false);
+                                map = getLayoutInflater().inflate(R.layout.canteen, parent, false);
                                 parent.addView(map, Cindex);
                                 break;
                             case 5://planta baja
