@@ -5,9 +5,16 @@ import android.graphics.drawable.Drawable;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class UserViewModel extends ViewModel {
     private int workSpace = 0;
     private MutableLiveData<Drawable> workSpaceIcon = new MutableLiveData<>();
+    private FirebaseFirestore db;
+
+    public UserViewModel(){
+        db = FirebaseFirestore.getInstance();
+    }
 
     public MutableLiveData<Drawable> getWorkSpaceIcon() {
         return workSpaceIcon;
@@ -23,5 +30,9 @@ public class UserViewModel extends ViewModel {
 
     public void setWorkSpace(int workSpace) {
         this.workSpace = workSpace;
+    }
+
+    public void getDesks(){
+        //TODO
     }
 }
