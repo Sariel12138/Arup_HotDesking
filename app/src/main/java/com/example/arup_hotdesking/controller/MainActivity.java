@@ -19,6 +19,9 @@ import com.example.arup_hotdesking.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
@@ -38,10 +41,9 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = findViewById(R.id.drawerlayout);
         mNavigationView = findViewById(R.id.navigationview);
         navController = Navigation.findNavController(this, R.id.fragment);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph())
+        appBarConfiguration = new AppBarConfiguration.Builder(R.id.profile_nav_graph,R.id.adminFragment,R.id.bookingFragment)
                 .setDrawerLayout(mDrawerLayout)
                 .build();
-
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         LoadNavItemSelListener();
 
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                         navController.navigate(R.id.profileFragment);
                         break;
                     case R.id.bookseat://book a seat
-                        navController.navigate(R.id.seatsFragment);
+                        navController.navigate(R.id.bookingFragment);
                         break;
                     case R.id.adminFragment://manage users
                         navController.navigate(R.id.adminFragment);

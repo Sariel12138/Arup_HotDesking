@@ -35,4 +35,9 @@
         android:name="com.example.arup_hotdesking.controller.PlantaBajaFragment"
         android:label="planta_baja"
         tools:layout="@layout/planta_baja" />
+    <fragment
+        android:id="@+id/courseFragment"
+        android:name="com.example.arup_hotdesking.controller.CourseFragment"
+        android:label="fragment_course"
+        tools:layout="@layout/fragment_course" />
 </navigation>

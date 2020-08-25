@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class UserViewModel extends ViewModel {
-    private int workSpace;
+    private int workSpace = 0;
     private MutableLiveData<Drawable> workSpaceIcon = new MutableLiveData<>();
 
     public MutableLiveData<Drawable> getWorkSpaceIcon() {

@@ -75,7 +75,7 @@ public class BookingFragment extends Fragment {
             }
         });
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomSelectedListener(R.id.planta2Fragment));
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomSelectedListener(userViewModel.getWorkSpace() == 0 ? R.id.courseFragment : userViewModel.getWorkSpace()));
         bottomNavigationView.setOnNavigationItemReselectedListener(new BottomReSelectedListener());
     }
 
