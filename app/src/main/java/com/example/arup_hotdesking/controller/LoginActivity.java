@@ -142,11 +142,14 @@ public class LoginActivity extends AppCompatActivity {
                     if(documentSnapshot.exists()){
                         authenticate(email,password);
                     }
+                    else {
+                        Toast.makeText(LoginActivity.this,getString(R.string.signinFailedString),Toast.LENGTH_LONG).show();
+                    }
                 }
                 else {
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(LoginActivity.this,getString(R.string.signinFailedString),Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this,getString(R.string.connectionFailed),Toast.LENGTH_LONG).show();
                 }
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
@@ -165,9 +168,7 @@ public class LoginActivity extends AppCompatActivity {
                 else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.getException());
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(LoginActivity.this, getString(R.string.authFailedString),
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, getString(R.string.authFailedString), Toast.LENGTH_LONG).show();
                 }
             }
 

@@ -36,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
     private LoginRegisterViewModel registerViewModel;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText passwordText = binding.password;
         final EditText confirmPasswordText = binding.confirmPassword;
         final Button registerButton = binding.registerButton;
-        final ProgressBar progressBar = binding.progressBar;
+        progressBar = binding.progressBar;
 
         registerViewModel.getRegisterFormState().observe(this, new Observer<RegisterFormState>() {
             @Override
@@ -133,11 +134,14 @@ public class RegisterActivity extends AppCompatActivity {
                         authenticate(email,password,displayName);
                         Log.d("whitelist","DocumentSnapshot data: " + documentSnapshot.getData());
                     }else {
+                        Toast.makeText(RegisterActivity.this,getString(R.string.registerFailedString), Toast.LENGTH_LONG).show();
                         Log.d("whitelist","No such employee");
                     }
                 }else {
+                    Toast.makeText(RegisterActivity.this,getString(R.string.connectionFailed), Toast.LENGTH_LONG).show();
                     Log.d("whitelist","get failed with ", task.getException());
                 }
+                progressBar.setVisibility(View.GONE);
             }
         });
 
