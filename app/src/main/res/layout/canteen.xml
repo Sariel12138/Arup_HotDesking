@@ -130,8 +130,8 @@
 
     <Button
         android:id="@+id/seat_505"
-        android:layout_width="36dp"
-        android:layout_height="38dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline291"
         app:layout_constraintEnd_toStartOf="@+id/guideline293"
         app:layout_constraintStart_toStartOf="@+id/guideline292"
@@ -139,8 +139,8 @@
 
     <Button
         android:id="@+id/seat_504"
-        android:layout_width="24dp"
-        android:layout_height="70dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline295"
         app:layout_constraintEnd_toStartOf="@+id/guideline297"
         app:layout_constraintStart_toStartOf="@+id/guideline296"
@@ -148,8 +148,8 @@
 
     <Button
         android:id="@+id/seat_503"
-        android:layout_width="34dp"
-        android:layout_height="37dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline306"
         app:layout_constraintEnd_toStartOf="@+id/guideline296"
         app:layout_constraintHorizontal_bias="0.0"
@@ -159,8 +159,8 @@
 
     <Button
         android:id="@+id/seat_502"
-        android:layout_width="32dp"
-        android:layout_height="35dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline307"
         app:layout_constraintEnd_toStartOf="@+id/guideline305"
         app:layout_constraintHorizontal_bias="0.0"
@@ -170,8 +170,8 @@
 
     <Button
         android:id="@+id/seat_511"
-        android:layout_width="29dp"
-        android:layout_height="42dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline312"
         app:layout_constraintEnd_toStartOf="@+id/guideline301"
         app:layout_constraintHorizontal_bias="0.0"
@@ -181,8 +181,8 @@
 
     <Button
         android:id="@+id/seat_501"
-        android:layout_width="34dp"
-        android:layout_height="93dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline316"
         app:layout_constraintEnd_toStartOf="@+id/guideline318"
         app:layout_constraintHorizontal_bias="1.0"
@@ -192,8 +192,8 @@
 
     <Button
         android:id="@+id/seat_512"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline312"
         app:layout_constraintEnd_toStartOf="@+id/guideline303"
         app:layout_constraintHorizontal_bias="0.0"
@@ -203,8 +203,8 @@
 
     <Button
         android:id="@+id/seat_513"
-        android:layout_width="35dp"
-        android:layout_height="36dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline312"
         app:layout_constraintEnd_toStartOf="@+id/guideline314"
         app:layout_constraintHorizontal_bias="1.0"
@@ -214,8 +214,8 @@
 
     <Button
         android:id="@+id/seat_506"
-        android:layout_width="28dp"
-        android:layout_height="57dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline299"
         app:layout_constraintEnd_toStartOf="@+id/guideline301"
         app:layout_constraintStart_toStartOf="@+id/guideline300"
@@ -223,8 +223,8 @@
 
     <Button
         android:id="@+id/seat_508"
-        android:layout_width="28dp"
-        android:layout_height="57dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline307"
         app:layout_constraintEnd_toStartOf="@+id/guideline301"
         app:layout_constraintHorizontal_bias="1.0"
@@ -234,8 +234,8 @@
 
     <Button
         android:id="@+id/seat_509"
-        android:layout_width="28dp"
-        android:layout_height="57dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline307"
         app:layout_constraintEnd_toStartOf="@+id/guideline303"
         app:layout_constraintStart_toStartOf="@+id/guideline302"
@@ -243,8 +243,8 @@
 
     <Button
         android:id="@+id/seat_510"
-        android:layout_width="28dp"
-        android:layout_height="57dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline307"
         app:layout_constraintEnd_toStartOf="@+id/guideline309"
         app:layout_constraintStart_toStartOf="@+id/guideline308"
@@ -252,8 +252,8 @@
 
     <Button
         android:id="@+id/seat_507"
-        android:layout_width="28dp"
-        android:layout_height="57dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline299"
         app:layout_constraintEnd_toStartOf="@+id/guideline303"
         app:layout_constraintHorizontal_bias="1.0"
