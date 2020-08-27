@@ -73,6 +73,8 @@ public class PlantaBajaFragment extends Fragment {
         public void onClick(View view) {
             Toast.makeText(requireContext(),seatName,Toast.LENGTH_SHORT).show();
             //TODO popup window: set booking detail
+            MainActivity mainActivity = (MainActivity) requireActivity();
+            mainActivity.seatPopupWindow(view);
         }
     }
 }

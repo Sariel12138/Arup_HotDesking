@@ -20,4 +20,5 @@
     <string name="authFailedString">Authentication failed. Incorrect email or password</string>
     <string name="registerFailedString">Your email is not in the whitelist. Please contact your administrator</string>
     <string name="connectionFailed">Connection failed. Please check your internet</string>
+    <string name="to_text">TO</string>
 </resources>
