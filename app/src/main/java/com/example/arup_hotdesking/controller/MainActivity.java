@@ -130,9 +130,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(contentView.getContext()));
         recyclerView.setAdapter(myAdapter);
 
-        userViewModel.getDeskRecords(deskID);   //TODO log test
 
-        myAdapter.setBookingRecords();  //TODO inside clicklistener(myAdapter.notifyDataSetChanged)
+        myAdapter.setBookingRecords(userViewModel.getDeskRecords(deskID));  //TODO inside clicklistener(myAdapter.notifyDataSetChanged)
 
     }
 

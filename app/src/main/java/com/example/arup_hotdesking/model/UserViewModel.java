@@ -16,10 +16,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserViewModel extends ViewModel {
     private int workSpace = 0;
     private MutableLiveData<Drawable> workSpaceIcon = new MutableLiveData<>();
     private FirebaseFirestore db;
+    private List<BookingRecord> bookingRecords;
 
     public UserViewModel(){
         db = FirebaseFirestore.getInstance();
@@ -41,18 +45,25 @@ public class UserViewModel extends ViewModel {
         this.workSpace = workSpace;
     }
 
-    public void getDeskRecords(String deskNo){
-        CollectionReference employees = db.collection("BookingRecords");
-        employees
-                .whereEqualTo("desk_number","PB_001")
+    public List<BookingRecord> getDeskRecords(String deskNo){
+        //If it is necessary to ensure the consistency of the data when writing to the database, register with collectionListener
+
+        CollectionReference records = db.collection("BookingRecords");
+        bookingRecords = new ArrayList<>();
+        records
+                .whereEqualTo("desk_number",deskNo)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     QuerySnapshot querySnapshot = task.getResult();
                     if(querySnapshot != null){
+                        int id = 0;
                         for(QueryDocumentSnapshot snapshot:task.getResult()){
-                            Log.d("getDeskInfo", snapshot.getString("email"));
+                            BookingRecord bookingRecord = new BookingRecord(++id,snapshot.getString("from_date"),
+                                    snapshot.getString("to_date"),snapshot.getString("email"));
+                            bookingRecords.add(bookingRecord);
+                            //Log.d("getDeskInfo", snapshot.getString("email"));
                         }
                     }
                     else {
@@ -64,5 +75,6 @@ public class UserViewModel extends ViewModel {
                 }
             }
         });
+        return bookingRecords;
     }
 }

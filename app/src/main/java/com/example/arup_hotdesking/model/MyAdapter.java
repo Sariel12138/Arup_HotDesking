@@ -16,11 +16,10 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     List<BookingRecord> bookingRecords = new ArrayList<>();
 
-    public void setBookingRecords(/*List<BookingRecord> bookingRecords*/) {
-        //this.bookingRecords = bookingRecords;
-        //TODO
-        this.bookingRecords.add(new BookingRecord(1,"28/08","29/08","abab"));
-        this.bookingRecords.add(new BookingRecord(2,"30/08","31/08","abab"));
+    public void setBookingRecords(List<BookingRecord> bookingRecords) {
+        this.bookingRecords = bookingRecords;
+//        this.bookingRecords.add(new BookingRecord(1,"28/08","29/08","abab"));
+//        this.bookingRecords.add(new BookingRecord(2,"30/08","31/08","abab"));
     }
 
     @NonNull
