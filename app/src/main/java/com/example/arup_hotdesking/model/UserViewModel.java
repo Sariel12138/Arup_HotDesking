@@ -44,7 +44,7 @@ public class UserViewModel extends ViewModel {
     public void getDeskRecords(String deskNo){
         CollectionReference employees = db.collection("BookingRecords");
         employees
-                .whereEqualTo("desk_number",deskNo)
+                .whereEqualTo("desk_number","PB_001")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
