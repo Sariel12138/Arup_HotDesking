@@ -48,7 +48,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:21.5.0'
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'cn.qqtheme.framework:WheelPicker:1.4.1'
-
+    implementation 'com.haibin:calendarview:3.6.8'
 
 
 }

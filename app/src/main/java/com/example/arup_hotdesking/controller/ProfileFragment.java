@@ -36,6 +36,7 @@ public class ProfileFragment extends Fragment {
 
     private UserViewModel mViewModel;
 
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -43,6 +44,8 @@ public class ProfileFragment extends Fragment {
         binding.setData(mViewModel);
         binding.setLifecycleOwner(requireActivity());
         return binding.getRoot();
+
+
     }
 
     @Override
@@ -62,6 +65,8 @@ public class ProfileFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         initUI(user);
+
+
     }
 
     private void initUI(final FirebaseUser user){

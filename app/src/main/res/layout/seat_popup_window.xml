@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CDCDCD">
+    android:background="#FFF">
 
     <Button
         android:id="@+id/button2"
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35" />
+        app:layout_constraintGuide_percent="0.74" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -33,23 +33,47 @@
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toTopOf="@+id/calendarline"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/titleline">
+        app:layout_constraintTop_toTopOf="@id/titleline"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <CalendarView
+            <com.haibin.calendarview.CalendarView
                 android:id="@+id/calendarView2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:selectedWeekBackgroundColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="1.0"
+                app:max_select_range="-1"
+                app:min_select_range="-1"
+                app:min_year="2004"
+                app:month_view="com.example.arup_hotdesking.view.CustomRangeMonthView"
+                app:month_view_show_mode="mode_only_current"
+                app:other_month_text_color="#e1e1e1"
+                app:scheme_text="假"
+                app:scheme_text_color="#333"
+                app:scheme_theme_color="#333"
+                app:select_mode="range_mode"
+                app:selected_text_color="#fff"
+                app:selected_theme_color="#EE7621"
+                app:week_background="#fff"
+                app:week_text_color="#111"
+                app:week_view="com.example.arup_hotdesking.view.CustomRangeWeekView"
+                app:year_view_day_text_color="#333333"
+                app:year_view_day_text_size="9sp"
+                app:year_view_month_text_color="#ff0000"
+                app:year_view_month_text_size="20sp"
+                app:year_view_scheme_color="#f17706" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
@@ -58,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85" />
+        app:layout_constraintGuide_percent="0.86" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/titleline"
@@ -82,44 +106,10 @@
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="4dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/calendarline2" />
+        app:layout_constraintTop_toTopOf="@+id/calendarline" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/calendarline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.65" />
-
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/calendarline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/calendarline">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <CalendarView
-                android:id="@+id/calendarView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
