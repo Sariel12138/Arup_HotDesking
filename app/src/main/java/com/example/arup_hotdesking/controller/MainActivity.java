@@ -15,17 +15,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.dreamlive.hotimglibrary.entity.HotArea;
+import com.dreamlive.hotimglibrary.utils.FileUtils;
+import com.dreamlive.hotimglibrary.view.HotClickView;
 import com.example.arup_hotdesking.R;
 import com.example.arup_hotdesking.model.MyAdapter;
 import com.example.arup_hotdesking.model.UserViewModel;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -105,25 +112,50 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    public void seatPopupWindow(View view){
+    public void seatPopupWindow(View view,HotArea hotArea){
         View contentView = getLayoutInflater().inflate(R.layout.seat_popup_window,null);
-        String deskID = getResources().getResourceEntryName(view.getId());
-        PopupWindow popupWindow = new PopupWindow(contentView,1000,1500);
+        PopupWindow popupWindow = new PopupWindow(contentView,800,1200);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setClippingEnabled(false);
         popupWindow.setFocusable(true);
-        popupWindow.showAsDropDown(view);
-        //popupWindow.showAtLocation(binding.getRoot(), Gravity.NO_GRAVITY,150,50);
+        //popupWindow.showAsDropDown(view);
+        popupWindow.showAtLocation(view, Gravity.CENTER,0,0);
         TextView seatIDText = contentView.findViewById(R.id.seatID);
-        seatIDText.setText(deskID);
+        seatIDText.setText(hotArea.getAreaTitle());
         RecyclerView recyclerView = contentView.findViewById(R.id.recyclerView);
         MyAdapter myAdapter = new MyAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(contentView.getContext()));
         recyclerView.setAdapter(myAdapter);
 
 
-        myAdapter.setBookingRecords(userViewModel.getDeskRecords(deskID));  //TODO inside clicklistener(myAdapter.notifyDataSetChanged)
+        myAdapter.setBookingRecords(userViewModel.getDeskRecords(hotArea.getAreaId()));  //TODO inside clicklistener(myAdapter.notifyDataSetChanged)
 
+    }
+
+
+    public void initDatas(String filename, HotClickView hotClickView) {
+        AssetManager assetManager = getResources().getAssets();
+        InputStream imgInputStream = null;
+        InputStream fileInputStream = null;
+        try {
+            imgInputStream = assetManager.open(filename+".png");
+            fileInputStream = assetManager.open(filename+".xml");
+            hotClickView.setImageBitmap(fileInputStream, imgInputStream, HotClickView.FIT_XY);
+            hotClickView.setOnClickListener(new HotClickListener());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            FileUtils.closeInputStream(imgInputStream);
+            FileUtils.closeInputStream(fileInputStream);
+        }
+    }
+
+    class HotClickListener implements HotClickView.OnClickListener{
+
+        @Override
+        public void OnClick(View view, HotArea hotArea) {
+            seatPopupWindow(view,hotArea);
+        }
     }
 
 

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Areas areaId="PlantaBaja" desc="Planta baja map"  areaTitle="Planta baja">
+    <Area areaId="PB_003"
+        areaTitle="seat003"
+        desc="this is seat 003"
+        pts="122,827,233,827,233,890,122,890"/>
+</Areas>

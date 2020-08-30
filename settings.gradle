@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':hotimglibrary'
 rootProject.name = "Arup_HotDesking"
