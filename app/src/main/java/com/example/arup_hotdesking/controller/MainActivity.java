@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -20,6 +21,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private NavController navController;
     private AppBarConfiguration appBarConfiguration;
     private Toolbar toolbar;
+    private MyAdapter myAdapter;
 
 
     @Override
@@ -126,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         TextView seatIDText = contentView.findViewById(R.id.seatID);
         seatIDText.setText(hotArea.getAreaTitle());
         RecyclerView recyclerView = contentView.findViewById(R.id.recyclerView);
-        MyAdapter myAdapter = new MyAdapter();
+        myAdapter = new MyAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(contentView.getContext()));
         recyclerView.setAdapter(myAdapter);
 
@@ -134,7 +137,14 @@ public class MainActivity extends AppCompatActivity {
         //BookingRecord bookingRecord1 = new BookingRecord(1,"28/08","31/08","test@email.com");
         //bookingRecords.add(bookingRecord1);
         //myAdapter.setBookingRecords(bookingRecords);
-        myAdapter.setBookingRecords(userViewModel.getDeskRecords(hotArea.getAreaId()));  //TODO inside clicklistener(myAdapter.notifyDataSetChanged)
+        userViewModel.getLiveBookingRecords().observe(this, new Observer<List<BookingRecord>>() {
+            @Override
+            public void onChanged(List<BookingRecord> bookingRecords) {
+                myAdapter.setBookingRecords(bookingRecords);
+                myAdapter.notifyDataSetChanged();
+            }
+        });
+        userViewModel.getDeskRecords(hotArea.getAreaId());
 
         //myAdapter.notifyDataSetChanged();
 

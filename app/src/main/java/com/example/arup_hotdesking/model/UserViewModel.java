@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.arup_hotdesking.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -20,10 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserViewModel extends ViewModel {
-    private int workSpace = 0;
+    private int workSpace = R.id.courseFragment;
     private MutableLiveData<Drawable> workSpaceIcon = new MutableLiveData<>();
     private FirebaseFirestore db;
     private List<BookingRecord> bookingRecords;
+    private MutableLiveData<List<BookingRecord>> liveRecords = new MutableLiveData<>();
 
     public UserViewModel(){
         db = FirebaseFirestore.getInstance();
@@ -45,7 +47,7 @@ public class UserViewModel extends ViewModel {
         this.workSpace = workSpace;
     }
 
-    public List<BookingRecord> getDeskRecords(String deskNo){
+    public void getDeskRecords(String deskNo){
         //If it is necessary to ensure the consistency of the data when writing to the database, register with collectionListener
 
         CollectionReference records = db.collection("BookingRecords");
@@ -65,6 +67,8 @@ public class UserViewModel extends ViewModel {
                             bookingRecords.add(bookingRecord);
                             Log.d("getDeskInfo", snapshot.getString("email"));
                         }
+                        Log.d("getDeskInfo", String.valueOf(bookingRecords.size()));
+                        liveRecords.setValue(bookingRecords);
                     }
                     else {
                         Log.d("getDeskInfo",task.getException().toString());
@@ -75,7 +79,9 @@ public class UserViewModel extends ViewModel {
                 }
             }
         });
-        Log.d("getDeskInfo","recordssize:"+bookingRecords.size());
-        return bookingRecords;
+    }
+
+    public MutableLiveData<List<BookingRecord>> getLiveBookingRecords(){
+        return liveRecords;
     }
 }

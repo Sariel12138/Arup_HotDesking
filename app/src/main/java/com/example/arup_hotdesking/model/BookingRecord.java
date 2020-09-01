@@ -13,7 +13,6 @@ public class BookingRecord {
         this.from_date = from_date;
         this.to_date = to_date;
         this.email = email;
-        Log.d("getDeskInfo","new success"+from_date+","+to_date);
     }
 
     public int getId() {
