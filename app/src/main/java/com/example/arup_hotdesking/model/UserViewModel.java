@@ -75,6 +75,7 @@ public class UserViewModel extends ViewModel {
                 }
             }
         });
+        Log.d("getDeskInfo","recordssize:"+bookingRecords.size());
         return bookingRecords;
     }
 }

@@ -1,5 +1,7 @@
 package com.example.arup_hotdesking.model;
 
+import android.util.Log;
+
 public class BookingRecord {
     private int id = 1;
     private String from_date = "28/08";
@@ -11,6 +13,7 @@ public class BookingRecord {
         this.from_date = from_date;
         this.to_date = to_date;
         this.email = email;
+        Log.d("getDeskInfo","new success"+from_date+","+to_date);
     }
 
     public int getId() {

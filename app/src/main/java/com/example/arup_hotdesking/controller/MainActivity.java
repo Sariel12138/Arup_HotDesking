@@ -27,12 +27,15 @@ import com.dreamlive.hotimglibrary.entity.HotArea;
 import com.dreamlive.hotimglibrary.utils.FileUtils;
 import com.dreamlive.hotimglibrary.view.HotClickView;
 import com.example.arup_hotdesking.R;
+import com.example.arup_hotdesking.model.BookingRecord;
 import com.example.arup_hotdesking.model.MyAdapter;
 import com.example.arup_hotdesking.model.UserViewModel;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -127,9 +130,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(contentView.getContext()));
         recyclerView.setAdapter(myAdapter);
 
-
+        //List<BookingRecord> bookingRecords = new ArrayList<>();
+        //BookingRecord bookingRecord1 = new BookingRecord(1,"28/08","31/08","test@email.com");
+        //bookingRecords.add(bookingRecord1);
+        //myAdapter.setBookingRecords(bookingRecords);
         myAdapter.setBookingRecords(userViewModel.getDeskRecords(hotArea.getAreaId()));  //TODO inside clicklistener(myAdapter.notifyDataSetChanged)
-        myAdapter.notifyDataSetChanged();
+
+        //myAdapter.notifyDataSetChanged();
 
     }
 
