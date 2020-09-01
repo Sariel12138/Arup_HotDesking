@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".controller.PlantaRecepcionFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="data"
+            type="com.example.arup_hotdesking.model.UserViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".controller.PlantaRecepcionFragment">
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.dreamlive.hotimglibrary.view.HotClickView
+            android:id="@+id/planta1hotview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></com.dreamlive.hotimglibrary.view.HotClickView>
+    </RelativeLayout>
+</layout>

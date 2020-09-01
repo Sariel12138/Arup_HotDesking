@@ -18,10 +18,6 @@
         <com.dreamlive.hotimglibrary.view.HotClickView
             android:id="@+id/bajahotview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></com.dreamlive.hotimglibrary.view.HotClickView>
+            android:layout_height="match_parent"></com.dreamlive.hotimglibrary.view.HotClickView>
     </RelativeLayout>
 </layout>

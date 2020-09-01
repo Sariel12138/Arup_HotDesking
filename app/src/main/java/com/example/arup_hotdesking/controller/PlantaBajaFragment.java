@@ -1,31 +1,19 @@
 package com.example.arup_hotdesking.controller;
 
-import android.content.res.AssetManager;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-
-import com.dreamlive.hotimglibrary.entity.HotArea;
-import com.dreamlive.hotimglibrary.utils.FileUtils;
-import com.dreamlive.hotimglibrary.view.HotClickView;
 import com.example.arup_hotdesking.R;
 import com.example.arup_hotdesking.databinding.PlantaBajaBinding;
 import com.example.arup_hotdesking.model.UserViewModel;
-import com.google.rpc.context.AttributeContext;
-
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PlantaBajaFragment extends Fragment {
     private final String FILENAME = "plantabaja";
