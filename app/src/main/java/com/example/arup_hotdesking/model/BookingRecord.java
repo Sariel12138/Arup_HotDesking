@@ -3,9 +3,9 @@ package com.example.arup_hotdesking.model;
 import android.util.Log;
 
 public class BookingRecord {
-    private int id = 1;
-    private String from_date = "28/08";
-    private String to_date = "29/08";
+    private int id;
+    private String from_date;
+    private String to_date;
     private String email;
 
     public BookingRecord(int id, String from_date, String to_date, String email) {

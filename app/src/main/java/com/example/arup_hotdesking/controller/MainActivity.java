@@ -124,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
         popupWindow.setOutsideTouchable(true);
         popupWindow.setClippingEnabled(false);
         popupWindow.setFocusable(true);
-        //popupWindow.showAsDropDown(view);
         popupWindow.showAtLocation(view, Gravity.CENTER,0,0);
         TextView seatIDText = contentView.findViewById(R.id.seatID);
         seatIDText.setText(hotArea.getAreaTitle());
@@ -133,10 +132,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(contentView.getContext()));
         recyclerView.setAdapter(myAdapter);
 
-        //List<BookingRecord> bookingRecords = new ArrayList<>();
-        //BookingRecord bookingRecord1 = new BookingRecord(1,"28/08","31/08","test@email.com");
-        //bookingRecords.add(bookingRecord1);
-        //myAdapter.setBookingRecords(bookingRecords);
         userViewModel.getLiveBookingRecords().observe(this, new Observer<List<BookingRecord>>() {
             @Override
             public void onChanged(List<BookingRecord> bookingRecords) {

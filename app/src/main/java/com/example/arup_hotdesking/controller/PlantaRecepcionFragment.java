@@ -30,7 +30,6 @@ public class PlantaRecepcionFragment extends Fragment {
         planta1Binding.setData(userViewModel);
         planta1Binding.setLifecycleOwner(requireActivity());
 
-
         return planta1Binding.getRoot();
 
     }
