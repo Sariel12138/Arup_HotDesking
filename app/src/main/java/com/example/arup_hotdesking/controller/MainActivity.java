@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        myAdapter = new MyAdapter();
         toolbar = (Toolbar) this.findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -128,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         TextView seatIDText = contentView.findViewById(R.id.seatID);
         seatIDText.setText(hotArea.getAreaTitle());
         RecyclerView recyclerView = contentView.findViewById(R.id.recyclerView);
-        myAdapter = new MyAdapter();
+//        myAdapter = new MyAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(contentView.getContext()));
         recyclerView.setAdapter(myAdapter);
 
