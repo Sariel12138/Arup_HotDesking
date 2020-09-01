@@ -86,6 +86,6 @@ public class UserViewModel extends ViewModel {
     }
 
     public void resetLiveRecords() {
-        liveRecords.setValue(null);
+        liveRecords.setValue(new ArrayList<BookingRecord>());
     }
 }
