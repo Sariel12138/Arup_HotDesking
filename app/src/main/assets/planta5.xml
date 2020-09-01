@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Areas areaId="Planta5" desc="Planta 5 map"  areaTitle="Planta 5">
+    <Area areaId="P5_501"
+        areaTitle="seat501"
+        desc="this is seat 501"
+        pts="314,1780,520,1780,520,2100,314,2100"/>
+
+    <Area areaId="P5_502"
+        areaTitle="seat502"
+        desc="this is seat 502"
+        pts="450,1430,544,1430,544,1520,450,1520"/>
+
+    <Area areaId="P5_503"
+        areaTitle="seat503"
+        desc="this is seat 503"
+        pts="466,1112,557,1112,557,1230,466,1230"/>
+
+    <Area areaId="P5_504"
+        areaTitle="seat504"
+        desc="this is seat 504"
+        pts="555,556,619,556,619,790,555,790"/>
+
+    <Area areaId="P5_505"
+        areaTitle="seat505"
+        desc="this is seat 505"
+        pts="270,290,374,290,374,390,270,390"/>
+
+    <Area areaId="P5_506"
+        areaTitle="seat506"
+        desc="this is seat 506"
+        pts="734,1123,880,1123,880,1293,734,1293"/>
+
+    <Area areaId="P5_507"
+        areaTitle="seat507"
+        desc="this is seat 507"
+        pts="895,1123,1040,1123,1040,1293,895,1293"/>
+
+    <Area areaId="P5_508"
+        areaTitle="seat508"
+        desc="this is seat 508"
+        pts="722,1360,866,1360,866,1530,722,1530"/>
+
+    <Area areaId="P5_509"
+        areaTitle="seat509"
+        desc="this is seat 509"
+        pts="881,1360,1027,1360,1027,1530,881,1530"/>
+
+    <Area areaId="P5_510"
+        areaTitle="seat510"
+        desc="this is seat 510"
+        pts="1050,1360,1193,1360,1193,1530,1050,1530"/>
+
+    <Area areaId="P5_511"
+        areaTitle="seat511"
+        desc="this is seat 511"
+        pts="760,1646,852,1646,862,1743,760,1743"/>
+
+    <Area areaId="P5_512"
+        areaTitle="seat512"
+        desc="this is seat 512"
+        pts="912,1670,1030,1670,1030,1776,912,1776"/>
+
+    <Area areaId="P5_513"
+        areaTitle="seat513"
+        desc="this is seat 513"
+        pts="1086,1672,1204,1672,1204,1770,1086,1770"/>
+
+</Areas>

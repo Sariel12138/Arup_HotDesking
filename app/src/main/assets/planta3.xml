@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Areas areaId="Planta3" desc="Planta 3 map"  areaTitle="Planta 3">
+    <Area areaId="P3_301"
+        areaTitle="seat301"
+        desc="this is seat 301"
+        pts="159,1935,278,1935,278,2052,159,2052"/>
+
+    <Area areaId="P3_302"
+        areaTitle="seat302"
+        desc="this is seat 302"
+        pts="278,1935,394,1935,394,2052,278,2052"/>
+
+    <Area areaId="P3_303"
+        areaTitle="seat303"
+        desc="this is seat 303"
+        pts="159,1818,278,1818,278,1935,159,1935"/>
+
+    <Area areaId="P3_304"
+        areaTitle="seat304"
+        desc="this is seat 304"
+        pts="278,1818,394,1818,394,1935,278,1935"/>
+
+    <Area areaId="P3_305"
+        areaTitle="seat305"
+        desc="this is seat 305"
+        pts="159,1664,278,1664,278,1780,159,1780"/>
+
+    <Area areaId="P3_306"
+        areaTitle="seat306"
+        desc="this is seat 306"
+        pts="278,1664,394,1664,394,1780,278,1780"/>
+
+    <Area areaId="P3_307"
+        areaTitle="seat307"
+        desc="this is seat 307"
+        pts="159,1540,278,1540,278,1664,159,1664"/>
+
+    <Area areaId="P3_308"
+        areaTitle="seat308"
+        desc="this is seat 308"
+        pts="278,1540,394,1540,394,1664,278,1664"/>
+
+    <Area areaId="P3_309"
+        areaTitle="seat309"
+        desc="this is seat 309"
+        pts="159,1400,278,1400,278,1515,159,1515"/>
+
+    <Area areaId="P3_310"
+        areaTitle="seat310"
+        desc="this is seat 310"
+        pts="278,1400,394,1400,394,1515,278,1515"/>
+
+    <Area areaId="P3_311"
+        areaTitle="seat311"
+        desc="this is seat 311"
+        pts="159,1280,278,1280,278,1400,159,1400"/>
+
+    <Area areaId="P3_312"
+        areaTitle="seat312"
+        desc="this is seat 312"
+        pts="278,1280,394,1280,394,1400,278,1400"/>
+
+    <Area areaId="P3_313"
+        areaTitle="seat313"
+        desc="this is seat 313"
+        pts="159,1125,278,1125,278,1244,159,1244"/>
+
+    <Area areaId="P3_314"
+        areaTitle="seat314"
+        desc="this is seat 314"
+        pts="278,1125,394,1125,394,1244,278,1244"/>
+
+    <Area areaId="P3_315"
+        areaTitle="seat315"
+        desc="this is seat 315"
+        pts="159,1010,278,1010,278,1125,159,1125"/>
+
+    <Area areaId="P3_316"
+        areaTitle="seat316"
+        desc="this is seat 316"
+        pts="278,1010,394,1010,394,1125,278,1125"/>
+
+    <Area areaId="P3_317"
+        areaTitle="seat317"
+        desc="this is seat 317"
+        pts="159,862,278,862,278,980,159,980"/>
+
+    <Area areaId="P3_318"
+        areaTitle="seat318"
+        desc="this is seat 318"
+        pts="278,862,394,862,394,980,278,980"/>
+
+    <Area areaId="P3_319"
+        areaTitle="seat319"
+        desc="this is seat 319"
+        pts="159,740,278,740,278,862,159,862"/>
+
+    <Area areaId="P3_320"
+        areaTitle="seat320"
+        desc="this is seat 320"
+        pts="278,740,394,740,394,862,278,862"/>
+
+    <Area areaId="P2_321"
+        areaTitle="seat321"
+        desc="this is seat 321"
+        pts="159,580,278,580,278,700,159,700"/>
+
+    <Area areaId="P3_322"
+        areaTitle="seat322"
+        desc="this is seat 322"
+        pts="278,580,394,580,394,700,278,700"/>
+
+    <Area areaId="P3_323"
+        areaTitle="seat323"
+        desc="this is seat 323"
+        pts="190,223,305,223,305,340,190,340"/>
+
+    <Area areaId="P3_324"
+        areaTitle="seat324"
+        desc="this is seat 324"
+        pts="190,340,305,340,305,460,190,460"/>
+
+    <Area areaId="P3_325"
+        areaTitle="seat325"
+        desc="this is seat 325"
+        pts="365,223,480,223,480,340,365,340"/>
+
+    <Area areaId="P2_326"
+        areaTitle="seat326"
+        desc="this is seat 326"
+        pts="365,340,480,340,480,460,365,460"/>
+
+    <Area areaId="P3_327"
+        areaTitle="seat327"
+        desc="this is seat 327"
+        pts="480,223,600,223,600,340,480,340"/>
+
+    <Area areaId="P3_328"
+        areaTitle="seat328"
+        desc="this is seat 328"
+        pts="480,340,600,340,600,460,480,460"/>
+
+    <Area areaId="P3_329"
+        areaTitle="seat329"
+        desc="this is seat 329"
+        pts="630,223,744,233,744,340,630,340"/>
+
+    <Area areaId="P3_330"
+        areaTitle="seat330"
+        desc="this is seat 330"
+        pts="630,340,744,340,744,460,630,460"/>
+
+    <Area areaId="P3_331"
+        areaTitle="seat331"
+        desc="this is seat 331"
+        pts="744,223,860,223,860,340,744,340"/>
+
+    <Area areaId="P3_332"
+        areaTitle="seat232"
+        desc="this is seat 232"
+        pts="744,340,860,340,860,460,744,460"/>
+
+    <Area areaId="P3_333"
+        areaTitle="seat333"
+        desc="this is seat 333"
+        pts="780,943,890,943,890,1050,780,1050"/>
+
+    <Area areaId="P2_334"
+        areaTitle="seat334"
+        desc="this is seat 334"
+        pts="607,1030,690,1030,690,1120,607,1120"/>
+
+    <Area areaId="P3_335"
+        areaTitle="seat335"
+        desc="this is seat 335"
+        pts="739,1115,830,1115,830,1196,739,1196"/>
+
+    <Area areaId="P3_336"
+        areaTitle="seat336"
+        desc="this is seat 336"
+        pts="1024,1590,1144,1590,1144,1706,1024,1706"/>
+
+    <Area areaId="P3_337"
+        areaTitle="seat337"
+        desc="this is seat 337"
+        pts="1024,1477,1144,1477,1144,1588,1024,1588"/>
+
+    <Area areaId="P3_338"
+        areaTitle="seat338"
+        desc="this is seat 338"
+        pts="1024,1362,1144,1362,1144,1480,1024,1480"/>
+
+    <Area areaId="P2_339"
+        areaTitle="seat339"
+        desc="this is seat 339"
+        pts="910,1588,1024,1588,1024,1706,910,1706"/>
+
+    <Area areaId="P3_340"
+        areaTitle="seat340"
+        desc="this is seat 340"
+        pts="910,1480,1024,1480,1024,1588,910,1588"/>
+
+    <Area areaId="P3_341"
+        areaTitle="seat341"
+        desc="this is seat 341"
+        pts="910,1362,1024,1362,1024,1480,910,1480"/>
+
+    <Area areaId="P3_342"
+        areaTitle="seat342"
+        desc="this is seat 342"
+        pts="786,1625,900,1625,900,1743,786,1743"/>
+
+    <Area areaId="P3_343"
+        areaTitle="seat343"
+        desc="this is seat 343"
+        pts="786,1507,900,1507,900,1625,786,1625"/>
+
+    <Area areaId="P3_344"
+        areaTitle="seat344"
+        desc="this is seat 344"
+        pts="668,1625,786,1625,786,1743,668,1743"/>
+
+    <Area areaId="P3_345"
+        areaTitle="seat345"
+        desc="this is seat 345"
+        pts="668,1507,786,1507,786,1625,668,1625"/>
+
+    <Area areaId="P3_346"
+        areaTitle="seat346"
+        desc="this is seat 346"
+        pts="222,2255,352,2255,352,2383,222,2383"/>
+
+    <Area areaId="P3_347"
+        areaTitle="seat347"
+        desc="this is seat 347"
+        pts="1025,266,1225,266,1225,452,1025,452"/>
+
+    <Area areaId="P3_3T1"
+        areaTitle="P3_3T1"
+        desc="this is seat 3T1"
+        pts="775,585,895,585,895,688,775,688"/>
+
+    <Area areaId="P3_3T2"
+        areaTitle="P3_3T2"
+        desc="this is seat 3T2"
+        pts="775,741,895,741,895,842,775,842"/>
+
+    <Area areaId="P3_3T3"
+        areaTitle="P3_3T3"
+        desc="this is seat 3T3"
+        pts="660,585,775,585,775,688,660,688"/>
+
+    <Area areaId="P3_3T4"
+        areaTitle="P3_3T4"
+        desc="this is seat 3T4"
+        pts="660,741,775,741,775,842,660,842"/>
+
+
+</Areas>
