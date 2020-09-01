@@ -129,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         myAdapter.setBookingRecords(userViewModel.getDeskRecords(hotArea.getAreaId()));  //TODO inside clicklistener(myAdapter.notifyDataSetChanged)
+        myAdapter.notifyDataSetChanged();
 
     }
 
