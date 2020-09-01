@@ -84,4 +84,8 @@ public class UserViewModel extends ViewModel {
     public MutableLiveData<List<BookingRecord>> getLiveBookingRecords(){
         return liveRecords;
     }
+
+    public void resetLiveRecords() {
+        liveRecords.setValue(null);
+    }
 }

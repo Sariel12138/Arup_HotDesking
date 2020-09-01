@@ -146,8 +146,12 @@ public class MainActivity extends AppCompatActivity {
         });
         userViewModel.getDeskRecords(hotArea.getAreaId());
 
-        //myAdapter.notifyDataSetChanged();
-
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                userViewModel.resetLiveRecords();
+            }
+        });
     }
 
 
