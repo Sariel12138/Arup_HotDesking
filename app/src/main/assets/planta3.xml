@@ -163,7 +163,7 @@
     <Area areaId="P3_333"
         areaTitle="seat333"
         desc="this is seat 333"
-        pts="780,943,890,943,890,1050,780,1050"/>
+        pts="780,943,845,943,845,1016,780,1016"/>
 
     <Area areaId="P2_334"
         areaTitle="seat334"
@@ -228,7 +228,7 @@
     <Area areaId="P3_346"
         areaTitle="seat346"
         desc="this is seat 346"
-        pts="222,2255,352,2255,352,2383,222,2383"/>
+        pts="162,2164,390,2164,390,2476,162,2476"/>
 
     <Area areaId="P3_347"
         areaTitle="seat347"
