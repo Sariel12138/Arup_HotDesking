@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModel;
 import com.example.arup_hotdesking.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -26,9 +28,15 @@ public class UserViewModel extends ViewModel {
     private FirebaseFirestore db;
     private List<BookingRecord> bookingRecords;
     private MutableLiveData<List<BookingRecord>> liveRecords = new MutableLiveData<>();
+    private FirebaseUser user;
+    private MutableLiveData<String> displayName = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isAdmin = new MutableLiveData<>();
 
     public UserViewModel(){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        user = mAuth.getCurrentUser();
+        getUserInfo();
     }
 
     public MutableLiveData<Drawable> getWorkSpaceIcon() {
@@ -45,6 +53,34 @@ public class UserViewModel extends ViewModel {
 
     public void setWorkSpace(int workSpace) {
         this.workSpace = workSpace;
+    }
+
+    public FirebaseUser getUser() { return user; }
+
+    private void getUserInfo() {
+        if (user != null) {
+            displayName.setValue(user.getDisplayName());
+            DocumentReference employees = db.collection("employees").document(user.getEmail());
+            employees.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if (documentSnapshot.exists()) {
+                            isAdmin.setValue(documentSnapshot.getBoolean("admin"));
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    public MutableLiveData<String> getDisplayName() {
+        return displayName;
+    }
+
+    public MutableLiveData<Boolean> getIsAdmin() {
+        return isAdmin;
     }
 
     public void getDeskRecords(String deskNo){

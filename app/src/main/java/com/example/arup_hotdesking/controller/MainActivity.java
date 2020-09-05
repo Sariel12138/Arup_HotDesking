@@ -21,9 +21,9 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dreamlive.hotimglibrary.entity.HotArea;
 import com.dreamlive.hotimglibrary.utils.FileUtils;
@@ -34,9 +34,10 @@ import com.example.arup_hotdesking.model.MyAdapter;
 import com.example.arup_hotdesking.model.UserViewModel;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.haibin.calendarview.Calendar;
+import com.haibin.calendarview.CalendarView;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -62,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerLayout = findViewById(R.id.drawerlayout);
         mNavigationView = findViewById(R.id.navigationview);
+        userViewModel.getIsAdmin().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                mNavigationView.getMenu().getItem(2).setVisible(aBoolean);
+            }
+        });
         navController = Navigation.findNavController(this, R.id.fragment);
         appBarConfiguration = new AppBarConfiguration.Builder(R.id.profile_nav_graph,R.id.adminFragment,R.id.bookingFragment)
                 .setDrawerLayout(mDrawerLayout)
@@ -72,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
     private void LoadNavItemSelListener() {
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -109,9 +117,6 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
     }
 
-    public MenuItem getAdminMenuItem(){
-        return mNavigationView.getMenu().getItem(2);
-    }
 
     private void signOutUI(){
         Intent intent = new Intent(MainActivity.this,LoginActivity.class);
@@ -128,7 +133,52 @@ public class MainActivity extends AppCompatActivity {
         popupWindow.showAtLocation(view, Gravity.CENTER,0,0);
         TextView seatIDText = contentView.findViewById(R.id.seatID);
         seatIDText.setText(hotArea.getAreaTitle());
+
+        setUpCustomCalendar(contentView);
+
+        setUpPopupWindowRecyclerView(contentView);
+
+
+
+
+
+        userViewModel.getDeskRecords(hotArea.getAreaId());
+
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                userViewModel.resetLiveRecords();
+            }
+        });
+    }
+
+    private void setUpCustomCalendar(View contentView){
+        CalendarView calendarView = contentView.findViewById(R.id.customCalendar);
+        calendarView.setSelectRange(-1,7);
+        calendarView.setRange(calendarView.getCurYear(),calendarView.getCurMonth(),calendarView.getCurDay(),
+                calendarView.getCurYear()+1,calendarView.getCurMonth(),calendarView.getCurDay());
+        calendarView.setOnCalendarRangeSelectListener(new CalendarView.OnCalendarRangeSelectListener() {
+            @Override
+            public void onCalendarSelectOutOfRange(Calendar calendar) {
+
+            }
+
+            @Override
+            public void onSelectOutOfRange(Calendar calendar, boolean isOutOfMinRange) {
+                if(!isOutOfMinRange) Toast.makeText(MainActivity.this,"> 7",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCalendarRangeSelect(Calendar calendar, boolean isEnd) {
+                if(!isEnd) Toast.makeText(MainActivity.this,"notEnd"+calendar.isWeekend(),Toast.LENGTH_LONG).show();
+                else Toast.makeText(MainActivity.this,"End"+calendar.isWeekend(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void setUpPopupWindowRecyclerView(View contentView){
         RecyclerView recyclerView = contentView.findViewById(R.id.recyclerView);
+        //CalendarView calendarView = contentView.findViewById(R.id.customCalendar);  //TODO
 //        myAdapter = new MyAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(contentView.getContext()));
         recyclerView.setAdapter(myAdapter);
@@ -138,14 +188,6 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(List<BookingRecord> bookingRecords) {
                 myAdapter.setBookingRecords(bookingRecords);
                 myAdapter.notifyDataSetChanged();
-            }
-        });
-        userViewModel.getDeskRecords(hotArea.getAreaId());
-
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                userViewModel.resetLiveRecords();
             }
         });
     }

@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -27,7 +28,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ProfileFragment extends Fragment {
     private FirebaseAuth mAuth;
-    private FirebaseFirestore db;
     private FragmentProfileBinding binding;
 
     public static UserViewModel newInstance() {
@@ -48,48 +48,30 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser user = mAuth.getCurrentUser();
-        initUI(user);
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        FirebaseUser user = mAuth.getCurrentUser();
+//        initUI(user);
+//    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        FirebaseUser user = mViewModel.getUser();
+        if(user!=null){
+            binding.emailText.setText(user.getEmail());
 
-
-        mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
-        initUI(user);
-
-
-    }
-
-    private void initUI(final FirebaseUser user){
-        MainActivity mainActivity = (MainActivity) getActivity();
-        final MenuItem adminMenuItem = mainActivity.getAdminMenuItem();
-        if(user != null){
-            DocumentReference employees = db.collection("employees").document(user.getEmail());
-            employees.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            mViewModel.getDisplayName().observe(requireActivity(), new Observer<String>() {
                 @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot documentSnapshot = task.getResult();
-                        if (documentSnapshot.exists() && documentSnapshot.getBoolean("admin")) {
-                            adminMenuItem.setVisible(true);
-                        }
-                    }
+                public void onChanged(String s) {
+                    binding.displayNameText.setText(s);
                 }
             });
-
-            TextView textView = binding.textView;
-            TextView textView1 = binding.textView2;
-            textView.setText(user.getEmail());
-            textView1.setText(user.getDisplayName() == null ? "Arup Employee" : user.getDisplayName());
+            //TODO
         }
+
+
     }
 }
