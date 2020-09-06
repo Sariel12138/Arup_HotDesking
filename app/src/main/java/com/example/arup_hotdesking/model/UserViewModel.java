@@ -99,7 +99,7 @@ public class UserViewModel extends ViewModel {
                         int id = 0;
                         for(QueryDocumentSnapshot snapshot:task.getResult()){
                             BookingRecord bookingRecord = new BookingRecord(++id,snapshot.getString("from_date"),
-                                    snapshot.getString("to_date"),snapshot.getString("email"));
+                                    snapshot.getString("to_date"),snapshot.getString(":year"),snapshot.getString("email"));
                             bookingRecords.add(bookingRecord);
                             Log.d("getDeskInfo", snapshot.getString("email"));
                         }

@@ -21,7 +21,9 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private NavController navController;
     private AppBarConfiguration appBarConfiguration;
     private Toolbar toolbar;
-    private MyAdapter myAdapter;
+    private View popupView;
 
 
     @Override
@@ -57,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        myAdapter = new MyAdapter();
         toolbar = (Toolbar) this.findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -75,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         LoadNavItemSelListener();
-
 
 
     }
@@ -125,22 +125,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void seatPopupWindow(View view,HotArea hotArea){
-        View contentView = getLayoutInflater().inflate(R.layout.seat_popup_window,null);
-        PopupWindow popupWindow = new PopupWindow(contentView,800,1200);
+        popupView = getLayoutInflater().inflate(R.layout.seat_popup_window,null);
+        PopupWindow popupWindow = new PopupWindow(popupView,800,1200);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setClippingEnabled(false);
         popupWindow.setFocusable(true);
         popupWindow.showAtLocation(view, Gravity.CENTER,0,0);
-        TextView seatIDText = contentView.findViewById(R.id.seatID);
+        TextView seatIDText = popupView.findViewById(R.id.seatID);
+        CalendarView calendarView = popupView.findViewById(R.id.customCalendar);
+        RecyclerView recyclerView = popupView.findViewById(R.id.recyclerView);
+        MyAdapter myAdapter = new MyAdapter();
+        userViewModel.getLiveBookingRecords().observe(this, new BookingRecordsObserver(calendarView,
+                recyclerView, myAdapter));
+
         seatIDText.setText(hotArea.getAreaTitle());
 
-        setUpCustomCalendar(contentView);
+        setUpCustomCalendar(calendarView);
 
-        setUpPopupWindowRecyclerView(contentView);
-
-
-
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(popupView.getContext()));
+        recyclerView.setAdapter(myAdapter);
 
         userViewModel.getDeskRecords(hotArea.getAreaId());
 
@@ -152,8 +155,27 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setUpCustomCalendar(View contentView){
-        CalendarView calendarView = contentView.findViewById(R.id.customCalendar);
+    static class BookingRecordsObserver implements Observer<List<BookingRecord>>{
+        CalendarView calendarView;
+        RecyclerView recyclerView;
+        MyAdapter myAdapter;
+
+        public BookingRecordsObserver(CalendarView calendarView,RecyclerView recyclerView,MyAdapter myAdapter){
+            this.calendarView = calendarView;
+            this.recyclerView = recyclerView;
+            this.myAdapter = myAdapter;
+        }
+
+        @Override
+        public void onChanged(List<BookingRecord> bookingRecords) {
+            myAdapter.setBookingRecords(bookingRecords);
+            myAdapter.notifyDataSetChanged();
+            calendarView.setOnCalendarInterceptListener(new CalendarIntercepter(bookingRecords));
+
+        }
+    }
+
+    private void setUpCustomCalendar(CalendarView calendarView){
         calendarView.setSelectRange(-1,7);
         calendarView.setRange(calendarView.getCurYear(),calendarView.getCurMonth(),calendarView.getCurDay(),
                 calendarView.getCurYear()+1,calendarView.getCurMonth(),calendarView.getCurDay());
@@ -165,32 +187,47 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSelectOutOfRange(Calendar calendar, boolean isOutOfMinRange) {
-                if(!isOutOfMinRange) Toast.makeText(MainActivity.this,"> 7",Toast.LENGTH_LONG).show();
+                if(!isOutOfMinRange) Toast.makeText(MainActivity.this,"> 7",Toast.LENGTH_LONG).show();  //TODO
             }
 
             @Override
             public void onCalendarRangeSelect(Calendar calendar, boolean isEnd) {
-                if(!isEnd) Toast.makeText(MainActivity.this,"notEnd"+calendar.isWeekend(),Toast.LENGTH_LONG).show();
-                else Toast.makeText(MainActivity.this,"End"+calendar.isWeekend(),Toast.LENGTH_LONG).show();
+
             }
         });
     }
 
-    private void setUpPopupWindowRecyclerView(View contentView){
-        RecyclerView recyclerView = contentView.findViewById(R.id.recyclerView);
-        //CalendarView calendarView = contentView.findViewById(R.id.customCalendar);  //TODO
-//        myAdapter = new MyAdapter();
-        recyclerView.setLayoutManager(new LinearLayoutManager(contentView.getContext()));
-        recyclerView.setAdapter(myAdapter);
+    static class CalendarIntercepter implements CalendarView.OnCalendarInterceptListener{
+        List<BookingRecord> bookingRecords;
 
-        userViewModel.getLiveBookingRecords().observe(this, new Observer<List<BookingRecord>>() {
-            @Override
-            public void onChanged(List<BookingRecord> bookingRecords) {
-                myAdapter.setBookingRecords(bookingRecords);
-                myAdapter.notifyDataSetChanged();
+        public  CalendarIntercepter(List<BookingRecord> bookingRecords){
+            this.bookingRecords = bookingRecords;
+        }
+
+        @Override
+        public boolean onCalendarIntercept(Calendar calendar) {
+            for(int i=0;i<bookingRecords.size();i++){
+                Calendar from_date = bookingRecords.get(i).getFrom_dateCalendar();
+                Calendar to_date = bookingRecords.get(i).getTo_dateCalendar();
+                if(calendar.compareTo(from_date) >= 0 && calendar.compareTo(to_date) <=0) return true;
             }
-        });
+            return false;
+        }
+
+        @Override
+        public void onCalendarInterceptClick(Calendar calendar, boolean isClick) {
+
+        }
     }
+
+//    private void setUpPopupWindowRecyclerView(RecyclerView recyclerView,MyAdapter myAdapter){
+//        //recyclerView = popupView.findViewById(R.id.recyclerView);
+//        //CalendarView calendarView = contentView.findViewById(R.id.customCalendar);
+////        myAdapter = new MyAdapter();
+//        recyclerView.setLayoutManager(new LinearLayoutManager(popupView.getContext()));
+//        recyclerView.setAdapter(myAdapter);
+//
+//    }
 
 
     public void initDatas(String filename, HotClickView hotClickView) {
