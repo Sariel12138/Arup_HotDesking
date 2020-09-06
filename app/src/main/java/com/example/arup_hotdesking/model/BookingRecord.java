@@ -8,14 +8,14 @@ public class BookingRecord {
     private int id;
     private String from_date;
     private String to_date;
-    private int year;
     private String email;
 
-    public BookingRecord(int id, String from_date, String to_date,String year, String email) {
+    public BookingRecord(){};
+
+    public BookingRecord(int id, String from_date, String to_date, String email) {
         this.id = id;
         this.from_date = from_date;
         this.to_date = to_date;
-        this.year = Integer.parseInt(year);
         this.email = email;
     }
 
@@ -38,8 +38,9 @@ public class BookingRecord {
     public Calendar getFrom_dateCalendar(){
         Calendar calendar = new Calendar();
         String[] s = from_date.split("/");
-        int month = Integer.parseInt(s[1]);
         int day = Integer.parseInt(s[0]);
+        int month = Integer.parseInt(s[1]);
+        int year = Integer.parseInt(s[2]);
         calendar.setMonth(month);
         calendar.setDay(day);
         calendar.setYear(year);
@@ -50,8 +51,9 @@ public class BookingRecord {
     public Calendar getTo_dateCalendar(){
         Calendar calendar = new Calendar();
         String[] s = to_date.split("/");
-        int month = Integer.parseInt(s[1]);
         int day = Integer.parseInt(s[0]);
+        int month = Integer.parseInt(s[1]);
+        int year = Integer.parseInt(s[2]);
         calendar.setMonth(month);
         calendar.setDay(day);
         calendar.setYear(year);

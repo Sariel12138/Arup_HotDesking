@@ -47,7 +47,7 @@ public class SeatFragment extends Fragment {
         picker.setSelectedIndex(1);
         picker.setTextSize(18);
         picker.setCycleDisable(true);
-        selectPlanta = getView().findViewById(R.id.button2);
+        selectPlanta = getView().findViewById(R.id.bookButton);
         choosedPlanta =  getView().findViewById(R.id.textView4);
         map = getView().findViewById(R.id.plantamap);
         parent = (ViewGroup) map.getParent();

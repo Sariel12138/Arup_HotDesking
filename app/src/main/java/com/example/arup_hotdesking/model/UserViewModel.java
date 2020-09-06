@@ -2,6 +2,7 @@ package com.example.arup_hotdesking.model;
 
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -9,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.arup_hotdesking.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,9 +20,13 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.haibin.calendarview.Calendar;
+import com.haibin.calendarview.CalendarView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserViewModel extends ViewModel {
     private int workSpace = R.id.courseFragment;
@@ -31,6 +37,7 @@ public class UserViewModel extends ViewModel {
     private FirebaseUser user;
     private MutableLiveData<String> displayName = new MutableLiveData<>();
     private MutableLiveData<Boolean> isAdmin = new MutableLiveData<>();
+    private MutableLiveData<Boolean> bookingResult = new MutableLiveData<>();
 
     public UserViewModel(){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -66,7 +73,7 @@ public class UserViewModel extends ViewModel {
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         DocumentSnapshot documentSnapshot = task.getResult();
-                        if (documentSnapshot.exists()) {
+                        if (documentSnapshot != null && documentSnapshot.exists()) {
                             isAdmin.setValue(documentSnapshot.getBoolean("admin"));
                         }
                     }
@@ -81,6 +88,10 @@ public class UserViewModel extends ViewModel {
 
     public MutableLiveData<Boolean> getIsAdmin() {
         return isAdmin;
+    }
+
+    public MutableLiveData<Boolean> getBookingResult() {
+        return bookingResult;
     }
 
     public void getDeskRecords(String deskNo){
@@ -99,7 +110,7 @@ public class UserViewModel extends ViewModel {
                         int id = 0;
                         for(QueryDocumentSnapshot snapshot:task.getResult()){
                             BookingRecord bookingRecord = new BookingRecord(++id,snapshot.getString("from_date"),
-                                    snapshot.getString("to_date"),snapshot.getString("year"),snapshot.getString("email"));
+                                    snapshot.getString("to_date"),snapshot.getString("email"));
                             bookingRecords.add(bookingRecord);
                             Log.d("getDeskInfo", snapshot.getString("email"));
                         }
@@ -123,5 +134,23 @@ public class UserViewModel extends ViewModel {
 
     public void resetLiveRecords() {
         liveRecords.setValue(new ArrayList<BookingRecord>());
+    }
+
+    public void bookSeat(String seatID, List<Calendar> calendarRange){
+        Map<String,Object> bookingRecord = new HashMap<>();
+        bookingRecord.put("desk_number",seatID);
+        bookingRecord.put("email",user.getEmail());
+        bookingRecord.put("from_date",calendarRange.get(0));
+        bookingRecord.put("to_date",calendarRange.get(calendarRange.size()-1));
+        bookingRecord.put("year",calendarRange.get(0).getYear());
+        db.collection("BookingRecords")
+                .add(bookingRecord)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        bookingResult.setValue(true);
+                    }
+                });
+
     }
 }

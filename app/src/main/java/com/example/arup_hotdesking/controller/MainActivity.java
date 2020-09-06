@@ -1,6 +1,7 @@
 package com.example.arup_hotdesking.controller;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -22,6 +23,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -134,18 +136,23 @@ public class MainActivity extends AppCompatActivity {
         TextView seatIDText = popupView.findViewById(R.id.seatID);
         CalendarView calendarView = popupView.findViewById(R.id.customCalendar);
         RecyclerView recyclerView = popupView.findViewById(R.id.recyclerView);
+        Button book = popupView.findViewById(R.id.bookButton);
         MyAdapter myAdapter = new MyAdapter();
         userViewModel.getLiveBookingRecords().observe(this, new BookingRecordsObserver(calendarView,
                 recyclerView, myAdapter));
 
         seatIDText.setText(hotArea.getAreaTitle());
 
-        setUpCustomCalendar(calendarView);
+        setUpCustomCalendar(calendarView,book);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(popupView.getContext()));
         recyclerView.setAdapter(myAdapter);
 
         userViewModel.getDeskRecords(hotArea.getAreaId());
+
+        book.setOnClickListener(new BookingButtonClickListener(calendarView.getSelectCalendarRange(),hotArea.getAreaId()));
+
+        userViewModel.getBookingResult().observe(this,new BookingResultObserver(popupWindow));
 
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
@@ -175,26 +182,69 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setUpCustomCalendar(CalendarView calendarView){
+    class BookingResultObserver implements Observer<Boolean>{
+        private PopupWindow popupWindow;
+
+        public BookingResultObserver(PopupWindow popupWindow){
+            this.popupWindow = popupWindow;
+        }
+
+        @Override
+        public void onChanged(Boolean aBoolean) {
+            if(aBoolean){
+                Toast.makeText(MainActivity.this,"Booking succeeded",Toast.LENGTH_LONG).show();
+                popupWindow.dismiss();
+            }
+            else{
+                Toast.makeText(MainActivity.this,"Booking failed",Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    class BookingButtonClickListener implements View.OnClickListener{
+        private List<Calendar> calendarRange;
+        private String seatID;
+
+        public BookingButtonClickListener(List<Calendar> calendarRange,String seatID){
+            this.calendarRange = calendarRange;
+            this.seatID = seatID;
+        }
+
+        @Override
+        public void onClick(View view) {
+            userViewModel.bookSeat(seatID,calendarRange);
+        }
+    }
+
+    private void setUpCustomCalendar(CalendarView calendarView, Button bookButton){
         calendarView.setSelectRange(-1,7);
         calendarView.setRange(calendarView.getCurYear(),calendarView.getCurMonth(),calendarView.getCurDay(),
                 calendarView.getCurYear()+1,calendarView.getCurMonth(),calendarView.getCurDay());
-        calendarView.setOnCalendarRangeSelectListener(new CalendarView.OnCalendarRangeSelectListener() {
-            @Override
-            public void onCalendarSelectOutOfRange(Calendar calendar) {
+        calendarView.setOnCalendarRangeSelectListener(new MyCalendarRangeSelectListener(bookButton));
+    }
 
-            }
+    class MyCalendarRangeSelectListener implements CalendarView.OnCalendarRangeSelectListener{
+        private Button button;
 
-            @Override
-            public void onSelectOutOfRange(Calendar calendar, boolean isOutOfMinRange) {
-                if(!isOutOfMinRange) Toast.makeText(MainActivity.this,"> 7",Toast.LENGTH_LONG).show();  //TODO
-            }
+        public MyCalendarRangeSelectListener(Button button){
+            this.button = button;
+        }
 
-            @Override
-            public void onCalendarRangeSelect(Calendar calendar, boolean isEnd) {
+        @Override
+        public void onCalendarSelectOutOfRange(Calendar calendar) {
 
-            }
-        });
+        }
+
+        @Override
+        public void onSelectOutOfRange(Calendar calendar, boolean isOutOfMinRange) {
+            if(!isOutOfMinRange) Toast.makeText(MainActivity.this,R.string.calendarOutOfRange,Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onCalendarRangeSelect(Calendar calendar, boolean isEnd) {
+            if(isEnd) button.setEnabled(true);
+            else button.setEnabled(false);
+        }
     }
 
     static class CalendarIntercepter implements CalendarView.OnCalendarInterceptListener{
@@ -219,16 +269,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
-//    private void setUpPopupWindowRecyclerView(RecyclerView recyclerView,MyAdapter myAdapter){
-//        //recyclerView = popupView.findViewById(R.id.recyclerView);
-//        //CalendarView calendarView = contentView.findViewById(R.id.customCalendar);
-////        myAdapter = new MyAdapter();
-//        recyclerView.setLayoutManager(new LinearLayoutManager(popupView.getContext()));
-//        recyclerView.setAdapter(myAdapter);
-//
-//    }
-
 
     public void initDatas(String filename, HotClickView hotClickView) {
         AssetManager assetManager = getResources().getAssets();
