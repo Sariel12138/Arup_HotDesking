@@ -104,7 +104,7 @@ public class UserViewModel extends ViewModel {
         CollectionReference records = db.collection("BookingRecords");
         bookingRecords = new ArrayList<>();
         records
-                .whereEqualTo("desk_number",deskNo)
+                .whereEqualTo("deskID",deskNo)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -112,7 +112,7 @@ public class UserViewModel extends ViewModel {
                     QuerySnapshot querySnapshot = task.getResult();
                     if(querySnapshot != null){
                         int id = 0;
-                        for(QueryDocumentSnapshot snapshot:task.getResult()){
+                        for(QueryDocumentSnapshot snapshot:querySnapshot){
 //                            BookingRecord bookingRecord = new BookingRecord(++id,snapshot.getString("from_date"),
 //                                    snapshot.getString("to_date"),snapshot.getString("email"));
                             BookingRecord bookingRecord = snapshot.toObject(BookingRecord.class);
