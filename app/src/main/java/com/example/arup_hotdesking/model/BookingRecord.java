@@ -19,6 +19,9 @@ public class BookingRecord {
     public BookingRecord(String deskID, List<Calendar> bookingRange, String email) {
         this.deskID = deskID;
         this.bookingRange = bookingRange;
+        this.from_dateString = setFromDateString();
+        this.to_dateString = setToDateString();
+        this.year = setYear();
         this.email = email;
     }
 
@@ -35,11 +38,18 @@ public class BookingRecord {
     }
 
     public int getYear(){
-        if(bookingRange==null) return 0;
-        return bookingRange.get(0).getYear();
+        return year;
     }
 
-    public String getFrom_DateString(){
+    public String getFrom_date(){
+        return from_dateString;
+    }
+
+    public String getTo_date(){
+        return to_dateString;
+    }
+
+    private String setFromDateString(){
         if(bookingRange==null) return null;
         StringBuilder from_date = new StringBuilder();
         Calendar calendar = bookingRange.get(0);
@@ -49,7 +59,7 @@ public class BookingRecord {
         return from_date.toString();
     }
 
-    public String getTo_DateString(){
+    private String setToDateString(){
         if(bookingRange==null) return null;
         StringBuilder from_date = new StringBuilder();
         Calendar calendar = bookingRange.get(bookingRange.size()-1);
@@ -57,5 +67,10 @@ public class BookingRecord {
                 .append(calendar.getMonth());
 
         return from_date.toString();
+    }
+
+    private int setYear(){
+        if(bookingRange==null) return 0;
+        return bookingRange.get(0).getYear();
     }
 }
