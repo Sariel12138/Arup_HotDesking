@@ -19,6 +19,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -207,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
 
         public BookingButtonClickListener(List<Calendar> calendarRange,String seatID){
             this.calendarRange = calendarRange;
+            Log.d("calendar",calendarRange.toString());
             this.seatID = seatID;
         }
 
@@ -242,7 +244,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onCalendarRangeSelect(Calendar calendar, boolean isEnd) {
-            if(isEnd) button.setEnabled(true);
+            if(isEnd) {
+                button.setEnabled(true);
+            }
             else button.setEnabled(false);
         }
     }
