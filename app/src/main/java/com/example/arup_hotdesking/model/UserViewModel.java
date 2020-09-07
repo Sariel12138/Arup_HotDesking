@@ -140,9 +140,21 @@ public class UserViewModel extends ViewModel {
         Map<String,Object> bookingRecord = new HashMap<>();
         bookingRecord.put("desk_number",seatID);
         bookingRecord.put("email",user.getEmail());
-        bookingRecord.put("from_date",calendarRange.get(0));
-        bookingRecord.put("to_date",calendarRange.get(calendarRange.size()-1));
-        bookingRecord.put("year",calendarRange.get(0).getYear());
+
+        StringBuilder fromDateStringBuilder = new StringBuilder();
+        Calendar fromDate = calendarRange.get(0);
+        fromDateStringBuilder.append(fromDate.getDay()).append("/")
+                .append(fromDate.getMonth()).append("/")
+                .append(fromDate.getYear());
+        bookingRecord.put("from_date",fromDateStringBuilder.toString());
+
+        StringBuilder toDateStringBuilder = new StringBuilder();
+        Calendar toDate = calendarRange.get(calendarRange.size()-1);
+        toDateStringBuilder.append(toDate.getDay()).append("/")
+                .append(toDate.getMonth()).append("/")
+                .append(toDate.getYear());
+        bookingRecord.put("to_date",toDateStringBuilder.toString());
+        bookingRecord.put("year",String.valueOf(fromDate.getYear()));
         db.collection("BookingRecords")
                 .add(bookingRecord)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
