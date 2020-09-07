@@ -33,7 +33,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         BookingRecord record = bookingRecords.get(position);
-        holder.number.setText(position+1);
+        holder.number.setText(String.valueOf(position+1));
         holder.from_date.setText(record.getFrom_date());
         holder.to_date.setText(record.getTo_date());
     }
