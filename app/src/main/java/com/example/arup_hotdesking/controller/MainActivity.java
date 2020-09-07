@@ -192,8 +192,12 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onChanged(Boolean aBoolean) {
+            if(aBoolean == null){
+                return;
+            }
             if(aBoolean){
                 Toast.makeText(MainActivity.this,"Booking succeeded",Toast.LENGTH_LONG).show();
+                userViewModel.resetBookingResult();
                 popupWindow.dismiss();
             }
             else{

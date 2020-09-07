@@ -94,6 +94,10 @@ public class UserViewModel extends ViewModel {
         return bookingResult;
     }
 
+    public void resetBookingResult() {
+        bookingResult.setValue(null);
+    }
+
     public void getDeskRecords(String deskNo){
         //If it is necessary to ensure the consistency of the data when writing to the database, register with collectionListener
 
