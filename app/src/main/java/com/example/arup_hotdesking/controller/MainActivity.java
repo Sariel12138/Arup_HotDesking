@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
 
         userViewModel.getDeskRecords(hotArea.getAreaId());
 
-        book.setOnClickListener(new BookingButtonClickListener(calendarView.getSelectCalendarRange(),hotArea.getAreaId()));
+        book.setOnClickListener(new BookingButtonClickListener(calendarView,hotArea.getAreaId()));
 
         userViewModel.getBookingResult().observe(this,new BookingResultObserver(popupWindow));
 
@@ -203,18 +203,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class BookingButtonClickListener implements View.OnClickListener{
-        private List<Calendar> calendarRange;
+        private CalendarView calendarView;
         private String seatID;
 
-        public BookingButtonClickListener(List<Calendar> calendarRange,String seatID){
-            this.calendarRange = calendarRange;
-            Log.d("calendar",calendarRange.toString());
+        public BookingButtonClickListener(CalendarView calendarView,String seatID){
+            this.calendarView = calendarView;
             this.seatID = seatID;
         }
 
         @Override
         public void onClick(View view) {
-            userViewModel.bookSeat(seatID,calendarRange);
+            userViewModel.bookSeat(seatID,calendarView.getSelectCalendarRange());
         }
     }
 
