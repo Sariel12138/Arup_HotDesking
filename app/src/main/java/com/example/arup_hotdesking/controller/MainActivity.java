@@ -264,9 +264,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onCalendarIntercept(Calendar calendar) {
             for(int i=0;i<bookingRecords.size();i++){
-                Calendar from_date = bookingRecords.get(i).getFrom_dateCalendar();
-                Calendar to_date = bookingRecords.get(i).getTo_dateCalendar();
-                if(calendar.compareTo(from_date) >= 0 && calendar.compareTo(to_date) <=0) return true;
+                if(bookingRecords.get(i).getBookingRange().contains(calendar)) return true;
             }
             return false;
         }

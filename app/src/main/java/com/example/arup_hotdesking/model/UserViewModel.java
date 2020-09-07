@@ -113,8 +113,9 @@ public class UserViewModel extends ViewModel {
                     if(querySnapshot != null){
                         int id = 0;
                         for(QueryDocumentSnapshot snapshot:task.getResult()){
-                            BookingRecord bookingRecord = new BookingRecord(++id,snapshot.getString("from_date"),
-                                    snapshot.getString("to_date"),snapshot.getString("email"));
+//                            BookingRecord bookingRecord = new BookingRecord(++id,snapshot.getString("from_date"),
+//                                    snapshot.getString("to_date"),snapshot.getString("email"));
+                            BookingRecord bookingRecord = snapshot.toObject(BookingRecord.class);
                             bookingRecords.add(bookingRecord);
                             Log.d("getDeskInfo", snapshot.getString("email"));
                         }
@@ -141,24 +142,36 @@ public class UserViewModel extends ViewModel {
     }
 
     public void bookSeat(String seatID, List<Calendar> calendarRange){
-        Map<String,Object> bookingRecord = new HashMap<>();
-        bookingRecord.put("desk_number",seatID);
-        bookingRecord.put("email",user.getEmail());
+//        Map<String,Object> bookingRecord = new HashMap<>();
+//        bookingRecord.put("desk_number",seatID);
+//        bookingRecord.put("email",user.getEmail());
+//
+//
+//
+//        StringBuilder fromDateStringBuilder = new StringBuilder();
+//        Calendar fromDate = calendarRange.get(0);
+//        fromDateStringBuilder.append(fromDate.getDay()).append("/")
+//                .append(fromDate.getMonth()).append("/")
+//                .append(fromDate.getYear());
+//        bookingRecord.put("from_date",fromDateStringBuilder.toString());
+//
+//        StringBuilder toDateStringBuilder = new StringBuilder();
+//        Calendar toDate = calendarRange.get(calendarRange.size()-1);
+//        toDateStringBuilder.append(toDate.getDay()).append("/")
+//                .append(toDate.getMonth()).append("/")
+//                .append(toDate.getYear());
+//        bookingRecord.put("to_date",toDateStringBuilder.toString());
+//        bookingRecord.put("year",String.valueOf(fromDate.getYear()));
+//        db.collection("BookingRecords")
+//                .add(bookingRecord)
+//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                    @Override
+//                    public void onSuccess(DocumentReference documentReference) {
+//                        bookingResult.setValue(true);
+//                    }
+//                });
 
-        StringBuilder fromDateStringBuilder = new StringBuilder();
-        Calendar fromDate = calendarRange.get(0);
-        fromDateStringBuilder.append(fromDate.getDay()).append("/")
-                .append(fromDate.getMonth()).append("/")
-                .append(fromDate.getYear());
-        bookingRecord.put("from_date",fromDateStringBuilder.toString());
-
-        StringBuilder toDateStringBuilder = new StringBuilder();
-        Calendar toDate = calendarRange.get(calendarRange.size()-1);
-        toDateStringBuilder.append(toDate.getDay()).append("/")
-                .append(toDate.getMonth()).append("/")
-                .append(toDate.getYear());
-        bookingRecord.put("to_date",toDateStringBuilder.toString());
-        bookingRecord.put("year",String.valueOf(fromDate.getYear()));
+        BookingRecord bookingRecord = new BookingRecord(seatID,calendarRange,user.getEmail());
         db.collection("BookingRecords")
                 .add(bookingRecord)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
