@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = popupView.findViewById(R.id.recyclerView);
         Button book = popupView.findViewById(R.id.bookButton);
         MyAdapter myAdapter = new MyAdapter();
-        calendarView.setOnCalendarInterceptListener(new CalendarIntercepter(userViewModel.getLiveBookingRecords().getValue()));
+
         userViewModel.getLiveBookingRecords().observe(this, new BookingRecordsObserver(calendarView,
                 recyclerView, myAdapter));
 
@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(myAdapter);
 
         userViewModel.getDeskRecords(hotArea.getAreaId());
+        calendarView.setOnCalendarInterceptListener(new CalendarIntercepter(userViewModel.getLiveBookingRecords().getValue()));
 
         book.setOnClickListener(new BookingButtonClickListener(calendarView,hotArea.getAreaId()));
 
