@@ -151,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(myAdapter);
 
         userViewModel.getDeskRecords(hotArea.getAreaId());
-        calendarView.setOnCalendarInterceptListener(new CalendarIntercepter(userViewModel.getLiveBookingRecords().getValue()));
 
         book.setOnClickListener(new BookingButtonClickListener(calendarView,hotArea.getAreaId()));
 
@@ -180,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
         public void onChanged(List<BookingRecord> bookingRecords) {
             myAdapter.setBookingRecords(bookingRecords);
             myAdapter.notifyDataSetChanged();
-
+            calendarView.setOnCalendarInterceptListener(new CalendarIntercepter(bookingRecords));
         }
     }
 
