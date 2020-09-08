@@ -1,246 +1,246 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Areas areaId="Planta2" desc="Planta 2 map"  areaTitle="Planta 2">
-    <Area areaId="P2_201"
-        areaTitle="seat201"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_201Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_201"
         desc="this is seat 201"
         pts="159,1935,278,1935,278,2052,159,2052"/>
 
-    <Area areaId="P2_202"
-        areaTitle="seat202"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_202Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_202"
         desc="this is seat 202"
         pts="278,1935,394,1935,394,2052,278,2052"/>
 
-    <Area areaId="P2_203"
-        areaTitle="seat203"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_203Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_203"
         desc="this is seat 203"
         pts="159,1818,278,1818,278,1935,159,1935"/>
 
-    <Area areaId="P2_204"
-        areaTitle="seat204"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_204Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_204"
         desc="this is seat 204"
         pts="278,1818,394,1818,394,1935,278,1935"/>
 
-    <Area areaId="P2_205"
-        areaTitle="seat205"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_205Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_205"
         desc="this is seat 205"
         pts="159,1664,278,1664,278,1780,159,1780"/>
 
-    <Area areaId="P2_206"
-        areaTitle="seat206"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_206Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_206"
         desc="this is seat 206"
         pts="278,1664,394,1664,394,1780,278,1780"/>
 
-    <Area areaId="P2_207"
-        areaTitle="seat207"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_207Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_207"
         desc="this is seat 207"
         pts="159,1540,278,1540,278,1664,159,1664"/>
 
-    <Area areaId="P2_208"
-        areaTitle="seat208"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_208Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_208"
         desc="this is seat 208"
         pts="278,1540,394,1540,394,1664,278,1664"/>
 
-    <Area areaId="P2_209"
-        areaTitle="seat209"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_209Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_209"
         desc="this is seat 209"
         pts="159,1400,278,1400,278,1515,159,1515"/>
 
-    <Area areaId="P2_210"
-        areaTitle="seat210"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_210Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_210"
         desc="this is seat 210"
         pts="278,1400,394,1400,394,1515,278,1515"/>
 
-    <Area areaId="P2_211"
-        areaTitle="seat211"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_211Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_211"
         desc="this is seat 211"
         pts="159,1280,278,1280,278,1400,159,1400"/>
 
-    <Area areaId="P2_212"
-        areaTitle="seat212"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_212Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_212"
         desc="this is seat 212"
         pts="278,1280,394,1280,394,1400,278,1400"/>
 
-    <Area areaId="P2_213"
-        areaTitle="seat213"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_213Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_213"
         desc="this is seat 213"
         pts="159,1125,278,1125,278,1244,159,1244"/>
 
-    <Area areaId="P2_214"
-        areaTitle="seat214"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_214Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_214"
         desc="this is seat 214"
         pts="278,1125,394,1125,394,1244,278,1244"/>
 
-    <Area areaId="P2_215"
-        areaTitle="seat215"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_215Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_215"
         desc="this is seat 215"
         pts="159,1010,278,1010,278,1125,159,1125"/>
 
-    <Area areaId="P2_216"
-        areaTitle="seat216"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_216Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_216"
         desc="this is seat 216"
         pts="278,1010,394,1010,394,1125,278,1125"/>
 
-    <Area areaId="P2_217"
-        areaTitle="seat217"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_217Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_217"
         desc="this is seat 217"
         pts="159,862,278,862,278,980,159,980"/>
 
-    <Area areaId="P2_218"
-        areaTitle="seat218"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_218Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_218"
         desc="this is seat 218"
         pts="278,862,394,862,394,980,278,980"/>
 
-    <Area areaId="P2_219"
-        areaTitle="seat219"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_219Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_219"
         desc="this is seat 219"
         pts="159,740,278,740,278,862,159,862"/>
 
-    <Area areaId="P2_220"
-        areaTitle="seat220"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_220Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_220"
         desc="this is seat 220"
         pts="278,740,394,740,394,862,278,862"/>
 
-    <Area areaId="P2_221"
-        areaTitle="seat221"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_221Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_221"
         desc="this is seat 221"
         pts="159,580,278,580,278,700,159,700"/>
 
-    <Area areaId="P2_222"
-        areaTitle="seat222"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_222Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_222"
         desc="this is seat 222"
         pts="278,580,394,580,394,700,278,700"/>
 
-    <Area areaId="P2_223"
-        areaTitle="seat223"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_223Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_223"
         desc="this is seat 223"
         pts="190,223,305,223,305,340,190,340"/>
 
-    <Area areaId="P2_224"
-        areaTitle="seat224"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_224Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_224"
         desc="this is seat 224"
         pts="190,340,305,340,305,460,190,460"/>
 
-    <Area areaId="P2_225"
-        areaTitle="seat225"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_225Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_225"
         desc="this is seat 225"
         pts="365,223,480,223,480,340,365,340"/>
 
-    <Area areaId="P2_226"
-        areaTitle="seat226"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_226Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_226"
         desc="this is seat 226"
         pts="365,340,480,340,480,460,365,460"/>
 
-    <Area areaId="P2_227"
-        areaTitle="seat227"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_227Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_227"
         desc="this is seat 227"
         pts="480,223,600,223,600,340,480,340"/>
 
-    <Area areaId="P2_228"
-        areaTitle="seat228"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_228Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_228"
         desc="this is seat 228"
         pts="480,340,600,340,600,460,480,460"/>
 
-    <Area areaId="P2_229"
-        areaTitle="seat229"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_229Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_229"
         desc="this is seat 229"
         pts="630,223,744,233,744,340,630,340"/>
 
-    <Area areaId="P2_230"
-        areaTitle="seat230"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_230Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_230"
         desc="this is seat 230"
         pts="630,340,744,340,744,460,630,460"/>
 
-    <Area areaId="P2_231"
-        areaTitle="seat231"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_231Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_231"
         desc="this is seat 231"
         pts="744,223,860,223,860,340,744,340"/>
 
-    <Area areaId="P2_232"
-        areaTitle="seat232"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_232Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_232"
         desc="this is seat 232"
         pts="744,340,860,340,860,460,744,460"/>
 
-    <Area areaId="P2_233"
-        areaTitle="seat233"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_233Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_233"
         desc="this is seat 233"
         pts="780,943,890,943,890,1050,780,1050"/>
 
-    <Area areaId="P2_234"
-        areaTitle="seat234"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_234Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_234"
         desc="this is seat 234"
         pts="607,1030,690,1030,690,1120,607,1120"/>
 
-    <Area areaId="P2_235"
-        areaTitle="seat235"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_235Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_235"
         desc="this is seat 235"
         pts="739,1115,830,1115,830,1196,739,1196"/>
 
-    <Area areaId="P2_236"
-        areaTitle="seat236"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_236Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_236"
         desc="this is seat 236"
         pts="1024,1590,1144,1590,1144,1706,1024,1706"/>
 
-    <Area areaId="P2_237"
-        areaTitle="seat237"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_237Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_237"
         desc="this is seat 237"
         pts="1024,1477,1144,1477,1144,1588,1024,1588"/>
 
-    <Area areaId="P2_238"
-        areaTitle="seat238"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_238Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_238"
         desc="this is seat 238"
         pts="1024,1362,1144,1362,1144,1480,1024,1480"/>
 
-    <Area areaId="P2_239"
-        areaTitle="seat239"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_239Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_239"
         desc="this is seat 239"
         pts="910,1588,1024,1588,1024,1706,910,1706"/>
 
-    <Area areaId="P2_240"
-        areaTitle="seat240"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_240Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_240"
         desc="this is seat 240"
         pts="910,1480,1024,1480,1024,1588,910,1588"/>
 
-    <Area areaId="P2_241"
-        areaTitle="seat241"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_241Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_241"
         desc="this is seat 241"
         pts="910,1362,1024,1362,1024,1480,910,1480"/>
 
-    <Area areaId="P2_242"
-        areaTitle="seat242"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_242Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_242"
         desc="this is seat 242"
         pts="786,1625,900,1625,900,1743,786,1743"/>
 
-    <Area areaId="P2_243"
-        areaTitle="seat243"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_243Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_243"
         desc="this is seat 243"
         pts="786,1507,900,1507,900,1625,786,1625"/>
 
-    <Area areaId="P2_244"
-        areaTitle="seat244"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_244Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_244"
         desc="this is seat 244"
         pts="668,1625,786,1625,786,1743,668,1743"/>
 
-    <Area areaId="P2_245"
-        areaTitle="seat245"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_245Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_245"
         desc="this is seat 245"
         pts="668,1507,786,1507,786,1625,668,1625"/>
 
-    <Area areaId="P2_246"
-        areaTitle="seat246"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_246Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_246"
         desc="this is seat 246"
         pts="217,2265,390,2265,390,2383,217,2383"/>
 
-    <Area areaId="P2_247"
-        areaTitle="seat247"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_247Planta(2)-Reception-Floor(2)_1246Seater"
+        areaTitle="P2_247"
         desc="this is seat 247"
         pts="1025,266,1225,266,1225,452,1025,452"/>
 
-    <Area areaId="P2_2T1"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_2T1Planta(2)-Reception-Floor(2)_1246Seater"
         areaTitle="P2_2T1"
         desc="this is seat 2T1"
         pts="762,582,874,582,874,714,762,714"/>
 
-    <Area areaId="P2_2T2"
+    <Area areaId="RMIT-ARUP:2020_AustraliaP2_2T2Planta(2)-Reception-Floor(2)_1246Seater"
         areaTitle="P2_2T2"
         desc="this is seat 2T2"
         pts="652,714,762,714,762,850,652,850"/>

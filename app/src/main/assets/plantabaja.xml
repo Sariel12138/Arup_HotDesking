@@ -1,142 +1,142 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Areas areaId="PlantaBaja" desc="Planta baja map"  areaTitle="Planta baja">
-    <Area areaId="PB_001"
-        areaTitle="seat001"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_001Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_001"
         desc="this is seat 001"
         pts="122,890,233,890,233,1009,122,1009"/>
 
-    <Area areaId="PB_002"
-        areaTitle="seat002"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_002Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_002"
         desc="this is seat 002"
         pts="233,890,352,890,352,1009,233,1009"/>
 
-    <Area areaId="PB_003"
-        areaTitle="seat003"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_003Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_003"
         desc="this is seat 003"
         pts="122,779,233,779,233,890,122,890"/>
 
-    <Area areaId="PB_004"
-        areaTitle="seat004"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_004Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_004"
         desc="this is seat 004"
         pts="233,779,352,779,352,890,233,890"/>
 
-    <Area areaId="PB_005"
-        areaTitle="seat005"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_005Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_005"
         desc="this is seat 005"
         pts="122,589,233,589,233,704,122,704"/>
 
-    <Area areaId="PB_006"
-        areaTitle="seat006"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_006Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_006"
         desc="this is seat 006"
         pts="233,589,352,589,352,704,233,704"/>
 
-    <Area areaId="PB_007"
-        areaTitle="seat007"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_007Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_007"
         desc="this is seat 007"
         pts="122,471,233,471,233,589,122,589"/>
 
-    <Area areaId="PB_008"
-        areaTitle="seat008"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_008Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_008"
         desc="this is seat 008"
         pts="233,471,352,471,352,589,233,589"/>
 
-    <Area areaId="PB_009"
-        areaTitle="seat009"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_009Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_009"
         desc="this is seat 009"
         pts="103,263,159,263,159,333,103,333"/>
 
-    <Area areaId="PB_010"
-        areaTitle="seat010"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_010Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_010"
         desc="this is seat 010"
         pts="259,196,322,196,322,259,259,259"/>
 
-    <Area areaId="PB_011"
-        areaTitle="seat011"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_011Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_011"
         desc="this is seat 011"
         pts="449,118,564,118,564,233,449,233"/>
 
-    <Area areaId="PB_012"
-        areaTitle="seat012"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_012Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_012"
         desc="this is seat 012"
         pts="449,233,564,233,564,352,449,352"/>
 
-    <Area areaId="PB_013"
-        areaTitle="seat013"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_013Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_013"
         desc="this is seat 013"
         pts="604,118,720,118,720,233,604,233"/>
 
-    <Area areaId="PB_014"
-        areaTitle="seat014"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_014Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_014"
         desc="this is seat 014"
         pts="604,233,720,233,720,352,604,352"/>
 
-    <Area areaId="PB_015"
-        areaTitle="seat015"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_015Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_015"
         desc="this is seat 015"
         pts="720,118,835,118,835,233,720,233"/>
 
-    <Area areaId="PB_016"
-        areaTitle="seat016"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_016Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_016"
         desc="this is seat 016"
         pts="720,233,835,233,835,352,720,352"/>
 
-    <Area areaId="PB_017"
-        areaTitle="seat017"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_017Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_017"
         desc="this is seat 017"
         pts="879,118,994,118,994,233,879,233"/>
 
-    <Area areaId="PB_018"
-        areaTitle="seat018"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_018Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_018"
         desc="this is seat 018"
         pts="879,233,994,233,994,352,879,352"/>
 
-    <Area areaId="PB_019"
-        areaTitle="seat019"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_019Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_019"
         desc="this is seat 019"
         pts="994,118,1109,118,1109,233,994,233"/>
 
-    <Area areaId="PB_020"
-        areaTitle="seat020"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_020Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_020"
         desc="this is seat 020"
         pts="994,233,1109,233,1109,352,994,352"/>
 
-    <Area areaId="PB_021"
-        areaTitle="seat021"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_021Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_021"
         desc="this is seat 021"
         pts="597,474,671,474,671,578,597,578"/>
 
-    <Area areaId="PB_022"
-        areaTitle="seat022"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_022Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_022"
         desc="this is seat 022"
         pts="515,474,597,474,597,578,515,578"/>
 
-    <Area areaId="PB_023"
-        areaTitle="seat023"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_023Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_023"
         desc="this is seat 023"
         pts="437,474,515,471,515,578,437,578"/>
 
-    <Area areaId="PB_024"
-        areaTitle="seat024"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_024Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_024"
         desc="this is seat 024"
         pts="597,578,671,578,671,690,597,690"/>
 
-    <Area areaId="PB_025"
-        areaTitle="seat025"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_025Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_025"
         desc="this is seat 025"
         pts="515,578,597,578,597,690,515,690"/>
 
-    <Area areaId="PB_026"
-        areaTitle="seat026"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_026Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_026"
         desc="this is seat 026"
         pts="437,578,515,579,515,690,437,690"/>
 
-    <Area areaId="PB_0T3"
-        areaTitle="seat0T3"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_0T3Planta()-Baja-Groundfloor()_123420Seater"
+        areaTitle="PB_0T3"
         desc="this is seat 0T3"
         pts="449,842,564,842,564,960,449,960"/>
 
-    <Area areaId="PB_0T4"
-        areaTitle="seat0T4"
+    <Area areaId="RMIT-ARUP:2020_AustraliaPB_0T4Planta()-Baja-Groundfloor()_123420Seaters"
+        areaTitle="PB_0T4"
         desc="this is seat 0T4"
         pts="564,842,675,842,675,960,564,960"/>
 </Areas>
