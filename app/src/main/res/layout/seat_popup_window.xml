@@ -14,17 +14,17 @@
         android:text="BOOK"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bottomline"
-        app:layout_constraintVertical_bias="0.50" />
+        app:layout_constraintTop_toTopOf="@+id/calendarline"
+        app:layout_constraintVertical_bias="0.452" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/calendarline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.77" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -55,21 +55,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0"
-                app:max_select_range="-1"
-                app:min_select_range="-1"
+                app:max_multi_select_size="7"
                 app:min_year="2004"
-                app:month_view="com.example.arup_hotdesking.view.CustomRangeMonthView"
+                app:month_view="com.example.arup_hotdesking.view.CustomMultiMonthView"
                 app:month_view_show_mode="mode_only_current"
                 app:other_month_text_color="#e1e1e1"
                 app:scheme_text="假"
                 app:scheme_text_color="#333"
                 app:scheme_theme_color="#333"
-                app:select_mode="range_mode"
+                app:select_mode="multi_mode"
                 app:selected_text_color="#fff"
                 app:selected_theme_color="#EE7621"
                 app:week_background="#fff"
                 app:week_text_color="#111"
-                app:week_view="com.example.arup_hotdesking.view.CustomRangeWeekView"
+                app:week_view="com.example.arup_hotdesking.view.MultiRangeWeekView"
                 app:year_view_day_text_color="#333333"
                 app:year_view_day_text_size="9sp"
                 app:year_view_month_text_color="#ff0000"
@@ -80,39 +79,25 @@
     </ScrollView>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bottomline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.86" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/titleline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.13" />
 
     <TextView
         android:id="@+id/seatID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/titleline"
+        android:fontFamily="serif"
+        android:textColor="#0E0D0D"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.238"
         tools:text="Seat 001" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/bottomline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/calendarline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

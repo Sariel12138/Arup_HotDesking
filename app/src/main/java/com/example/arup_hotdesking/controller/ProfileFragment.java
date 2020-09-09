@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.arup_hotdesking.R;
@@ -29,6 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class ProfileFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FragmentProfileBinding binding;
+    private Button myBookings;
 
     public static UserViewModel newInstance() {
         return new UserViewModel();
@@ -71,7 +73,6 @@ public class ProfileFragment extends Fragment {
             });
             //TODO
         }
-
 
     }
 }

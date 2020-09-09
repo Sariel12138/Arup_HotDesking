@@ -117,9 +117,9 @@ public class UserViewModel extends ViewModel {
 //                                    snapshot.getString("to_date"),snapshot.getString("email"));
                             BookingRecord bookingRecord = snapshot.toObject(BookingRecord.class);
                             bookingRecords.add(bookingRecord);
-                            Log.d("getDeskInfo", snapshot.getString("email"));
+                            Log.d("getDeskInfo", "email: "+snapshot.getString("email"));
                         }
-                        Log.d("getDeskInfo", String.valueOf(bookingRecords.size()));
+                        Log.d("getDeskInfo", "number of records: "+ String.valueOf(bookingRecords.size()));
                         liveRecords.setValue(bookingRecords);
                     }
                     else {
@@ -131,6 +131,7 @@ public class UserViewModel extends ViewModel {
                 }
             }
         });
+
     }
 
     public MutableLiveData<List<BookingRecord>> getLiveBookingRecords(){

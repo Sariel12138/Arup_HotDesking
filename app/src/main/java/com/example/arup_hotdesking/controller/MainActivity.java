@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private View popupView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +94,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.bookseat://book a seat
                         navController.navigate(R.id.bookingFragment);
+                        break;
+                    case R.id.myBookings://book a seat
+                        navController.navigate(R.id.myBookingFragment);
                         break;
                     case R.id.adminFragment://manage users
                         navController.navigate(R.id.adminFragment);
@@ -136,25 +138,26 @@ public class MainActivity extends AppCompatActivity {
         popupWindow.showAtLocation(view, Gravity.CENTER,0,0);
         TextView seatIDText = popupView.findViewById(R.id.seatID);
         CalendarView calendarView = popupView.findViewById(R.id.customCalendar);
-        RecyclerView recyclerView = popupView.findViewById(R.id.recyclerView);
+        //RecyclerView recyclerView = popupView.findViewById(R.id.recyclerView);
         Button book = popupView.findViewById(R.id.bookButton);
         MyAdapter myAdapter = new MyAdapter();
 
         userViewModel.getLiveBookingRecords().observe(this, new BookingRecordsObserver(calendarView,
-                recyclerView, myAdapter));
+                 myAdapter));
 
         seatIDText.setText(hotArea.getAreaTitle());
 
         setUpCustomCalendar(calendarView,book);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(popupView.getContext()));
-        recyclerView.setAdapter(myAdapter);
+       // recyclerView.setLayoutManager(new LinearLayoutManager(popupView.getContext()));
+       // recyclerView.setAdapter(myAdapter);
 
         userViewModel.getDeskRecords(hotArea.getAreaId());
 
         book.setOnClickListener(new BookingButtonClickListener(calendarView,hotArea.getAreaId()));
 
         userViewModel.getBookingResult().observe(this,new BookingResultObserver(popupWindow));
+
+
 
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
@@ -169,9 +172,9 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView;
         MyAdapter myAdapter;
 
-        public BookingRecordsObserver(CalendarView calendarView,RecyclerView recyclerView,MyAdapter myAdapter){
+        public BookingRecordsObserver(CalendarView calendarView,MyAdapter myAdapter){
             this.calendarView = calendarView;
-            this.recyclerView = recyclerView;
+            //this.recyclerView = recyclerView;
             this.myAdapter = myAdapter;
         }
 
@@ -217,40 +220,60 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            userViewModel.bookSeat(seatID,calendarView.getSelectCalendarRange());
+            userViewModel.bookSeat(seatID,calendarView.getMultiSelectCalendars());
         }
     }
 
     private void setUpCustomCalendar(CalendarView calendarView, Button bookButton){
-        calendarView.setSelectRange(-1,7);
+       // calendarView.setSelectRange(-1,7);
+
+
         calendarView.setRange(calendarView.getCurYear(),calendarView.getCurMonth(),calendarView.getCurDay(),
                 calendarView.getCurYear()+1,calendarView.getCurMonth(),calendarView.getCurDay());
-        calendarView.setOnCalendarRangeSelectListener(new MyCalendarRangeSelectListener(bookButton));
+        calendarView.setOnCalendarMultiSelectListener(new MyCalendarMultiSelectListener(bookButton));
     }
 
-    class MyCalendarRangeSelectListener implements CalendarView.OnCalendarRangeSelectListener{
+    class MyCalendarMultiSelectListener implements CalendarView.OnCalendarMultiSelectListener{
         private Button button;
 
-        public MyCalendarRangeSelectListener(Button button){
+        public MyCalendarMultiSelectListener(Button button){
             this.button = button;
         }
 
+//        @Override
+//        public void onCalendarSelectOutOfRange(Calendar calendar) {
+//
+//        }
+//
+//        @Override
+//        public void onSelectOutOfRange(Calendar calendar, boolean isOutOfMinRange) {
+//            if(!isOutOfMinRange) Toast.makeText(MainActivity.this,R.string.calendarOutOfRange,Toast.LENGTH_SHORT).show();
+//        }
+//
+//        @Override
+//        public void onCalendarRangeSelect(Calendar calendar, boolean isEnd) {
+//            if(isEnd) {
+//                button.setEnabled(true);
+//            }
+//            else button.setEnabled(false);
+//        }
+
         @Override
-        public void onCalendarSelectOutOfRange(Calendar calendar) {
+        public void onCalendarMultiSelectOutOfRange(Calendar calendar) {
 
         }
 
         @Override
-        public void onSelectOutOfRange(Calendar calendar, boolean isOutOfMinRange) {
-            if(!isOutOfMinRange) Toast.makeText(MainActivity.this,R.string.calendarOutOfRange,Toast.LENGTH_SHORT).show();
+        public void onMultiSelectOutOfSize(Calendar calendar, int maxSize) {
+            Toast.makeText(MainActivity.this,R.string.calendarOutOfRange,Toast.LENGTH_SHORT).show();
         }
 
         @Override
-        public void onCalendarRangeSelect(Calendar calendar, boolean isEnd) {
-            if(isEnd) {
-                button.setEnabled(true);
-            }
-            else button.setEnabled(false);
+        public void onCalendarMultiSelect(Calendar calendar, int curSize, int maxSize) {
+            if(curSize==0) {
+                 button.setEnabled(false);
+              }
+              else button.setEnabled(true);
         }
     }
 
@@ -298,6 +321,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void OnClick(View view, HotArea hotArea) {
             seatPopupWindow(view,hotArea);
+
         }
     }
 

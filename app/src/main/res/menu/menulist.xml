@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/profileFragment"
@@ -11,6 +12,9 @@
         android:id="@+id/adminFragment"
         android:title="Manage users"
         android:visible="false" />
+    <item
+        android:id="@+id/myBookings"
+        android:title="My bookings" />
     <item
         android:id="@+id/logout"
         android:title="Log out" />
