@@ -83,15 +83,14 @@
 
         <Button
             android:id="@+id/button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline14"
-            app:layout_constraintHorizontal_bias="0.463"
-            app:layout_constraintStart_toStartOf="@+id/guideline13"
-            app:layout_constraintTop_toTopOf="@+id/guideline12"
-            app:layout_constraintVertical_bias="0.516"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="CHANGE PASSWORD" />
+            android:text="CHANGE PASSWORD"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline14"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline13"
+            app:layout_constraintTop_toTopOf="@+id/guideline12" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

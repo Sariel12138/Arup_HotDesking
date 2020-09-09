@@ -95,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.bookseat://book a seat
                         navController.navigate(R.id.bookingFragment);
                         break;
+                    case R.id.myBookings://book a seat
+                        navController.navigate(R.id.myBookingFragment);
+                        break;
                     case R.id.adminFragment://manage users
                         navController.navigate(R.id.adminFragment);
                         break;
@@ -153,6 +156,8 @@ public class MainActivity extends AppCompatActivity {
         book.setOnClickListener(new BookingButtonClickListener(calendarView,hotArea.getAreaId()));
 
         userViewModel.getBookingResult().observe(this,new BookingResultObserver(popupWindow));
+
+
 
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
