@@ -31,6 +31,7 @@ public class UserViewModel extends ViewModel {
     private List<BookingRecord> deskBookingRecords;  //desk booking records
     private List<BookingRecord> userBookingRecords; //user booking records
     private MutableLiveData<List<BookingRecord>> liveRecords = new MutableLiveData<>();
+    private MutableLiveData<List<BookingRecord>> userLiveRecords = new MutableLiveData<>();
     private FirebaseUser user;
     private MutableLiveData<String> displayName = new MutableLiveData<>();
     private MutableLiveData<Boolean> isAdmin = new MutableLiveData<>();
@@ -151,7 +152,7 @@ public class UserViewModel extends ViewModel {
                             Log.d("getUserInfo", "email: "+snapshot.getString("email"));
                         }
                         Log.d("getUserInfo", "number of records: "+ String.valueOf(userBookingRecords.size()));
-                       // liveRecords.setValue(userBookingRecords);
+                       userLiveRecords.setValue(userBookingRecords);
                     }
                     else {
                         Log.d("getUserInfo",task.getException().toString());
@@ -173,6 +174,15 @@ public class UserViewModel extends ViewModel {
     public void resetLiveRecords() {
         liveRecords.setValue(new ArrayList<BookingRecord>());
     }
+
+    public MutableLiveData<List<BookingRecord>> getUserLiveBookingRecords(){
+        return userLiveRecords;
+    }
+
+    public void resetUserLiveRecords() {
+        userLiveRecords.setValue(new ArrayList<BookingRecord>());
+    }
+
 
     public void bookSeat(String seatID, List<Calendar> calendarRange){
 //        Map<String,Object> bookingRecord = new HashMap<>();

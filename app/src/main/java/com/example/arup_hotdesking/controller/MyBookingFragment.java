@@ -2,45 +2,57 @@ package com.example.arup_hotdesking.controller;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.arup_hotdesking.R;
+import com.example.arup_hotdesking.model.BookingRecord;
+import com.example.arup_hotdesking.model.MyAdapter;
+import com.example.arup_hotdesking.model.MyBookingAdapter;
+import com.example.arup_hotdesking.model.UserViewModel;
+
+import java.util.List;
 
 public class MyBookingFragment extends Fragment {
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private UserViewModel userViewModel;
+    private  RecyclerView recyclerView;
+    private MyBookingAdapter myBookingAdapter;
 
     public MyBookingFragment() {
         // Required empty public constructor
     }
 
-
-    public static MyBookingFragment newInstance(String param1, String param2) {
-        MyBookingFragment fragment = new MyBookingFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        MainActivity mainActivity = (MainActivity) requireActivity();
+        recyclerView = getView().findViewById(R.id.mybookingrecyclerView);
+        myBookingAdapter = new MyBookingAdapter();
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(myBookingAdapter);
+
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+
+        userViewModel.getUserRecords("employee@admin.com");
+        userViewModel.getUserLiveBookingRecords().observe(getViewLifecycleOwner(), new Observer<List<BookingRecord>>() {
+            @Override
+            public void onChanged(List<BookingRecord> bookingRecords) {
+                myBookingAdapter.setBookingRecords(bookingRecords);
+                myBookingAdapter.notifyDataSetChanged();
+
+            }
+        });
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

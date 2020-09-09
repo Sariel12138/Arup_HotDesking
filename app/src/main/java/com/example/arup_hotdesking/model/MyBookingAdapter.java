@@ -43,7 +43,7 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.MyVi
                             .append(calendar.getYear()).append("\n");
         }
 
-        holder.number.setText(position+1);
+        holder.number.setText(String.valueOf(position+1));
         holder.deskNo.setText(bookingRecord.getDeskID());
         holder.myBooking.setText(bookdaysToString);
     }
