@@ -42,7 +42,7 @@ public class MyBookingFragment extends Fragment {
 
         userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
-        userViewModel.getUserRecords("employee@admin.com");
+        userViewModel.getUserRecords(userViewModel.getUser().getEmail());
         userViewModel.getUserLiveBookingRecords().observe(getViewLifecycleOwner(), new Observer<List<BookingRecord>>() {
             @Override
             public void onChanged(List<BookingRecord> bookingRecords) {
