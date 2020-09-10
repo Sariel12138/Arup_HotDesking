@@ -7,6 +7,7 @@ import com.haibin.calendarview.Calendar;
 import java.util.List;
 
 public class BookingRecord {
+    private String documentID;
     private String deskID;
     private List<Calendar> bookingRange;
     private String email;
@@ -42,6 +43,14 @@ public class BookingRecord {
     public int year(){
         if(bookingRange==null) return 0;
         return bookingRange.get(0).getYear();
+    }
+
+    public void setDocumentID(String documentID) {
+        this.documentID = documentID;
+    }
+
+    public String documentID(){
+        return documentID;
     }
 
     public String from_DateString(){

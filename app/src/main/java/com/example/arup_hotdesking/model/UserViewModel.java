@@ -2,6 +2,7 @@ package com.example.arup_hotdesking.model;
 
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -9,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.arup_hotdesking.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserViewModel extends ViewModel {
+    private final static String BookingRecordsCollectionPath = "BookingRecords";
     private int workSpace = R.id.courseFragment;
     private MutableLiveData<Drawable> workSpaceIcon = new MutableLiveData<>();
     private FirebaseFirestore db;
@@ -36,7 +39,7 @@ public class UserViewModel extends ViewModel {
     private MutableLiveData<String> displayName = new MutableLiveData<>();
     private MutableLiveData<Boolean> isAdmin = new MutableLiveData<>();
     private MutableLiveData<Boolean> bookingResult = new MutableLiveData<>();
-
+    
     public UserViewModel(){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -99,7 +102,7 @@ public class UserViewModel extends ViewModel {
     public void getDeskRecords(String deskNo){
         //If it is necessary to ensure the consistency of the data when writing to the database, register with collectionListener
 
-        CollectionReference records = db.collection("BookingRecords");
+        CollectionReference records = db.collection(BookingRecordsCollectionPath);
         deskBookingRecords = new ArrayList<>();
         records
                 .whereEqualTo("deskID",deskNo)
@@ -114,6 +117,7 @@ public class UserViewModel extends ViewModel {
 //                            BookingRecord bookingRecord = new BookingRecord(++id,snapshot.getString("from_date"),
 //                                    snapshot.getString("to_date"),snapshot.getString("email"));
                             BookingRecord bookingRecord = snapshot.toObject(BookingRecord.class);
+                            bookingRecord.setDocumentID(snapshot.getId());
                             deskBookingRecords.add(bookingRecord);
                             Log.d("getDeskInfo", "email: "+snapshot.getString("email"));
                         }
@@ -133,10 +137,9 @@ public class UserViewModel extends ViewModel {
     }
 
     public void getUserRecords(String email){
-        CollectionReference records = db.collection("BookingRecords");
+        CollectionReference records = db.collection(BookingRecordsCollectionPath);
         userBookingRecords = new ArrayList<>();
-        records
-                .whereEqualTo("email",email)
+        records.whereEqualTo("email",email)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -148,6 +151,7 @@ public class UserViewModel extends ViewModel {
 //                            BookingRecord bookingRecord = new BookingRecord(++id,snapshot.getString("from_date"),
 //                                    snapshot.getString("to_date"),snapshot.getString("email"));
                             BookingRecord bookingRecord = snapshot.toObject(BookingRecord.class);
+                            bookingRecord.setDocumentID(snapshot.getId());
                             userBookingRecords.add(bookingRecord);
                             Log.d("getUserInfo", "email: "+snapshot.getString("email"));
                         }
@@ -185,37 +189,8 @@ public class UserViewModel extends ViewModel {
 
 
     public void bookSeat(String deskID, List<Calendar> calendarRange,String deskTitle){
-//        Map<String,Object> bookingRecord = new HashMap<>();
-//        bookingRecord.put("desk_number",seatID);
-//        bookingRecord.put("email",user.getEmail());
-//
-//
-//
-//        StringBuilder fromDateStringBuilder = new StringBuilder();
-//        Calendar fromDate = calendarRange.get(0);
-//        fromDateStringBuilder.append(fromDate.getDay()).append("/")
-//                .append(fromDate.getMonth()).append("/")
-//                .append(fromDate.getYear());
-//        bookingRecord.put("from_date",fromDateStringBuilder.toString());
-//
-//        StringBuilder toDateStringBuilder = new StringBuilder();
-//        Calendar toDate = calendarRange.get(calendarRange.size()-1);
-//        toDateStringBuilder.append(toDate.getDay()).append("/")
-//                .append(toDate.getMonth()).append("/")
-//                .append(toDate.getYear());
-//        bookingRecord.put("to_date",toDateStringBuilder.toString());
-//        bookingRecord.put("year",String.valueOf(fromDate.getYear()));
-//        db.collection("BookingRecords")
-//                .add(bookingRecord)
-//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                    @Override
-//                    public void onSuccess(DocumentReference documentReference) {
-//                        bookingResult.setValue(true);
-//                    }
-//                });
-
         BookingRecord bookingRecord = new BookingRecord(deskID,calendarRange,user.getEmail(),deskTitle);
-        db.collection("BookingRecords")
+        db.collection(BookingRecordsCollectionPath)
                 .add(bookingRecord)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -223,6 +198,11 @@ public class UserViewModel extends ViewModel {
                         bookingResult.setValue(true);
                     }
                 });
-
     }
+
+    public void deleteBooking(BookingRecord bookingRecord){
+        db.collection(BookingRecordsCollectionPath).document(bookingRecord.documentID())
+                .delete();
+    }
+
 }

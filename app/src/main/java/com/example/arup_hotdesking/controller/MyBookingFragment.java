@@ -33,7 +33,6 @@ public class MyBookingFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        MainActivity mainActivity = (MainActivity) requireActivity();
         recyclerView = getView().findViewById(R.id.mybookingrecyclerView);
         myBookingAdapter = new MyBookingAdapter();
 
