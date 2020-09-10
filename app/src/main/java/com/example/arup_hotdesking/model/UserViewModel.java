@@ -47,6 +47,10 @@ public class UserViewModel extends ViewModel {
         getUserInfo();
     }
 
+    public List<BookingRecord> getUserBookingRecords() {
+        return userBookingRecords;
+    }
+
     public MutableLiveData<Drawable> getWorkSpaceIcon() {
         return workSpaceIcon;
     }
@@ -203,6 +207,8 @@ public class UserViewModel extends ViewModel {
     public void deleteBooking(BookingRecord bookingRecord){
         db.collection(BookingRecordsCollectionPath).document(bookingRecord.documentID())
                 .delete();
+        userBookingRecords.remove(bookingRecord);
+        userLiveRecords.setValue(userBookingRecords);
     }
 
 }

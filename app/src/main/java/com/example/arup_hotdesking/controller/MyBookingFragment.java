@@ -23,8 +23,9 @@ import java.util.List;
 
 public class MyBookingFragment extends Fragment {
     private UserViewModel userViewModel;
-    private  RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     private MyBookingAdapter myBookingAdapter;
+    MainActivity mainActivity;
 
     public MyBookingFragment() {
         // Required empty public constructor
@@ -35,6 +36,7 @@ public class MyBookingFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         recyclerView = getView().findViewById(R.id.mybookingrecyclerView);
         myBookingAdapter = new MyBookingAdapter();
+        mainActivity = (MainActivity) requireActivity();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(myBookingAdapter);
@@ -45,12 +47,14 @@ public class MyBookingFragment extends Fragment {
         userViewModel.getUserLiveBookingRecords().observe(getViewLifecycleOwner(), new Observer<List<BookingRecord>>() {
             @Override
             public void onChanged(List<BookingRecord> bookingRecords) {
-                myBookingAdapter.setBookingRecords(bookingRecords);
+                myBookingAdapter.setBookingRecords(bookingRecords, userViewModel);
                 myBookingAdapter.notifyDataSetChanged();
-
             }
         });
+
+
     }
+
 
 
     @Override
