@@ -10,13 +10,15 @@ public class BookingRecord {
     private String deskID;
     private List<Calendar> bookingRange;
     private String email;
+    private  String deskTitle;
 
     public BookingRecord(){};
 
-    public BookingRecord(String deskID, List<Calendar> bookingRange, String email) {
+    public BookingRecord(String deskID, List<Calendar> bookingRange, String email, String deskTitle) {
         this.deskID = deskID;
         this.bookingRange = bookingRange;
         this.email = email;
+        this.deskTitle = deskTitle;
     }
 
     public List<Calendar> getBookingRange() {
@@ -25,6 +27,10 @@ public class BookingRecord {
 
     public String getDeskID() {
         return deskID;
+    }
+
+    public String getDeskTitle() {
+        return deskTitle;
     }
 
     public String getEmail() {
