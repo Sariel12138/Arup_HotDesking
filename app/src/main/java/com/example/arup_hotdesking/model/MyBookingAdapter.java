@@ -44,7 +44,7 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.MyVi
         }
 
         holder.number.setText(String.valueOf(position+1));
-        holder.deskNo.setText(bookingRecord.getDeskID());
+        holder.deskNo.setText(bookingRecord.getDeskTitle());
         holder.myBooking.setText(bookdaysToString);
     }
 
