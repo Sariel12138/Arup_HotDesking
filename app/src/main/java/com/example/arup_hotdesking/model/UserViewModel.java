@@ -184,7 +184,7 @@ public class UserViewModel extends ViewModel {
     }
 
 
-    public void bookSeat(String seatID, List<Calendar> calendarRange){
+    public void bookSeat(String deskID, List<Calendar> calendarRange,String deskTitle){
 //        Map<String,Object> bookingRecord = new HashMap<>();
 //        bookingRecord.put("desk_number",seatID);
 //        bookingRecord.put("email",user.getEmail());
@@ -214,7 +214,7 @@ public class UserViewModel extends ViewModel {
 //                    }
 //                });
 
-        BookingRecord bookingRecord = new BookingRecord(seatID,calendarRange,user.getEmail());
+        BookingRecord bookingRecord = new BookingRecord(deskID,calendarRange,user.getEmail(),deskTitle);
         db.collection("BookingRecords")
                 .add(bookingRecord)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

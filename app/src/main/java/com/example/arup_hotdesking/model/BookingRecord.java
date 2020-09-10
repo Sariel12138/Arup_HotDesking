@@ -37,6 +37,8 @@ public class BookingRecord {
         return email;
     }
 
+
+
     public int year(){
         if(bookingRange==null) return 0;
         return bookingRange.get(0).getYear();

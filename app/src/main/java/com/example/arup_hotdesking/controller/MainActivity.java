@@ -1,7 +1,6 @@
 package com.example.arup_hotdesking.controller;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -12,21 +11,17 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.PopupWindow;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -153,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
         userViewModel.getDeskRecords(hotArea.getAreaId());
 
-        book.setOnClickListener(new BookingButtonClickListener(calendarView,hotArea.getAreaId()));
+        book.setOnClickListener(new BookingButtonClickListener(calendarView,hotArea));
 
         userViewModel.getBookingResult().observe(this,new BookingResultObserver(popupWindow));
 
@@ -211,16 +206,18 @@ public class MainActivity extends AppCompatActivity {
 
     class BookingButtonClickListener implements View.OnClickListener{
         private CalendarView calendarView;
-        private String seatID;
+        private String deskID;
+        private String deskTitle;
 
-        public BookingButtonClickListener(CalendarView calendarView,String seatID){
+        public BookingButtonClickListener(CalendarView calendarView,HotArea hotArea){
             this.calendarView = calendarView;
-            this.seatID = seatID;
+            this.deskID = hotArea.getAreaId();
+            this.deskTitle = hotArea.getAreaTitle();
         }
 
         @Override
         public void onClick(View view) {
-            userViewModel.bookSeat(seatID,calendarView.getMultiSelectCalendars());
+            userViewModel.bookSeat(deskID,calendarView.getMultiSelectCalendars(),deskTitle);
         }
     }
 
