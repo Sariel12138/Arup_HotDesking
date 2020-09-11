@@ -96,6 +96,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.adminFragment://manage users
                         navController.navigate(R.id.adminFragment);
                         break;
+                    case R.id.signinseat:
+                    signIn();
+                       // navController.navigate(R.id.signin);
+                        break;
                     case R.id.logout://log out
                         FirebaseAuth.getInstance().signOut();
                         signOutUI();
@@ -110,7 +114,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    public void signIn(){
+        Intent intent= new Intent(MainActivity.this, Signin.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onSupportNavigateUp() {
         NavigationUI.navigateUp(navController, appBarConfiguration);
