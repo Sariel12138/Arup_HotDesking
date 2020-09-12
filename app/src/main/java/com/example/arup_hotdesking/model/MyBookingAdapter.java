@@ -23,6 +23,8 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.MyVi
 
     List<BookingRecord> bookingRecords = new ArrayList<>();
     UserViewModel userViewModel;
+    int recordIndex = 0;
+    int bookDayIndex = 0;
 
     public void setBookingRecords(List<BookingRecord> bookingRecords, UserViewModel userViewModel) {
         this.bookingRecords = bookingRecords;
@@ -40,16 +42,16 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
-        final BookingRecord bookingRecord = bookingRecords.get(position);
-        List<Calendar> bookdays = bookingRecord.getBookingRange();
+        final BookingRecord bookingRecord = bookingRecords.get(recordIndex);
+        Calendar bookDate = bookingRecord.getBookingRange().get(bookDayIndex);
+
         StringBuilder bookdaysToString = new StringBuilder();
 
-        for (Calendar calendar: bookdays) {
-            bookdaysToString.append(calendar.getDay()).append("/")
-                            .append(calendar.getMonth()).append("/")
-                            .append(calendar.getYear()).append("\n");
-        }
-        holder.number.setText(String.valueOf(position+1));
+            bookdaysToString.append(bookDate.getDay()).append("/")
+                            .append(bookDate.getMonth()).append("/")
+                            .append(bookDate.getYear());
+
+        holder.number.setText(bookDayIndex==0?String.valueOf(recordIndex):null);
         holder.deskNo.setText(bookingRecord.getDeskTitle());
         holder.myBooking.setText(bookdaysToString);
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +67,14 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.MyVi
 
     @Override
     public int getItemCount() {
-        return bookingRecords.size();
+        int itemCount = 0;
+        for(int i=0;i<bookingRecords.size();i++){
+            List<Calendar> bookDates = bookingRecords.get(i).getBookingRange();
+            for(int j=0;j<bookDates.size();j++){
+                itemCount++;
+            }
+        }
+        return itemCount;
     }
 
 

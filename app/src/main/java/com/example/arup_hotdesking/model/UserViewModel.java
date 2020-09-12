@@ -37,11 +37,11 @@ public class UserViewModel extends ViewModel {
     private MutableLiveData<Drawable> workSpaceIcon = new MutableLiveData<>();
     private FirebaseFirestore db;
     private CollectionReference BookingRecordsCollection;
-    private ListenerRegistration registration;
     private List<BookingRecord> deskBookingRecords;  //desk booking records
     private List<BookingRecord> userBookingRecords; //user booking records
     private MutableLiveData<List<BookingRecord>> liveRecords = new MutableLiveData<>();
     private MutableLiveData<List<BookingRecord>> userLiveRecords = new MutableLiveData<>();
+    private ListenerRegistration deskRecordsRegistration;
     private FirebaseUser user;
     private MutableLiveData<String> displayName = new MutableLiveData<>();
     private MutableLiveData<Boolean> isAdmin = new MutableLiveData<>();
@@ -122,7 +122,6 @@ public class UserViewModel extends ViewModel {
                 if(task.isSuccessful()){
                     QuerySnapshot querySnapshot = task.getResult();
                     if(querySnapshot != null){
-                        int id = 0;
                         for(QueryDocumentSnapshot snapshot:querySnapshot){
 //                            BookingRecord bookingRecord = new BookingRecord(++id,snapshot.getString("from_date"),
 //                                    snapshot.getString("to_date"),snapshot.getString("email"));
@@ -144,12 +143,12 @@ public class UserViewModel extends ViewModel {
             }
         });
 
-        registration = deskRecords
+        deskRecordsRegistration = deskRecords
                 .addSnapshotListener(MetadataChanges.INCLUDE, new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (error != null) {
-                            Log.w("snapshotListener", "Listen failed.", error);
+                            Log.w("deskSnapshotListener", "Listen failed.", error);
                             return;
                         }
 
@@ -165,21 +164,20 @@ public class UserViewModel extends ViewModel {
     }
 
     public void removeBookingRecordsListener(){
-        registration.remove();
+        deskRecordsRegistration.remove();
     }
 
 
     public void getUserRecords(String email){
         userBookingRecords = new ArrayList<>();
-        BookingRecordsCollection
-                .whereEqualTo("email",email)
+        Query userRecords = BookingRecordsCollection.whereEqualTo("email",email);
+        userRecords
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     QuerySnapshot querySnapshot = task.getResult();
                     if(querySnapshot != null){
-                        int id = 0;
                         for(QueryDocumentSnapshot snapshot:querySnapshot){
 //                            BookingRecord bookingRecord = new BookingRecord(++id,snapshot.getString("from_date"),
 //                                    snapshot.getString("to_date"),snapshot.getString("email"));
@@ -201,7 +199,6 @@ public class UserViewModel extends ViewModel {
             }
         });
     }
-
 
 
     public MutableLiveData<List<BookingRecord>> getLiveBookingRecords(){
@@ -233,12 +230,39 @@ public class UserViewModel extends ViewModel {
                 });
     }
 
-    public void deleteBooking(BookingRecord bookingRecord){
+    private void deleteBookingRecord(BookingRecord bookingRecord){
         BookingRecordsCollection
                 .document(bookingRecord.documentID())
                 .delete();
-        userBookingRecords.remove(bookingRecord);
-        userLiveRecords.setValue(userBookingRecords);
+//        userBookingRecords.remove(bookingRecord);
+//        userLiveRecords.setValue(userBookingRecords);
+    }
+
+    private void updateBookingDates(BookingRecord bookingRecord,List<Calendar> bookDates){
+        BookingRecordsCollection
+                .document(bookingRecord.documentID())
+                .update("bookingRange",bookDates);
+    }
+
+    public void deleteBooking(BookingRecord bookingRecord,Calendar bookDate){
+        if(userLiveRecords!=null) return;
+        List<BookingRecord> bookingRecords = userLiveRecords.getValue();
+        for(int i=0;i<bookingRecords.size();i++){
+            if(bookingRecords.get(i) == bookingRecord){
+                List<Calendar> bookDates = bookingRecords.get(i).getBookingRange();
+                for(int j=0;j<bookDates.size();j++){
+                    if(bookDates.get(i) == bookDate) {
+                        bookDates.remove(bookDate);
+                        if(bookDates.size()==0){
+                            deleteBookingRecord(bookingRecord);
+                        }
+                        else{
+                            updateBookingDates(bookingRecord,bookDates);
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }
