@@ -187,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
             myAdapter.setBookingRecords(bookingRecords);
             myAdapter.notifyDataSetChanged();
             calendarView.setOnCalendarInterceptListener(new CalendarIntercepter(bookingRecords,calendarView));
+            calendarView.update();
         }
     }
 
@@ -297,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
             if(bookingRecords == null) return false;
             for(int i=0;i<bookingRecords.size();i++){
                 if(bookingRecords.get(i).getBookingRange().contains(calendar)) {
-                    calendarView.update();
+                    //calendarView.update();
                     return true;
                 }
             }
