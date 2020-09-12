@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
         public void onChanged(List<BookingRecord> bookingRecords) {
             myAdapter.setBookingRecords(bookingRecords);
             myAdapter.notifyDataSetChanged();
-            calendarView.setOnCalendarInterceptListener(new CalendarIntercepter(bookingRecords,calendarView));
+            calendarView.setOnCalendarInterceptListener(new CalendarIntercepter(bookingRecords));
             calendarView.update();
         }
     }
@@ -288,19 +288,15 @@ public class MainActivity extends AppCompatActivity {
         List<BookingRecord> bookingRecords;
         CalendarView calendarView;
 
-        public  CalendarIntercepter(List<BookingRecord> bookingRecords,CalendarView calendarView){
+        public  CalendarIntercepter(List<BookingRecord> bookingRecords){
             this.bookingRecords = bookingRecords;
-            this.calendarView = calendarView;
         }
 
         @Override
         public boolean onCalendarIntercept(Calendar calendar) {
             if(bookingRecords == null) return false;
             for(int i=0;i<bookingRecords.size();i++){
-                if(bookingRecords.get(i).getBookingRange().contains(calendar)) {
-                    //calendarView.update();
-                    return true;
-                }
+                if(bookingRecords.get(i).getBookingRange().contains(calendar)) return true;
             }
             return false;
         }
