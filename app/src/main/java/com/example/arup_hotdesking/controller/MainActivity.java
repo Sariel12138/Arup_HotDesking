@@ -164,9 +164,9 @@ public class MainActivity extends AppCompatActivity {
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
+                userViewModel.getBookingResult().removeObservers(MainActivity.this);
                 userViewModel.resetLiveRecords();
                 userViewModel.removeBookingRecordsListener();
-                userViewModel.getBookingResult().removeObservers(MainActivity.this);
             }
         });
     }
@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
         public void onChanged(List<BookingRecord> bookingRecords) {
             myAdapter.setBookingRecords(bookingRecords);
             myAdapter.notifyDataSetChanged();
-            calendarView.setOnCalendarInterceptListener(new CalendarIntercepter(bookingRecords));
+            calendarView.setOnCalendarInterceptListener(new CalendarIntercepter(bookingRecords,calendarView));
         }
     }
 
@@ -285,16 +285,21 @@ public class MainActivity extends AppCompatActivity {
 
     static class CalendarIntercepter implements CalendarView.OnCalendarInterceptListener{
         List<BookingRecord> bookingRecords;
+        CalendarView calendarView;
 
-        public  CalendarIntercepter(List<BookingRecord> bookingRecords){
+        public  CalendarIntercepter(List<BookingRecord> bookingRecords,CalendarView calendarView){
             this.bookingRecords = bookingRecords;
+            this.calendarView = calendarView;
         }
 
         @Override
         public boolean onCalendarIntercept(Calendar calendar) {
             if(bookingRecords == null) return false;
             for(int i=0;i<bookingRecords.size();i++){
-                if(bookingRecords.get(i).getBookingRange().contains(calendar)) return true;
+                if(bookingRecords.get(i).getBookingRange().contains(calendar)) {
+                    calendarView.update();
+                    return true;
+                }
             }
             return false;
         }
