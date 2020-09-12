@@ -165,6 +165,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDismiss() {
                 userViewModel.resetLiveRecords();
+                userViewModel.removeBookingRecordsListener();
+                userViewModel.getBookingResult().removeObservers(MainActivity.this);
             }
         });
     }

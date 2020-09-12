@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -18,7 +19,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.MetadataChanges;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.haibin.calendarview.Calendar;
@@ -27,10 +33,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserViewModel extends ViewModel {
-    private final static String BookingRecordsCollectionPath = "BookingRecords";
     private int workSpace = R.id.courseFragment;
     private MutableLiveData<Drawable> workSpaceIcon = new MutableLiveData<>();
     private FirebaseFirestore db;
+    private CollectionReference BookingRecordsCollection;
+    private ListenerRegistration registration;
     private List<BookingRecord> deskBookingRecords;  //desk booking records
     private List<BookingRecord> userBookingRecords; //user booking records
     private MutableLiveData<List<BookingRecord>> liveRecords = new MutableLiveData<>();
@@ -43,6 +50,7 @@ public class UserViewModel extends ViewModel {
     public UserViewModel(){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        BookingRecordsCollection = db.collection("BookingRecords");
         user = mAuth.getCurrentUser();
         getUserInfo();
     }
@@ -105,11 +113,9 @@ public class UserViewModel extends ViewModel {
 
     public void getDeskRecords(String deskNo){
         //If it is necessary to ensure the consistency of the data when writing to the database, register with collectionListener
-
-        CollectionReference records = db.collection(BookingRecordsCollectionPath);
         deskBookingRecords = new ArrayList<>();
-        records
-                .whereEqualTo("deskID",deskNo)
+        Query deskRecords = BookingRecordsCollection.whereEqualTo("deskID",deskNo);
+        deskRecords
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -138,12 +144,35 @@ public class UserViewModel extends ViewModel {
             }
         });
 
+        registration = deskRecords
+                .addSnapshotListener(MetadataChanges.INCLUDE, new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (error != null) {
+                            Log.w("snapshotListener", "Listen failed.", error);
+                            return;
+                        }
+
+                        for(QueryDocumentSnapshot snapshot:value){
+                            BookingRecord bookingRecord = snapshot.toObject(BookingRecord.class);
+                            bookingRecord.setDocumentID(snapshot.getId());
+                            deskBookingRecords.add(bookingRecord);
+                        }
+                        liveRecords.setValue(deskBookingRecords);
+                    }
+                });
+
     }
 
+    public void removeBookingRecordsListener(){
+        registration.remove();
+    }
+
+
     public void getUserRecords(String email){
-        CollectionReference records = db.collection(BookingRecordsCollectionPath);
         userBookingRecords = new ArrayList<>();
-        records.whereEqualTo("email",email)
+        BookingRecordsCollection
+                .whereEqualTo("email",email)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -194,7 +223,7 @@ public class UserViewModel extends ViewModel {
 
     public void bookSeat(String deskID, List<Calendar> calendarRange,String deskTitle){
         BookingRecord bookingRecord = new BookingRecord(deskID,calendarRange,user.getEmail(),deskTitle);
-        db.collection(BookingRecordsCollectionPath)
+        BookingRecordsCollection
                 .add(bookingRecord)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -205,7 +234,8 @@ public class UserViewModel extends ViewModel {
     }
 
     public void deleteBooking(BookingRecord bookingRecord){
-        db.collection(BookingRecordsCollectionPath).document(bookingRecord.documentID())
+        BookingRecordsCollection
+                .document(bookingRecord.documentID())
                 .delete();
         userBookingRecords.remove(bookingRecord);
         userLiveRecords.setValue(userBookingRecords);
