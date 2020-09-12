@@ -24,7 +24,7 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.MyVi
     List<BookingRecord> bookingRecords = new ArrayList<>();
     UserViewModel userViewModel;
     int recordIndex = 0;
-    int bookDayIndex = 0;
+    int bookDateIndex = 0;
 
     public void setBookingRecords(List<BookingRecord> bookingRecords, UserViewModel userViewModel) {
         this.bookingRecords = bookingRecords;
@@ -43,7 +43,7 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
         final BookingRecord bookingRecord = bookingRecords.get(recordIndex);
-        Calendar bookDate = bookingRecord.getBookingRange().get(bookDayIndex);
+        final Calendar bookDate = bookingRecord.getBookingRange().get(bookDateIndex);
 
         StringBuilder bookdaysToString = new StringBuilder();
 
@@ -51,17 +51,22 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.MyVi
                             .append(bookDate.getMonth()).append("/")
                             .append(bookDate.getYear());
 
-        holder.number.setText(bookDayIndex==0?String.valueOf(recordIndex):null);
+        holder.number.setText(bookDateIndex==0?String.valueOf(recordIndex):null);
         holder.deskNo.setText(bookingRecord.getDeskTitle());
         holder.myBooking.setText(bookdaysToString);
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userViewModel.deleteBooking(bookingRecord);
+                userViewModel.deleteBooking(bookingRecord,bookDate);
                 //userViewModel.getUserRecords(userViewModel.getUser().getEmail());
             }
         });
 
+        if(bookDateIndex < bookingRecord.getBookingRange().size()-1) bookDateIndex++;
+        else{
+            bookDateIndex=0;
+            recordIndex++;
+        }
     }
 
 
