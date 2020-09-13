@@ -43,11 +43,16 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
+<<<<<<< HEAD
         Log.d("index:", recordIndex + "-"+bookDateIndex);
 
         final BookingRecord bookingRecord = bookingRecords.get(recordIndex);
 
         final Calendar bookDate = bookingRecord.getBookingRange().get(bookDateIndex);
+=======
+        BookingRecord bookingRecord = bookingRecords.get(recordIndex);
+        Calendar bookDate = bookingRecord.getBookingRange().get(bookDateIndex);
+>>>>>>> 1aee6cf451a703ca807c2cc158a4cbc2dc65bf91
 
         StringBuilder bookdaysToString = new StringBuilder();
 
@@ -58,20 +63,19 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.MyVi
         holder.number.setText(bookDateIndex==0?String.valueOf(recordIndex+1):null);
         holder.deskNo.setText(bookingRecord.getDeskTitle());
         holder.myBooking.setText(bookdaysToString);
-        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                userViewModel.deleteBooking(bookingRecord,bookDate);
-                //userViewModel.getUserRecords(userViewModel.getUser().getEmail());
-            }
-        });
+        holder.deleteBtn.setOnClickListener(new DeleteClickListener(bookingRecord,bookDate));
 
+<<<<<<< HEAD
         if(bookDateIndex < bookingRecord.getBookingRange().size()-1) {
             bookDateIndex++;
         } else if(recordIndex == bookingRecords.size()-1){
             bookDateIndex=0;
             recordIndex = 0;
         }else{
+=======
+        if(bookDateIndex < bookingRecord.getBookingRange().size()-1) bookDateIndex++;
+        else if(recordIndex < bookingRecords.size()-1){
+>>>>>>> 1aee6cf451a703ca807c2cc158a4cbc2dc65bf91
             bookDateIndex=0;
             recordIndex++;
         }
@@ -89,6 +93,21 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.MyVi
             }
         }
         return itemCount;
+    }
+
+    private class DeleteClickListener implements View.OnClickListener{
+        private BookingRecord bookingRecord;
+        private Calendar bookDate;
+
+        public DeleteClickListener(BookingRecord bookingRecord,Calendar bookDate){
+            this.bookingRecord = bookingRecord;
+            this.bookDate = bookDate;
+        }
+
+        @Override
+        public void onClick(View view) {
+            userViewModel.deleteBooking(bookingRecord,bookDate);
+        }
     }
 
 
