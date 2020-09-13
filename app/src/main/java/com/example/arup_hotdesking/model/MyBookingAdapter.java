@@ -63,7 +63,7 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.MyVi
         });
 
         if(bookDateIndex < bookingRecord.getBookingRange().size()-1) bookDateIndex++;
-        else{
+        else if(recordIndex < bookingRecords.size()-1){
             bookDateIndex=0;
             recordIndex++;
         }
