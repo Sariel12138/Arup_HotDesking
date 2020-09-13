@@ -140,7 +140,6 @@ public class MainActivity extends AppCompatActivity {
         popupWindow.showAtLocation(view, Gravity.CENTER,0,0);
         TextView seatIDText = popupView.findViewById(R.id.seatID);
         CalendarView calendarView = popupView.findViewById(R.id.customCalendar);
-        //RecyclerView recyclerView = popupView.findViewById(R.id.recyclerView);
         Button book = popupView.findViewById(R.id.bookButton);
         MyAdapter myAdapter = new MyAdapter();
 
@@ -150,11 +149,8 @@ public class MainActivity extends AppCompatActivity {
         seatIDText.setText(hotArea.getAreaTitle());
 
         setUpCustomCalendar(calendarView,book);
-       // recyclerView.setLayoutManager(new LinearLayoutManager(popupView.getContext()));
-       // recyclerView.setAdapter(myAdapter);
 
         userViewModel.getDeskRecords(hotArea.getAreaId());
-
         book.setOnClickListener(new BookingButtonClickListener(calendarView,hotArea));
 
         userViewModel.getBookingResult().observe(this,new BookingResultObserver(popupWindow));
@@ -178,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
 
         public BookingRecordsObserver(CalendarView calendarView,MyAdapter myAdapter){
             this.calendarView = calendarView;
-            //this.recyclerView = recyclerView;
             this.myAdapter = myAdapter;
         }
 
@@ -228,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             userViewModel.bookSeat(deskID,calendarView.getMultiSelectCalendars(),deskTitle);
+
         }
     }
 
@@ -246,24 +242,6 @@ public class MainActivity extends AppCompatActivity {
         public MyCalendarMultiSelectListener(Button button){
             this.button = button;
         }
-
-//        @Override
-//        public void onCalendarSelectOutOfRange(Calendar calendar) {
-//
-//        }
-//
-//        @Override
-//        public void onSelectOutOfRange(Calendar calendar, boolean isOutOfMinRange) {
-//            if(!isOutOfMinRange) Toast.makeText(MainActivity.this,R.string.calendarOutOfRange,Toast.LENGTH_SHORT).show();
-//        }
-//
-//        @Override
-//        public void onCalendarRangeSelect(Calendar calendar, boolean isEnd) {
-//            if(isEnd) {
-//                button.setEnabled(true);
-//            }
-//            else button.setEnabled(false);
-//        }
 
         @Override
         public void onCalendarMultiSelectOutOfRange(Calendar calendar) {

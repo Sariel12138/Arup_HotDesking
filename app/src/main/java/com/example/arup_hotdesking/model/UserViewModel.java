@@ -31,6 +31,7 @@ import com.haibin.calendarview.Calendar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class UserViewModel extends ViewModel {
     private int workSpace = R.id.courseFragment;
@@ -220,12 +221,14 @@ public class UserViewModel extends ViewModel {
 
     public void bookSeat(String deskID, List<Calendar> calendarRange,String deskTitle){
         BookingRecord bookingRecord = new BookingRecord(deskID,calendarRange,user.getEmail(),deskTitle);
+
         BookingRecordsCollection
                 .add(bookingRecord)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         bookingResult.setValue(true);
+
                     }
                 });
     }
@@ -234,6 +237,8 @@ public class UserViewModel extends ViewModel {
         BookingRecordsCollection
                 .document(bookingRecord.documentID())
                 .delete();
+
+
 //        userBookingRecords.remove(bookingRecord);
 //        userLiveRecords.setValue(userBookingRecords);
     }
@@ -242,18 +247,21 @@ public class UserViewModel extends ViewModel {
         BookingRecordsCollection
                 .document(bookingRecord.documentID())
                 .update("bookingRange",bookDates);
+
+
     }
 
     public void deleteBooking(BookingRecord bookingRecord,Calendar bookDate){
-        if(userLiveRecords!=null) return;
+       // if(userLiveRecords!=null) return;
         List<BookingRecord> bookingRecords = userLiveRecords.getValue();
         for(int i=0;i<bookingRecords.size();i++){
             if(bookingRecords.get(i) == bookingRecord){
                 List<Calendar> bookDates = bookingRecords.get(i).getBookingRange();
                 for(int j=0;j<bookDates.size();j++){
-                    if(bookDates.get(i) == bookDate) {
+                    if(bookDates.get(j) == bookDate) {
                         bookDates.remove(bookDate);
                         if(bookDates.size()==0){
+                            bookingRecords.remove(bookingRecord);
                             deleteBookingRecord(bookingRecord);
                         }
                         else{
@@ -263,6 +271,9 @@ public class UserViewModel extends ViewModel {
                 }
             }
         }
+        userBookingRecords = bookingRecords;
+        userLiveRecords.setValue(userBookingRecords);
+
     }
 
 }

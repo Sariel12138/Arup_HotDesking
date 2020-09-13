@@ -1,5 +1,6 @@
 package com.example.arup_hotdesking.model;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,10 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
+        Log.d("index:", recordIndex + "-"+bookDateIndex);
+
         final BookingRecord bookingRecord = bookingRecords.get(recordIndex);
+
         final Calendar bookDate = bookingRecord.getBookingRange().get(bookDateIndex);
 
         StringBuilder bookdaysToString = new StringBuilder();
@@ -51,7 +55,7 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.MyVi
                             .append(bookDate.getMonth()).append("/")
                             .append(bookDate.getYear());
 
-        holder.number.setText(bookDateIndex==0?String.valueOf(recordIndex):null);
+        holder.number.setText(bookDateIndex==0?String.valueOf(recordIndex+1):null);
         holder.deskNo.setText(bookingRecord.getDeskTitle());
         holder.myBooking.setText(bookdaysToString);
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -62,11 +66,16 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.MyVi
             }
         });
 
-        if(bookDateIndex < bookingRecord.getBookingRange().size()-1) bookDateIndex++;
-        else{
+        if(bookDateIndex < bookingRecord.getBookingRange().size()-1) {
+            bookDateIndex++;
+        } else if(recordIndex == bookingRecords.size()-1){
+            bookDateIndex=0;
+            recordIndex = 0;
+        }else{
             bookDateIndex=0;
             recordIndex++;
         }
+
     }
 
 
