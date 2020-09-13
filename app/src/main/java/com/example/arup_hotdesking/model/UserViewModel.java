@@ -237,8 +237,6 @@ public class UserViewModel extends ViewModel {
         BookingRecordsCollection
                 .document(bookingRecord.documentID())
                 .delete();
-
-
 //        userBookingRecords.remove(bookingRecord);
 //        userLiveRecords.setValue(userBookingRecords);
     }
