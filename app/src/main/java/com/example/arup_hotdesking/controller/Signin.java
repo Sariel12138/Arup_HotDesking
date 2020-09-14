@@ -60,7 +60,7 @@ public class Signin extends AppCompatActivity {
         SimpleDateFormat sdfYear = new SimpleDateFormat("YYYY");
         final String year = sdfYear.format(calendar.getTime());
 
-        Toast.makeText(Signin.this, "Checking booking.", Toast.LENGTH_SHORT).show();
+
         progressBar.setVisibility(View.VISIBLE);
         currDate.setText(dateTime);
 
@@ -99,11 +99,16 @@ public class Signin extends AppCompatActivity {
 
                                 contDay = currRange.contains("day="+day);
                                 contMonth = currRange.contains("month="+month);
+                                contYear = currRange.contains("year="+year);
 
                                 verDay = Boolean.toString(contDay);
                                 verMonth = Boolean.toString(contMonth);
+                                verYear = Boolean.toString(contYear);
+                                Log.d("myTag", "Date: "+contDay+"/"+contMonth+"/"+contYear);
 
-                                if (verDay.equals("true") && verMonth.equals("true") ) {
+                                Toast.makeText(Signin.this, "Checking...", Toast.LENGTH_SHORT).show();
+
+                                if (verDay.equals("true") && verMonth.equals("true") && verYear.equals("true") ) {
 
                                     deskKey = document.getString("deskID");
                                     Toast.makeText(Signin.this, "You got a booking today!", Toast.LENGTH_SHORT).show();

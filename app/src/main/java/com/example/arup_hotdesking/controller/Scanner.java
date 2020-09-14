@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -57,9 +58,11 @@ public class Scanner extends AppCompatActivity {
                             progressBar.setVisibility(View.VISIBLE);
                             Toast.makeText(Scanner.this, "Booking Confirmed: You are signed in.", Toast.LENGTH_SHORT).show();
                             finish();
-                            //   startActivity(new Intent(Scanner.this, MainActivity.class));
+                            startActivity(new Intent(Scanner.this, MainActivity.class));
+
                         } else {
                             Toast.makeText(Scanner.this, "Incorrect Desk!", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(Scanner.this, MainActivity.class));
                             finish();
                         }
 
