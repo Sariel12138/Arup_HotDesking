@@ -245,8 +245,6 @@ public class UserViewModel extends ViewModel {
         BookingRecordsCollection
                 .document(bookingRecord.documentID())
                 .update("bookingRange",bookDates);
-
-
     }
 
     public void deleteBooking(BookingRecord bookingRecord,Calendar bookDate){
