@@ -22,4 +22,6 @@
     <string name="connectionFailed">Connection failed. Please check your internet</string>
     <string name="to_text">TO</string>
     <string name="calendarOutOfRange">You cannot book the same seat for more than 7 days</string>
+    <string name="wrongOldPassword">Incorrect old password</string>
+    <string name="changePasswordSuccess">Change password successfully!</string>
 </resources>
