@@ -53,8 +53,9 @@
 
     <Button
         android:id="@+id/btn_delete_booking"
-        android:layout_width="75dp"
-        android:layout_height="45dp"
+        android:layout_width="79dp"
+        android:layout_height="41dp"
+        android:fontFamily="serif"
         android:text="DELETE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

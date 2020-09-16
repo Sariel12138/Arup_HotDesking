@@ -24,4 +24,9 @@
     <string name="calendarOutOfRange">You cannot book the same seat for more than 7 days</string>
     <string name="wrongOldPassword">Incorrect old password</string>
     <string name="changePasswordSuccess">Change password successfully!</string>
+    <string name="AddtoWhiteList">Add successfully!</string>
+    <string name="failMessage">Fail, please try again!</string>
+    <string name="deleteUserSuccess">Delete successfully!</string>
+    <string name="deleteFail">The user does not exist</string>
+
 </resources>

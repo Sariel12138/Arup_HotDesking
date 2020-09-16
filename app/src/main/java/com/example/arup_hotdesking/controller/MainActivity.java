@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         userViewModel.getIsAdmin().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                mNavigationView.getMenu().getItem(2).setVisible(aBoolean);
+                mNavigationView.getMenu().getItem(4).setVisible(aBoolean);
             }
         });
         navController = Navigation.findNavController(this, R.id.fragment);

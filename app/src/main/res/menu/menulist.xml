@@ -9,15 +9,15 @@
         android:id="@+id/bookseat"
         android:title="Book a seat" />
     <item
-        android:id="@+id/adminFragment"
-        android:title="Manage users"
-        android:visible="false" />
-    <item
         android:id="@+id/myBookings"
         android:title="My bookings" />
     <item
         android:id="@+id/signinseat"
         android:title="Sign in to a seat" />
+    <item
+        android:id="@+id/adminFragment"
+        android:title="Manage users"
+        android:visible="false" />
     <item
         android:id="@+id/logout"
         android:title="Log out" />

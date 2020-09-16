@@ -18,7 +18,9 @@
             android:id="@+id/emailText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:text="TextView"
+            android:textColor="#070707"
             android:textSize="24sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toTopOf="@+id/guideline11"
@@ -29,17 +31,19 @@
 
         <TextView
             android:id="@+id/displayNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:text="TextView"
+            android:textColor="#0B0A0A"
+            android:textSize="24sp"
+            android:textStyle="normal"
             app:layout_constraintBottom_toTopOf="@+id/guideline12"
             app:layout_constraintEnd_toStartOf="@+id/guideline14"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="@+id/guideline13"
             app:layout_constraintTop_toTopOf="@+id/guideline11"
-            app:layout_constraintVertical_bias="0.491"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textSize="24sp"
-            android:textStyle="normal" />
+            app:layout_constraintVertical_bias="0.491" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline11"
@@ -85,6 +89,7 @@
             android:id="@+id/buttonchangepwd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:fontFamily="serif"
             android:text="CHANGE PASSWORD"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline14"
