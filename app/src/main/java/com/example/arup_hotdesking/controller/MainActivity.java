@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private View popupView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
 
     private void LoadNavItemSelListener() {

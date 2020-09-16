@@ -30,4 +30,9 @@
         android:name="com.example.arup_hotdesking.controller.MyBookingFragment"
         android:label="fragment_my_booking"
         tools:layout="@layout/fragment_my_booking" />
+    <fragment
+        android:id="@+id/changePwdFragment"
+        android:name="com.example.arup_hotdesking.controller.changePwdFragment"
+        android:label="fragment_change_pwd"
+        tools:layout="@layout/fragment_change_pwd" />
 </navigation>

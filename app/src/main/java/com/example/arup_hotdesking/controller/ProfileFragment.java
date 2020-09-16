@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -30,7 +32,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class ProfileFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FragmentProfileBinding binding;
-    private Button myBookings;
+    private Button changePwd;
+    MainActivity mainActivity;
+    private NavController navController;
+
 
     public static UserViewModel newInstance() {
         return new UserViewModel();
@@ -72,7 +77,27 @@ public class ProfileFragment extends Fragment {
                 }
             });
             //TODO
+            mainActivity = (MainActivity) requireActivity();
+
+            changePwd = mainActivity.findViewById(R.id.buttonchangepwd);
+
+            navController = Navigation.findNavController(mainActivity, R.id.fragment);
+
+            changePwd.setOnClickListener(new changePasswordListener(navController));
         }
 
+    }
+
+    private class changePasswordListener implements View.OnClickListener{
+        private NavController navController;
+
+        public changePasswordListener(NavController navController){
+            this.navController = navController;
+        }
+
+        @Override
+        public void onClick(View view) {
+            navController.navigate(R.id.changePwdFragment);
+        }
     }
 }
