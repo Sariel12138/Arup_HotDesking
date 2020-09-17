@@ -16,6 +16,12 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.example.arup_hotdesking.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.zxing.Result;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -24,24 +30,43 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 public class Scanner extends AppCompatActivity {
 
     EditText resultData;
     CodeScanner codeScanner;
     CodeScannerView scannView;
     ProgressBar progressBar;
+    FirebaseAuth firebaseAuth;
+    FirebaseFirestore db;
+
+    Calendar calendar = Calendar.getInstance();
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("hh:mm:ss a");
+    final String date = simpleDateFormat.format(calendar.getTime());
+    final String time = simpleTimeFormat.format(calendar.getTime());
+    final String dateTime= ""+date+" "+time;
+    final String seat =  Signin.getSeat();
+    final Map<String, Object> details= new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        db= FirebaseFirestore.getInstance();
         resultData = findViewById(R.id.tv_result);
         scannView = findViewById(R.id.scanner_view);
         codeScanner = new CodeScanner(this, scannView);
         progressBar=findViewById(R.id.progressBar2);
         final String res = Signin.getKeyID();
-        Log.i("TAG", res);
+
 
 
         codeScanner.setDecodeCallback(new DecodeCallback() {
@@ -54,14 +79,20 @@ public class Scanner extends AppCompatActivity {
 
                         resultData.setText(result.getText());
                         String finRes = result.getText();
+                        String attempt;
+
                         if (finRes.equals(res)) {
+                            attempt= "Success";
                             progressBar.setVisibility(View.VISIBLE);
                             Toast.makeText(Scanner.this, "Booking Confirmed: You are signed in.", Toast.LENGTH_SHORT).show();
+                            addDB(attempt);
                             finish();
                             startActivity(new Intent(Scanner.this, MainActivity.class));
 
                         } else {
-                            Toast.makeText(Scanner.this, "Incorrect Desk!", Toast.LENGTH_SHORT).show();
+                            attempt="Denied";
+                            addDB(attempt);
+                            Toast.makeText(Scanner.this, "Incorrect Desk! Please try again.", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(Scanner.this, MainActivity.class));
                             finish();
                         }
@@ -79,9 +110,35 @@ public class Scanner extends AppCompatActivity {
                 codeScanner.startPreview();
             }
         });
-
     }
 
+    public void addDB(String attempt){
+        String id= UUID.randomUUID().toString();
+
+        details.put("DateTime",  dateTime);
+        details.put("Attempt", attempt);
+        details.put("User",  firebaseAuth.getCurrentUser().getEmail());
+        details.put("SeatName", seat);
+
+        Log.d("TAG", "Seat: "+seat);
+        Log.d("TAG", "User: "+ firebaseAuth.getCurrentUser().getEmail() );
+        Log.d("TAG", "Attempt: "+attempt);
+        Log.d("TAG", "Date/Time: "+ dateTime);
+
+
+        db.collection("CheckinRecords").document(id).set(details).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(Scanner.this, "Added!", Toast.LENGTH_SHORT).show();
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Scanner.this, "Error: "+e, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
     @Override
     protected void onResume() {

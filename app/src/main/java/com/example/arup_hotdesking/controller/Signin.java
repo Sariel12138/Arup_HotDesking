@@ -32,7 +32,7 @@ public class Signin extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
     DocumentSnapshot result;
-    static String deskKey;
+    static String deskKey, seat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,20 +49,18 @@ public class Signin extends AppCompatActivity {
 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        final String dateTime = simpleDateFormat.format(calendar.getTime());
+        final String date = simpleDateFormat.format(calendar.getTime());
 
         SimpleDateFormat sdfDay = new SimpleDateFormat("dd");
         final String day = sdfDay.format(calendar.getTime());
 
-        final SimpleDateFormat sdfMonth = new SimpleDateFormat("M");
+        SimpleDateFormat sdfMonth = new SimpleDateFormat("M");
         final String month = sdfMonth.format(calendar.getTime());
 
         SimpleDateFormat sdfYear = new SimpleDateFormat("YYYY");
         final String year = sdfYear.format(calendar.getTime());
 
-
         progressBar.setVisibility(View.VISIBLE);
-        currDate.setText(dateTime);
 
         firebaseFirestore.collection("BookingRecords").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -78,10 +76,8 @@ public class Signin extends AppCompatActivity {
                         if (currUser.equals(userID)) {
                             email.add(document.getString("email"));
                             id.add(document.getId());
-                            Log.d("TAG", "Sucessful");
                         }
                     }
-
 
                     for (int i=0;i <id.size();i++) {
                         firebaseFirestore.collection("BookingRecords").document(id.get(i).toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -95,42 +91,38 @@ public class Signin extends AppCompatActivity {
 
                                 //current list index
                                 currRange = collect.toString() + "\n";
-                                Log.d("myTag", currRange);
 
-                                contDay = currRange.contains("day="+day);
-                                contMonth = currRange.contains("month="+month);
-                                contYear = currRange.contains("year="+year);
+                                contDay = currRange.contains("day=" + day);
+                                contMonth = currRange.contains("month=" + month);
+                                contYear = currRange.contains("year=" + year);
 
                                 verDay = Boolean.toString(contDay);
                                 verMonth = Boolean.toString(contMonth);
                                 verYear = Boolean.toString(contYear);
-                                Log.d("myTag", "Date: "+contDay+"/"+contMonth+"/"+contYear);
 
-                                Toast.makeText(Signin.this, "Checking...", Toast.LENGTH_SHORT).show();
+                                if (verDay.equals("true") && verMonth.equals("true") && verYear.equals("true")) {
 
-                                if (verDay.equals("true") && verMonth.equals("true") && verYear.equals("true") ) {
-
+                                    seat = document.getString("deskTitle");
                                     deskKey = document.getString("deskID");
                                     Toast.makeText(Signin.this, "You got a booking today!", Toast.LENGTH_SHORT).show();
+                                    finish();
                                     startActivity(new Intent(Signin.this, Scanner.class));
 
                                 } else {
-                                     // Toast.makeText(Signin.this, "No more bookings today!", Toast.LENGTH_SHORT).show();
-                                    //startActivity(new Intent(Signin.this, MainActivity.class));
+
                                     finish();
+                                    startActivity(new Intent(Signin.this, MainActivity.class));
+
                                 }
 
 
-
                             }
+
                         });
                     }
-
-
                 } else {
+                    Toast.makeText(Signin.this, "Error", Toast.LENGTH_SHORT).show();
                     Log.d("TAG", "Error");
-
-
                 }
             }
         });
@@ -138,5 +130,8 @@ public class Signin extends AppCompatActivity {
     }
     public  static String getKeyID(){
         return deskKey;
+    }
+    public  static String getSeat(){
+        return seat;
     }
 }

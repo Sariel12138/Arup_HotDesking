@@ -102,7 +102,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.signinseat:
                     signIn();
-                       // navController.navigate(R.id.signin);
+                        break;
+                    case R.id.checkinRecord:
+                        checkinReports();
                         break;
                     case R.id.logout://log out
                         FirebaseAuth.getInstance().signOut();
@@ -116,6 +118,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void checkinReports(){
+        Intent intent= new Intent(MainActivity.this, CheckinReports.class);
+        startActivity(intent);
     }
 
     public void signIn(){

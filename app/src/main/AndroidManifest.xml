@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.arup_hotdesking">
 
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -12,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".controller.Scanner"></activity>
+        <activity android:name=".controller.CheckinReports"></activity>
+        <activity android:name=".controller.Scanner" />
         <activity android:name=".controller.Signin" />
         <activity android:name=".controller.RegisterActivity" />
         <activity android:name=".controller.MainActivity">
