@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(Boolean aBoolean) {
                 mNavigationView.getMenu().getItem(4).setVisible(aBoolean);
+                mNavigationView.getMenu().getItem(5).setVisible(aBoolean);
+                mNavigationView.getMenu().getItem(6).setVisible(aBoolean);
             }
         });
         navController = Navigation.findNavController(this, R.id.fragment);

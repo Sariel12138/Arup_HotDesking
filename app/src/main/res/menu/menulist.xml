@@ -19,6 +19,12 @@
         android:title="Manage users"
         android:visible="false" />
     <item
+        android:id="@+id/bookRecord"
+        android:title="Generate booking record" />
+    <item
+        android:id="@+id/checkinRecord"
+        android:title="Generate check in record" />
+    <item
         android:id="@+id/logout"
         android:title="Log out" />
 </menu>
