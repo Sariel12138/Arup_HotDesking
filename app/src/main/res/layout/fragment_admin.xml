@@ -60,6 +60,21 @@
             app:layout_constraintTop_toTopOf="@+id/guideline29"
             app:layout_constraintVertical_bias="0.046" />
 
+        <EditText
+            android:id="@+id/newEmail4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="serif"
+            android:hint="Email"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/guideline22"
+            app:layout_constraintEnd_toStartOf="@+id/guideline23"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline20"
+            app:layout_constraintTop_toTopOf="@+id/guideline30"
+            app:layout_constraintVertical_bias="0.507" />
+
         <Button
             android:id="@+id/Add"
             android:layout_width="wrap_content"
@@ -79,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
             android:fontFamily="serif"
-            android:text="Add"
+            android:text="Confirm"
             app:layout_constraintBottom_toTopOf="@+id/guideline29"
             app:layout_constraintEnd_toStartOf="@+id/guideline23"
             app:layout_constraintHorizontal_bias="0.777"
@@ -99,6 +114,19 @@
             app:layout_constraintStart_toEndOf="@+id/newEmail3"
             app:layout_constraintTop_toTopOf="@+id/guideline29"
             app:layout_constraintVertical_bias="0.367" />
+
+        <Button
+            android:id="@+id/add4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:text="confirm"
+            app:layout_constraintBottom_toTopOf="@+id/guideline22"
+            app:layout_constraintEnd_toStartOf="@+id/guideline23"
+            app:layout_constraintHorizontal_bias="0.777"
+            app:layout_constraintStart_toEndOf="@+id/newEmail4"
+            app:layout_constraintTop_toTopOf="@+id/guideline30"
+            app:layout_constraintVertical_bias="0.532" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline19"
@@ -176,7 +204,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="serif"
-            android:text="- Enter the email of a new admin:"
+            android:text="- Enter the email to make a normal user admin:"
             android:textColor="#070707"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/newEmail2"
@@ -199,6 +227,20 @@
             app:layout_constraintStart_toStartOf="@+id/guideline20"
             app:layout_constraintTop_toTopOf="@+id/guideline29"
             app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:fontFamily="serif"
+            android:text="- Enter an email to make an admin normal user: "
+            android:textColor="#050505"
+            app:layout_constraintBottom_toTopOf="@+id/newEmail4"
+            app:layout_constraintEnd_toStartOf="@+id/guideline23"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline20"
+            app:layout_constraintTop_toTopOf="@+id/guideline30" />
 
         <TextView
             android:id="@+id/textView8"

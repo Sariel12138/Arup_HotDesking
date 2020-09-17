@@ -28,5 +28,8 @@
     <string name="failMessage">Fail, please try again!</string>
     <string name="deleteUserSuccess">Delete successfully!</string>
     <string name="deleteFail">The user does not exist</string>
+    <string name="upgradeSuccess">Upgrade to admin successfully!</string>
+    <string name="degradeSuccess">Degrade to normal user successfully!</string>
+
 
 </resources>
