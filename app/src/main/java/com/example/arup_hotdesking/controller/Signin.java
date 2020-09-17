@@ -31,35 +31,32 @@ public class Signin extends AppCompatActivity {
     ProgressBar progressBar;
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
-    DocumentSnapshot result;
     static String deskKey, seat;
+
+    Calendar calendar = Calendar.getInstance();
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    final String date = simpleDateFormat.format(calendar.getTime());
+
+    SimpleDateFormat sdfDay = new SimpleDateFormat("dd");
+    final String day = sdfDay.format(calendar.getTime());
+
+    SimpleDateFormat sdfMonth = new SimpleDateFormat("M");
+    final String month = sdfMonth.format(calendar.getTime());
+
+    SimpleDateFormat sdfYear = new SimpleDateFormat("YYYY");
+    final String year = sdfYear.format(calendar.getTime());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
-
         progressBar = findViewById(R.id.progressBar);
         currDate= findViewById(R.id.tv_date);
+        currDate.setText(date);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
-
         final String userID = firebaseAuth.getCurrentUser().getEmail();
-
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        final String date = simpleDateFormat.format(calendar.getTime());
-
-        SimpleDateFormat sdfDay = new SimpleDateFormat("dd");
-        final String day = sdfDay.format(calendar.getTime());
-
-        SimpleDateFormat sdfMonth = new SimpleDateFormat("M");
-        final String month = sdfMonth.format(calendar.getTime());
-
-        SimpleDateFormat sdfYear = new SimpleDateFormat("YYYY");
-        final String year = sdfYear.format(calendar.getTime());
-
         progressBar.setVisibility(View.VISIBLE);
 
         firebaseFirestore.collection("BookingRecords").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -68,7 +65,6 @@ public class Signin extends AppCompatActivity {
                 String currUser;
                 List<String> id = new ArrayList<>();
                 List<String> email = new ArrayList<>();
-                String[] records;
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         currUser = document.getString("email");
@@ -85,12 +81,12 @@ public class Signin extends AppCompatActivity {
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 String currRange, verDay, verMonth, verYear;
                                 boolean contDay, contMonth, contYear;
-
                                 DocumentSnapshot document = task.getResult();
                                 List<String> collect = (List<String>) document.get("bookingRange");
 
                                 //current list index
                                 currRange = collect.toString() + "\n";
+                                Log.d("TAG", currRange);
 
                                 contDay = currRange.contains("day=" + day);
                                 contMonth = currRange.contains("month=" + month);
@@ -107,27 +103,24 @@ public class Signin extends AppCompatActivity {
                                     Toast.makeText(Signin.this, "You got a booking today!", Toast.LENGTH_SHORT).show();
                                     finish();
                                     startActivity(new Intent(Signin.this, Scanner.class));
-
                                 } else {
 
                                     finish();
                                     startActivity(new Intent(Signin.this, MainActivity.class));
-
                                 }
-
-
                             }
 
                         });
                     }
                 } else {
                     Toast.makeText(Signin.this, "Error", Toast.LENGTH_SHORT).show();
-                    Log.d("TAG", "Error");
+                    Log.d("TAG", "Error: "+task.getException());
                 }
             }
         });
 
     }
+
     public  static String getKeyID(){
         return deskKey;
     }

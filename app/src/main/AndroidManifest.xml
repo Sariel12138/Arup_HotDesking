@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".controller.CheckinReports"></activity>
+        <activity android:name=".controller.Export"></activity>
+        <activity android:name=".controller.CheckinReports" />
         <activity android:name=".controller.Scanner" />
         <activity android:name=".controller.Signin" />
         <activity android:name=".controller.RegisterActivity" />
@@ -31,6 +32,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.exportcsv.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
 
         <meta-data
             android:name="preloaded_fonts"

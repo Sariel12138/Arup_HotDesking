@@ -5,17 +5,17 @@
     android:id="@+id/checkin_single"
     android:layout_width="match_parent"
 
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/list_attempt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="337dp"
+        android:layout_marginTop="80dp"
         android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/list_datetime"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.144"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,25 +23,25 @@
         android:id="@+id/list_datetime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="337dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/list_user"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.144"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_attempt" />
+        app:layout_constraintTop_toBottomOf="@+id/list_attempt"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/list_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="336dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/list_seatname"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.144"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/list_datetime" />
 
@@ -49,12 +49,11 @@
         android:id="@+id/list_seatname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="337dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.144"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/list_user" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
