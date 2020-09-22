@@ -101,4 +101,19 @@
         app:layout_constraintVertical_bias="0.238"
         tools:text="Seat 001" />
 
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:textOff="Lock"
+        android:textOn="Unlock"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/titleline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.862"
+        app:layout_constraintStart_toEndOf="@+id/seatID"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.088" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
