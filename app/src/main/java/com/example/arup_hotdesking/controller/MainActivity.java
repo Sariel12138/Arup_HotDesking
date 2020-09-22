@@ -21,7 +21,9 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.PopupWindow;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,8 +34,13 @@ import com.example.arup_hotdesking.R;
 import com.example.arup_hotdesking.model.BookingRecord;
 import com.example.arup_hotdesking.model.MyAdapter;
 import com.example.arup_hotdesking.model.UserViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
 
@@ -68,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 mNavigationView.getMenu().getItem(4).setVisible(aBoolean);
                 mNavigationView.getMenu().getItem(5).setVisible(aBoolean);
                 mNavigationView.getMenu().getItem(6).setVisible(aBoolean);
+
             }
         });
         navController = Navigation.findNavController(this, R.id.fragment);
@@ -143,7 +151,54 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void seatPopupWindow(View view,HotArea hotArea){
+
+
         popupView = getLayoutInflater().inflate(R.layout.seat_popup_window,null);
+
+        final Switch lock =  popupView.findViewById(R.id.switch1);
+
+        userViewModel.getIsAdmin().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if(aBoolean) {
+                    lock.setVisibility(View.VISIBLE);
+                }else{
+                    lock.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final DocumentReference deskLock = db.collection("Desks").document(hotArea.getAreaTitle());
+
+        deskLock.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    String isActive = task.getResult().getString("Active");
+                    if(isActive.equals("True")) {
+                        lock.setChecked(true);
+                    }else if(isActive.equals("False")){
+                       lock.setChecked(false);
+                    }
+                }
+            }
+        });
+
+        lock.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    deskLock.update("Active", "True");
+                }else {
+                    deskLock.update("Active", "False");
+                }
+            }
+        });
+
+
+
         PopupWindow popupWindow = new PopupWindow(popupView,800,1200);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setClippingEnabled(false);
@@ -316,9 +371,33 @@ public class MainActivity extends AppCompatActivity {
     class HotClickListener implements HotClickView.OnClickListener{
 
         @Override
-        public void OnClick(View view, HotArea hotArea) {
-            seatPopupWindow(view,hotArea);
+        public void OnClick(final View view, final HotArea hotArea) {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            final DocumentReference deskLock = db.collection("Desks").document(hotArea.getAreaTitle());
 
+            userViewModel.getIsAdmin().observe(MainActivity.this, new Observer<Boolean>() {
+                @Override
+                public void onChanged(Boolean aBoolean) {
+                    if(aBoolean) {
+                        seatPopupWindow(view, hotArea);
+                    }else{
+                        deskLock.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    String isActive = task.getResult().getString("Active");
+                                    if(isActive.equals("True")) {
+                                        seatPopupWindow(view, hotArea);
+                                    }else if(isActive.equals("False")){
+                                        Toast.makeText(MainActivity.this,hotArea.getAreaTitle()+" is locked down!",Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            });
         }
     }
 
