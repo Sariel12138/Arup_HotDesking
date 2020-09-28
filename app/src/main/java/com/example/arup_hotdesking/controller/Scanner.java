@@ -93,8 +93,9 @@ public class Scanner extends AppCompatActivity {
                             attempt="Denied";
                             addDB(attempt);
                             Toast.makeText(Scanner.this, "Incorrect Desk! Please try again.", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(Scanner.this, MainActivity.class));
                             finish();
+                            startActivity(new Intent(Scanner.this, MainActivity.class));
+
                         }
 
                     }
@@ -129,7 +130,7 @@ public class Scanner extends AppCompatActivity {
         db.collection("CheckinRecords").document(id).set(details).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(Scanner.this, "Added!", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(Scanner.this, "Added!", Toast.LENGTH_SHORT).show();
             }
         })
                 .addOnFailureListener(new OnFailureListener() {

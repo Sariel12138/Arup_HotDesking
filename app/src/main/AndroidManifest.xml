@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".controller.Export"></activity>
+        <activity android:name=".controller.BookingDateRange"></activity>
+        <activity android:name=".controller.checkingDateRange" />
+        <activity android:name=".controller.BookingReports" />
         <activity android:name=".controller.CheckinReports" />
         <activity android:name=".controller.Scanner" />
         <activity android:name=".controller.Signin" />

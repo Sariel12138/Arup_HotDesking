@@ -27,24 +27,24 @@ import java.util.List;
 
 public class Signin extends AppCompatActivity {
 
-    EditText currDate;
-    ProgressBar progressBar;
-    FirebaseAuth firebaseAuth;
-    FirebaseFirestore firebaseFirestore;
-    static String deskKey, seat;
+    private EditText currDate;
+    private ProgressBar progressBar;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore firebaseFirestore;
+    private static String deskKey, seat;
 
-    Calendar calendar = Calendar.getInstance();
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    final String date = simpleDateFormat.format(calendar.getTime());
+    private Calendar calendar = Calendar.getInstance();
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private final String date = simpleDateFormat.format(calendar.getTime());
 
-    SimpleDateFormat sdfDay = new SimpleDateFormat("dd");
-    final String day = sdfDay.format(calendar.getTime());
+    private SimpleDateFormat sdfDay = new SimpleDateFormat("dd");
+    private final String day = sdfDay.format(calendar.getTime());
 
-    SimpleDateFormat sdfMonth = new SimpleDateFormat("M");
-    final String month = sdfMonth.format(calendar.getTime());
+    private SimpleDateFormat sdfMonth = new SimpleDateFormat("M");
+    private final String month = sdfMonth.format(calendar.getTime());
 
-    SimpleDateFormat sdfYear = new SimpleDateFormat("YYYY");
-    final String year = sdfYear.format(calendar.getTime());
+    private SimpleDateFormat sdfYear = new SimpleDateFormat("YYYY");
+    private final String year = sdfYear.format(calendar.getTime());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

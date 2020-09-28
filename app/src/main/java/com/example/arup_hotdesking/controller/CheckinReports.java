@@ -2,113 +2,167 @@ package com.example.arup_hotdesking.controller;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.core.content.FileProvider;
 
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.arup_hotdesking.R;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+
 
 public class CheckinReports extends AppCompatActivity {
 
+    private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebaseFirestore;
-    private RecyclerView recyclerView;
-    private  FirestoreRecyclerAdapter adapter;
     private Button export;
+    private ListView listView;
+    private ArrayList<String> attempt = new ArrayList<>();
+    private ArrayList<String> datetime = new ArrayList<>();
+    private ArrayList<String> seatname = new ArrayList<>();
+    private ArrayList<String> user = new ArrayList<>();
+    private ArrayList<String> newattempt = new ArrayList<>();
+    private ArrayList<String> newdatetime = new ArrayList<>();
+    private ArrayList<String> newseatname = new ArrayList<>();
+    private ArrayList<String> newuser = new ArrayList<>();
+    private ArrayList<CheckinRecords> complete = new ArrayList<>();
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkin_reports);
 
-        firebaseFirestore= FirebaseFirestore.getInstance();
-        recyclerView= findViewById(R.id.checkinlist);
-        export= findViewById(R.id.btn_export);
+        firebaseAuth= FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        export = findViewById(R.id.btn_export);
+        listView = (ListView) findViewById(R.id.listView_checkins);
 
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        final String date = simpleDateFormat.format(calendar.getTime());
+        final String toCalendar= checkingDateRange.getCheckinTo();
+        final String fromCalendar= checkingDateRange.getCheckinFrom();
 
-        Query  query= firebaseFirestore.collection("CheckinRecords").orderBy("DateTime", Query.Direction.DESCENDING ).limit(200);
+    firebaseFirestore.collection("CheckinRecords").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        @Override
+        public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-        FirestoreRecyclerOptions<CheckinRecords> options= new FirestoreRecyclerOptions.Builder<CheckinRecords>()
-                .setQuery(query,CheckinRecords.class)
-                .build();
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    attempt.add(document.getString("Attempt"));
+                    datetime.add(document.getString("DateTime"));
+                    seatname.add(document.getString("SeatName"));
+                    user.add(document.getString("User"));
+                }
 
-         adapter= new FirestoreRecyclerAdapter<CheckinRecords, CheckinRecordsHolder>(options) {
+                    for (int i = 0; i < datetime.size(); i++) {
 
-             @NonNull
-             @Override
-             public CheckinRecordsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                 View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.checkin_item, parent, false );
-                 return new CheckinRecordsHolder(view);
-             }
+                        String date = datetime.get(i);
+                        Log.d("TAG", "Current ArrayList date: " + date);
+                        Date dateObj = null;
+                        Date fromObj = null;
+                        Date toObj = null;
+                        try {
+                            dateObj = dateFormat.parse(date);
+                            fromObj = dateFormat.parse(fromCalendar);
+                            toObj = dateFormat.parse(toCalendar);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        Calendar cal = Calendar.getInstance();
+                        Calendar fromCal = Calendar.getInstance();
+                        Calendar toCal = Calendar.getInstance();
+                        cal.setTime(dateObj);
+                        fromCal.setTime(fromObj);
+                        toCal.setTime(toObj);
 
-             @Override
-             protected void onBindViewHolder(@NonNull CheckinRecordsHolder holder, int position, @NonNull CheckinRecords model) {
-                 holder.attempt.setText(model.getAttempt());
-                 holder.datetime.setText(model.getDateTime());
-                 holder.user.setText(model.getUser());
-                 holder.seatname.setText(model.getSeatName());
-             }
-         };
+                        if (cal.before(toCal) && cal.after(fromCal)) {
+                            add(attempt.get(i).toString(), datetime.get(i).toString(), seatname.get(i).toString(), user.get(i).toString());
+                            newattempt.add(attempt.get(i));
+                            newdatetime.add(datetime.get(i));
+                            newseatname.add(seatname.get(i));
+                            newuser.add(user.get(i));
+                        }
 
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+                    }
 
+            } else {
+                Toast.makeText(CheckinReports.this, "Error" + task.getException(), Toast.LENGTH_SHORT).show();
+                Log.d("TAG", "Error: " + task.getException());
+            }
+        }
+
+    });
         export.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(CheckinReports.this, Export.class));
+                String email = firebaseAuth.getCurrentUser().getEmail().toString();
+                StringBuilder data = new StringBuilder();
+                data.append("User,Attempt,DateTime,Booked Seat");
+
+                for (int i = 0; i < newattempt.size(); i++) {
+                    data.append("\n" + newuser.get(i).toString() + "," + newattempt.get(i).toString() + "," + newdatetime.get(i).toString() + "," + newseatname.get(i).toString());
+                }
+
+                try {
+                    FileOutputStream out = openFileOutput("CheckinReport.csv", Context.MODE_PRIVATE);
+                    out.write(data.toString().getBytes());
+                    out.close();
+
+                    Context context = getApplicationContext();
+                    File fileLocation = new File(getFilesDir(), "CheckinReport.csv");
+                    Uri path = FileProvider.getUriForFile(context, "com.example.exportcsv.fileprovider", fileLocation);
+
+                    Intent fileIntent = new Intent(Intent.ACTION_SEND);
+                    fileIntent.setType("text/csv");
+
+                    fileIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
+                    fileIntent.putExtra(Intent.EXTRA_SUBJECT, "Checkin Attempt Report");
+                    fileIntent.putExtra(Intent.EXTRA_TEXT, "Hi, " + "\n\n" + "Attached is the check in attempts reports." + "\n\n" + "Regards," + "\n");
+                    fileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+                    fileIntent.putExtra(Intent.EXTRA_STREAM, path);
+                    startActivity(Intent.createChooser(fileIntent, "Send mail"));
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        });
+            });
 
     }
 
+        public void add (String attempt, String datetime, String seat, String user) {
 
-    private class CheckinRecordsHolder extends RecyclerView.ViewHolder{
+            CheckinRecords record = new CheckinRecords(attempt, datetime, seat, user);
+                complete.add(record);
+            CheckinListAdapter adapter = new CheckinListAdapter(this, R.layout.checkin_item, complete);
+              listView.setAdapter(adapter);
 
-        private TextView attempt;
-        private TextView datetime;
-        private TextView user;
-        private TextView seatname;
-
-
-        public CheckinRecordsHolder(@NonNull View itemView) {
-            super(itemView);
-
-            attempt= itemView.findViewById(R.id.list_attempt);
-            datetime= itemView.findViewById(R.id.list_datetime);
-            user= itemView.findViewById(R.id.list_user);
-            seatname= itemView.findViewById(R.id.list_seatname);
         }
     }
-
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        adapter.stopListening();
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
-        adapter.startListening();
-    }
-
-
-}

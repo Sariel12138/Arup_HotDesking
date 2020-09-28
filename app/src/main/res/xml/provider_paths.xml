@@ -1,5 +1,5 @@
-<path>
+<paths>
     <files-path
         name="data"
-        path="." />
-</path>
+        path="."/>
+</paths>

@@ -111,6 +111,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.signinseat:
                     signIn();
                         break;
+                    case R.id.bookRecord:
+                        bookingReports();
+                        break;
                     case R.id.checkinRecord:
                         checkinReports();
                         break;
@@ -128,8 +131,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void bookingReports(){
+        Intent intent= new Intent(MainActivity.this, BookingDateRange.class);
+        startActivity(intent);
+    }
+
     public void checkinReports(){
-        Intent intent= new Intent(MainActivity.this, CheckinReports.class);
+        Intent intent= new Intent(MainActivity.this, checkingDateRange.class);
         startActivity(intent);
     }
 
