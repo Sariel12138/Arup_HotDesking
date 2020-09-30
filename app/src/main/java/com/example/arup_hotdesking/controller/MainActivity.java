@@ -302,7 +302,7 @@ public class MainActivity extends AppCompatActivity {
                 List<Calendar> bookingRange = bookingRecords.get(i).getBookingRange();
                 for(int j=0;j<bookingRange.size();j++){
                     Calendar calendar = bookingRange.get(j);
-                    Log.d("reservedEmailDebug",calendar.getMonth()+"/"+calendar.getDay());
+                    Log.d("reservedEmailDebug",calendar.getMonth()+"/"+calendar.getDay()+" : "+calendarView.getCurMonth()+"/"+calendarView.getCurDay());
                     if(calendar.getDay() == calendarView.getCurDay() &&
                     calendar.getMonth() == calendarView.getCurMonth() &&
                     calendar.getYear() == calendarView.getCurYear())
