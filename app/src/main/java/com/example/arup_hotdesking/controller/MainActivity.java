@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
         int curMonth = calendarView.getCurMonth();
         int curYear = calendarView.getCurYear();
         String reservedEmail = userViewModel.getReservedEmail(curDay,curMonth,curYear);
-        reservedText.setText(reservedEmail);
+        reservedText.setText(reservedEmail==null?"No Bookings":reservedEmail);
         final StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(curDay).append("/").append(curMonth).append("/").append(curYear);
         db.collection("CheckinRecords").whereEqualTo("User",reservedEmail).whereEqualTo("SeatName",hotArea.getAreaTitle())
