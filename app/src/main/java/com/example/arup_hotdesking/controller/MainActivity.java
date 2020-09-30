@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
         MyAdapter myAdapter = new MyAdapter();
 
         userViewModel.getLiveBookingRecords().observe(this, new BookingRecordsObserver(calendarView,
-                 myAdapter,reservedText));
+                 myAdapter,reservedText,hotArea.getAreaTitle()));
 
         seatIDText.setText(hotArea.getAreaTitle());
 
@@ -249,26 +249,25 @@ public class MainActivity extends AppCompatActivity {
 
         userViewModel.getBookingResult().observe(this,new BookingResultObserver(popupWindow));
 
-//        int curDay = calendarView.getCurDay();
-//        int curMonth = calendarView.getCurMonth();
-//        int curYear = calendarView.getCurYear();
-//        String reservedEmail = userViewModel.getReservedEmail(curDay,curMonth,curYear,hotArea.getAreaTitle());
-//        reservedText.setText(reservedEmail==null?"No Bookings":reservedEmail);
-//        final StringBuilder stringBuilder = new StringBuilder();
-//        stringBuilder.append(curDay).append("/").append(curMonth).append("/").append(curYear);
-//        db.collection("CheckinRecords").whereEqualTo("User",reservedEmail).whereEqualTo("SeatName",hotArea.getAreaTitle())
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if(task.isSuccessful()){
-//                            for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
-//                                if(documentSnapshot.getString("DateTime").split(" ")[0].equals(stringBuilder.toString()))
-//                                    statusText.setText("In Use");
-//                            }
-//                        }
-//                    }
-//                });
+        int curDay = calendarView.getCurDay();
+        int curMonth = calendarView.getCurMonth();
+        int curYear = calendarView.getCurYear();
+        final StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(curDay).append("/").append(curMonth).append("/").append(curYear);
+        db.collection("CheckinRecords").whereEqualTo("SeatName",hotArea.getAreaTitle())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
+                                if(documentSnapshot.getString("DateTime").split(" ")[0].equals(stringBuilder.toString())
+                                && documentSnapshot.getString("Attempt").equals("Success"))
+                                    statusText.setText("In Use");
+                            }
+                        }
+                    }
+                });
 
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
@@ -284,11 +283,13 @@ public class MainActivity extends AppCompatActivity {
         CalendarView calendarView;
         TextView reservedText;
         MyAdapter myAdapter;
+        String deskTitle;
 
-        public BookingRecordsObserver(CalendarView calendarView,MyAdapter myAdapter,TextView reservedText){
+        public BookingRecordsObserver(CalendarView calendarView,MyAdapter myAdapter,TextView reservedText,String deskTitle){
             this.calendarView = calendarView;
             this.myAdapter = myAdapter;
             this.reservedText = reservedText;
+            this.deskTitle = deskTitle;
         }
 
         @Override
@@ -299,14 +300,16 @@ public class MainActivity extends AppCompatActivity {
             calendarView.update();
 
             for(int i=0;i<bookingRecords.size();i++){
-                List<Calendar> bookingRange = bookingRecords.get(i).getBookingRange();
-                for(int j=0;j<bookingRange.size();j++){
-                    Calendar calendar = bookingRange.get(j);
-                    Log.d("reservedEmailDebug",calendar.getMonth()+"/"+calendar.getDay()+" : "+calendarView.getCurMonth()+"/"+calendarView.getCurDay());
-                    if(calendar.getDay() == calendarView.getCurDay() &&
-                    calendar.getMonth() == calendarView.getCurMonth() &&
-                    calendar.getYear() == calendarView.getCurYear())
-                        reservedText.setText(bookingRecords.get(i).getEmail());
+                if(bookingRecords.get(i).getDeskTitle().equals(deskTitle)) {
+                    List<Calendar> bookingRange = bookingRecords.get(i).getBookingRange();
+                    for (int j = 0; j < bookingRange.size(); j++) {
+                        Calendar calendar = bookingRange.get(j);
+                        Log.d("reservedEmailDebug", calendar.getMonth() + "/" + calendar.getDay() + " : " + calendarView.getCurMonth() + "/" + calendarView.getCurDay());
+                        if (calendar.getDay() == calendarView.getCurDay() &&
+                                calendar.getMonth() == calendarView.getCurMonth() &&
+                                calendar.getYear() == calendarView.getCurYear())
+                            reservedText.setText(bookingRecords.get(i).getEmail());
+                    }
                 }
             }
         }
