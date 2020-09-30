@@ -236,6 +236,18 @@ public class MainActivity extends AppCompatActivity {
         Button book = popupView.findViewById(R.id.bookButton);
         MyAdapter myAdapter = new MyAdapter();
 
+        userViewModel.getLiveBookingRecords().observe(this, new BookingRecordsObserver(calendarView,
+                 myAdapter));
+
+        seatIDText.setText(hotArea.getAreaTitle());
+
+        setUpCustomCalendar(calendarView,book);
+
+        userViewModel.getDeskRecords(hotArea.getAreaId());
+        book.setOnClickListener(new BookingButtonClickListener(calendarView,hotArea));
+
+        userViewModel.getBookingResult().observe(this,new BookingResultObserver(popupWindow));
+
         int curDay = calendarView.getCurDay();
         int curMonth = calendarView.getCurMonth();
         int curYear = calendarView.getCurYear();
@@ -256,20 +268,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-        userViewModel.getLiveBookingRecords().observe(this, new BookingRecordsObserver(calendarView,
-                 myAdapter));
-
-        seatIDText.setText(hotArea.getAreaTitle());
-
-        setUpCustomCalendar(calendarView,book);
-
-        userViewModel.getDeskRecords(hotArea.getAreaId());
-        book.setOnClickListener(new BookingButtonClickListener(calendarView,hotArea));
-
-        userViewModel.getBookingResult().observe(this,new BookingResultObserver(popupWindow));
-
-
 
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
