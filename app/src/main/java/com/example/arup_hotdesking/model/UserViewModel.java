@@ -272,19 +272,19 @@ public class UserViewModel extends ViewModel {
 
     }
 
-    public String getReservedEmail(int day,int month, int year){
-        if(liveRecords.getValue() == null) return null;
+    public String getReservedEmail(int day,int month, int year,String deskTitle){
         String reservedEmail = null;
-        List<BookingRecord> bookingRecords = liveRecords.getValue();
-        for(int i=0;i<bookingRecords.size();i++){
-            List<Calendar> bookingRange = bookingRecords.get(i).getBookingRange();
-            for(int j=0;j<bookingRange.size();j++){
-                Calendar calendar = bookingRange.get(j);
-                if(calendar.getDay() == day &&
-                        calendar.getMonth() == month &&
-                        calendar.getYear() == year)
-                    reservedEmail = bookingRecords.get(i).getEmail();
-
+        for(int i=0;i<deskBookingRecords.size();i++){
+            if(deskBookingRecords.get(i).getDeskTitle().equals(deskTitle)) {
+                List<Calendar> bookingRange = deskBookingRecords.get(i).getBookingRange();
+                for (int j = 0; j < bookingRange.size(); j++) {
+                    Calendar calendar = bookingRange.get(j);
+                    Log.d("reservedEmailDebug",calendar.getMonth()+"/"+calendar.getDay());
+                    if (calendar.getDay() == day &&
+                            calendar.getMonth() == month &&
+                            calendar.getYear() == year)
+                        reservedEmail = deskBookingRecords.get(i).getEmail();
+                }
             }
         }
         return reservedEmail;

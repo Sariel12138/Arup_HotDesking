@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
         MyAdapter myAdapter = new MyAdapter();
 
         userViewModel.getLiveBookingRecords().observe(this, new BookingRecordsObserver(calendarView,
-                 myAdapter));
+                 myAdapter,reservedText));
 
         seatIDText.setText(hotArea.getAreaTitle());
 
@@ -251,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
         int curDay = calendarView.getCurDay();
         int curMonth = calendarView.getCurMonth();
         int curYear = calendarView.getCurYear();
-        String reservedEmail = userViewModel.getReservedEmail(curDay,curMonth,curYear);
+        String reservedEmail = userViewModel.getReservedEmail(curDay,curMonth,curYear,hotArea.getAreaTitle());
         reservedText.setText(reservedEmail==null?"No Bookings":reservedEmail);
         final StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(curDay).append("/").append(curMonth).append("/").append(curYear);
@@ -281,12 +281,13 @@ public class MainActivity extends AppCompatActivity {
 
     static class BookingRecordsObserver implements Observer<List<BookingRecord>>{
         CalendarView calendarView;
-        RecyclerView recyclerView;
+        TextView reservedText;
         MyAdapter myAdapter;
 
-        public BookingRecordsObserver(CalendarView calendarView,MyAdapter myAdapter){
+        public BookingRecordsObserver(CalendarView calendarView,MyAdapter myAdapter,TextView reservedText){
             this.calendarView = calendarView;
             this.myAdapter = myAdapter;
+            this.reservedText = reservedText;
         }
 
         @Override
