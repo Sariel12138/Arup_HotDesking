@@ -6,6 +6,7 @@ import androidx.core.content.FileProvider;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -148,20 +149,33 @@ public class BookingReports extends AppCompatActivity {
 
                 final String toCalendar = BookingDateRange.getBookingTo();
                 final String fromCalendar = BookingDateRange.getBookingFrom();
-
                 String[] CESplit;
                 String day, month, year;
 
                 for (int z = 0; z < collect.size(); z++) {
-
+                    String newMonth, finMonth, finDay;
                     CESplit = collect.get(z).toString().split(",");
                     year = CESplit[3].substring(6, 10);
-                    month = CESplit[10].substring(7,9);
-                    day = CESplit[35].substring(5,7);
+                    month = CESplit[10];
+                    day = CESplit[35];
 
-                    String date = day + "/" + month + "/" + year;
-                    //Log.d("TAG", "Desk ID: " + deskname + " Booking Date: " + date);
-                    //Log.d("TAG", "Current ArrayList date: " + date);
+                    if (month.contains("tD")) {
+                        newMonth = CESplit[11];
+                    } else {
+                        newMonth = CESplit[10];
+                    }
+
+                    if (newMonth.length() == 8) {
+                        finMonth = newMonth.substring(7, 8);
+                    } else {
+                        finMonth = newMonth.substring(7, 9);
+                    }
+
+                    if (day.length() == 7) {
+                        finDay = day.substring(5, 7);
+                    } else finDay = day.substring(5, 6);
+
+                    String date = finDay + "/" + finMonth + "/" + year;
                     Date dateObj = null;
                     Date fromObj = null;
                     Date toObj = null;
@@ -193,9 +207,8 @@ public class BookingReports extends AppCompatActivity {
                         listViewB.setAdapter(adapter);
                     }
 
-
                 }
 
-
             }
+
         }
