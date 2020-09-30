@@ -17,6 +17,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +42,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
 
@@ -56,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private Toolbar toolbar;
     private View popupView;
+    TextView reservedTag;
+    TextView reservedText;
+    TextView statusTag;
+    TextView statusText;
+
 
 
     @Override
@@ -164,13 +172,25 @@ public class MainActivity extends AppCompatActivity {
         popupView = getLayoutInflater().inflate(R.layout.seat_popup_window,null);
 
         final Switch lock =  popupView.findViewById(R.id.switch1);
+        reservedTag = popupView.findViewById(R.id.reservedTag);
+        reservedText = popupView.findViewById(R.id.reservedText);
+        statusTag = popupView.findViewById(R.id.statusTag);
+        statusText = popupView.findViewById(R.id.statusText);
 
         userViewModel.getIsAdmin().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if(aBoolean) {
+                    reservedTag.setVisibility(View.VISIBLE);
+                    reservedText.setVisibility(View.VISIBLE);
+                    statusTag.setVisibility(View.VISIBLE);
+                    statusText.setVisibility(View.VISIBLE);
                     lock.setVisibility(View.VISIBLE);
                 }else{
+                    reservedTag.setVisibility(View.INVISIBLE);
+                    reservedText.setVisibility(View.INVISIBLE);
+                    statusTag.setVisibility(View.INVISIBLE);
+                    statusText.setVisibility(View.INVISIBLE);
                     lock.setVisibility(View.INVISIBLE);
                 }
             }
@@ -218,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
         MyAdapter myAdapter = new MyAdapter();
 
         userViewModel.getLiveBookingRecords().observe(this, new BookingRecordsObserver(calendarView,
-                 myAdapter));
+                 myAdapter,reservedText));
 
         seatIDText.setText(hotArea.getAreaTitle());
 
@@ -229,7 +249,26 @@ public class MainActivity extends AppCompatActivity {
 
         userViewModel.getBookingResult().observe(this,new BookingResultObserver(popupWindow));
 
-
+//        int curDay = calendarView.getCurDay();
+//        int curMonth = calendarView.getCurMonth();
+//        int curYear = calendarView.getCurYear();
+//        String reservedEmail = userViewModel.getReservedEmail(curDay,curMonth,curYear,hotArea.getAreaTitle());
+//        reservedText.setText(reservedEmail==null?"No Bookings":reservedEmail);
+//        final StringBuilder stringBuilder = new StringBuilder();
+//        stringBuilder.append(curDay).append("/").append(curMonth).append("/").append(curYear);
+//        db.collection("CheckinRecords").whereEqualTo("User",reservedEmail).whereEqualTo("SeatName",hotArea.getAreaTitle())
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if(task.isSuccessful()){
+//                            for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
+//                                if(documentSnapshot.getString("DateTime").split(" ")[0].equals(stringBuilder.toString()))
+//                                    statusText.setText("In Use");
+//                            }
+//                        }
+//                    }
+//                });
 
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
@@ -243,12 +282,13 @@ public class MainActivity extends AppCompatActivity {
 
     static class BookingRecordsObserver implements Observer<List<BookingRecord>>{
         CalendarView calendarView;
-        RecyclerView recyclerView;
+        TextView reservedText;
         MyAdapter myAdapter;
 
-        public BookingRecordsObserver(CalendarView calendarView,MyAdapter myAdapter){
+        public BookingRecordsObserver(CalendarView calendarView,MyAdapter myAdapter,TextView reservedText){
             this.calendarView = calendarView;
             this.myAdapter = myAdapter;
+            this.reservedText = reservedText;
         }
 
         @Override
@@ -257,6 +297,18 @@ public class MainActivity extends AppCompatActivity {
             myAdapter.notifyDataSetChanged();
             calendarView.setOnCalendarInterceptListener(new CalendarIntercepter(bookingRecords));
             calendarView.update();
+
+            for(int i=0;i<bookingRecords.size();i++){
+                List<Calendar> bookingRange = bookingRecords.get(i).getBookingRange();
+                for(int j=0;j<bookingRange.size();j++){
+                    Calendar calendar = bookingRange.get(j);
+                    Log.d("reservedEmailDebug",calendar.getMonth()+"/"+calendar.getDay()+" : "+calendarView.getCurMonth()+"/"+calendarView.getCurDay());
+                    if(calendar.getDay() == calendarView.getCurDay() &&
+                    calendar.getMonth() == calendarView.getCurMonth() &&
+                    calendar.getYear() == calendarView.getCurYear())
+                        reservedText.setText(bookingRecords.get(i).getEmail());
+                }
+            }
         }
     }
 
