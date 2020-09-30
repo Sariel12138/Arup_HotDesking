@@ -273,6 +273,7 @@ public class UserViewModel extends ViewModel {
     }
 
     public String getReservedEmail(int day,int month, int year){
+        if(liveRecords.getValue() == null) return null;
         String reservedEmail = null;
         List<BookingRecord> bookingRecords = liveRecords.getValue();
         for(int i=0;i<bookingRecords.size();i++){
