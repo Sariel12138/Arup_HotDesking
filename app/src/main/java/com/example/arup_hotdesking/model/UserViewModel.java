@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.arup_hotdesking.R;
+import com.example.arup_hotdesking.controller.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -161,7 +162,6 @@ public class UserViewModel extends ViewModel {
                         liveRecords.setValue(deskBookingRecords);
                     }
                 });
-
     }
 
     public void removeBookingRecordsListener(){
@@ -270,6 +270,23 @@ public class UserViewModel extends ViewModel {
         userBookingRecords = bookingRecords;
         userLiveRecords.setValue(userBookingRecords);
 
+    }
+
+    public String getReservedEmail(int day,int month, int year){
+        String reservedEmail = null;
+        List<BookingRecord> bookingRecords = liveRecords.getValue();
+        for(int i=0;i<bookingRecords.size();i++){
+            List<Calendar> bookingRange = bookingRecords.get(i).getBookingRange();
+            for(int j=0;j<bookingRange.size();j++){
+                Calendar calendar = bookingRange.get(j);
+                if(calendar.getDay() == day &&
+                        calendar.getMonth() == month &&
+                        calendar.getYear() == year)
+                    reservedEmail = bookingRecords.get(i).getEmail();
+
+            }
+        }
+        return reservedEmail;
     }
 
 }
