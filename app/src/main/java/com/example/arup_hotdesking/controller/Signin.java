@@ -34,10 +34,10 @@ public class Signin extends AppCompatActivity {
     private static String deskKey, seat;
 
     private Calendar calendar = Calendar.getInstance();
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d/M/yyyy");
     private final String date = simpleDateFormat.format(calendar.getTime());
 
-    private SimpleDateFormat sdfDay = new SimpleDateFormat("dd");
+    private SimpleDateFormat sdfDay = new SimpleDateFormat("d");
     private final String day = sdfDay.format(calendar.getTime());
 
     private SimpleDateFormat sdfMonth = new SimpleDateFormat("M");
@@ -79,39 +79,50 @@ public class Signin extends AppCompatActivity {
                         firebaseFirestore.collection("BookingRecords").document(id.get(i).toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                String currRange, verDay, verMonth, verYear;
+                                String  verDay, verMonth, verYear, finMonth;
                                 boolean contDay, contMonth, contYear;
+
                                 DocumentSnapshot document = task.getResult();
-                                List<String> collect = (List<String>) document.get("bookingRange");
+                                ArrayList<String> collect = (ArrayList<String>) document.get("bookingRange");
+                                String currRange[]= collect.toString().split(",");
 
-                                //current list index
-                                currRange = collect.toString() + "\n";
-                                Log.d("TAG", currRange);
+                                    String currDay = currRange[35];
+                                    String currMonth = currRange[10];
+                                    String currYear = currRange[3];
 
-                                contDay = currRange.contains("day=" + day);
-                                contMonth = currRange.contains("month=" + month);
-                                contYear = currRange.contains("year=" + year);
+                                    Log.d("TAG", "Day: "+currDay+" Month: "+currMonth+" Year: "+currYear);
+                                    if (currMonth.contains("current")) {
+                                        finMonth = currRange[11];
+                                    } else{
+                                        finMonth = currRange[10];
+                                    }
 
-                                verDay = Boolean.toString(contDay);
-                                verMonth = Boolean.toString(contMonth);
-                                verYear = Boolean.toString(contYear);
+                                    Log.d("TAG", "HERE 4");
+                                    Log.d("TAG", "Current Day: " + currDay + " Current Month: " + finMonth + " Current Year: " + currYear);
+                                    contDay = currDay.equals(" day=" + day);
+                                    contMonth = finMonth.equals(" month=" + month);
+                                    contYear = currYear.equals(" year=" + year);
 
-                                if (verDay.equals("true") && verMonth.equals("true") && verYear.equals("true")) {
+                                    verDay = Boolean.toString(contDay);
+                                    verMonth = Boolean.toString(contMonth);
+                                    verYear = Boolean.toString(contYear);
+                                    Log.d("TAG", "Date Check: " + verDay + " | " + verMonth + " | " + verYear);
 
-                                    seat = document.getString("deskTitle");
-                                    deskKey = document.getString("deskID");
-                                    Toast.makeText(Signin.this, "You got a booking today!", Toast.LENGTH_SHORT).show();
-                                    finish();
-                                    startActivity(new Intent(Signin.this, Scanner.class));
-                                } else {
-
-                                    finish();
-                                    startActivity(new Intent(Signin.this, MainActivity.class));
+                                    if (verDay.equals("true") && verMonth.equals("true") && verYear.equals("true")) {
+                                        seat = document.getString("deskTitle");
+                                        deskKey = document.getString("deskID");
+                                        Toast.makeText(Signin.this, "You got a booking today!", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                        startActivity(new Intent(Signin.this, Scanner.class));
+                                    } else {
+                                        finish();
+                                        startActivity(new Intent(Signin.this, MainActivity.class));
+                                    }
                                 }
-                            }
-
+                           // }
                         });
-                    }
+                        }
+
                 } else {
                     Toast.makeText(Signin.this, "Error", Toast.LENGTH_SHORT).show();
                     Log.d("TAG", "Error: "+task.getException());
@@ -127,4 +138,51 @@ public class Signin extends AppCompatActivity {
     public  static String getSeat(){
         return seat;
     }
+ /*   public void toScanner(){
+        startActivity(new Intent(Signin.this, Scanner.class));
+    }
+    public void checkDate(String seatB, String desk, ArrayList collect){
+        String  verDay, verMonth, verYear, finMonth;
+        boolean contDay, contMonth, contYear;
+
+        for(int z=0; z< collect.size(); z++){
+
+            String[] splitDay = collect.get(z).toString().split(",");
+            String currDay = splitDay[35];
+            String currMonth= splitDay[10];
+            String currYear= splitDay[3];
+
+            if(currMonth.contains("current")){
+                finMonth=splitDay[11];
+            }else
+                finMonth=splitDay[10];
+
+            Log.d("TAG", "Current Day: "+ currDay+" Current Month: "+finMonth+" Current Year: "+currYear);
+            contDay = currDay.equals(" day=" + day);
+            contMonth = finMonth.equals(" month=" + month);
+            contYear = currYear.equals(" year=" + year);
+
+            verDay = Boolean.toString(contDay);
+            verMonth = Boolean.toString(contMonth);
+            verYear = Boolean.toString(contYear);
+            Log.d("TAG", "Date Check: "+ verDay+" | "+verMonth+" | "+verYear);
+            if (verDay.equals("true") && verMonth.equals("true") && verYear.equals("true")) {
+
+                seat = seatB;
+                deskKey = desk;
+                finish();
+                toScanner();
+
+               // status=true;
+
+
+                break;
+            } else {
+                finish();
+                //status=false;
+                startActivity(new Intent(Signin.this, MainActivity.class));
+            }
+        }
+       // return status;
+    }*/
 }
