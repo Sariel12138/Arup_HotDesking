@@ -261,6 +261,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
+                                Log.d("seatStatusDebug",documentSnapshot.getString("DateTime").split(" ")[0]+","+stringBuilder.toString());
                                 if(documentSnapshot.getString("DateTime").split(" ")[0].equals(stringBuilder.toString())
                                 && documentSnapshot.getString("Attempt").equals("Success"))
                                     statusText.setText("In Use");
