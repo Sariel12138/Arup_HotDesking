@@ -58,7 +58,7 @@ public class Scanner extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
-        Log.d("TAG", "SCANNER");
+
         firebaseAuth = FirebaseAuth.getInstance();
         db= FirebaseFirestore.getInstance();
         resultData = findViewById(R.id.tv_result);
@@ -142,7 +142,6 @@ public class Scanner extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        Log.d("TAG", "SCANNER Camera");
         super.onResume();
         requestForCamera();
     }

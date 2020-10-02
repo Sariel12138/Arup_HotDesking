@@ -85,7 +85,7 @@ public class BookingReports extends AppCompatActivity {
                                 ArrayList<String> currBooking;
 
                                 currBooking = (ArrayList<String>) document.get("bookingRange");
-                                 Log.d("TAG: ", "Current: "+currBooking);
+                                //Log.d("TAG: ", "Current: "+currBooking);
                                 currEmail = document.getString("email");
                                 currDeskTitle = document.getString("deskTitle");
                                 add(currEmail, currDeskTitle, currBooking);
