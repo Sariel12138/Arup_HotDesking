@@ -84,42 +84,12 @@ public class Signin extends AppCompatActivity {
 
                                 DocumentSnapshot document = task.getResult();
                                 ArrayList<String> collect = (ArrayList<String>) document.get("bookingRange");
-                                String currRange[]= collect.toString().split(",");
 
-                                    String currDay = currRange[35];
-                                    String currMonth = currRange[10];
-                                    String currYear = currRange[3];
+                                String currSeat = document.getString("deskTitle");
+                                String currDesk = document.getString("deskID");
+                                checkDate(currSeat, currDesk, collect);
 
-                                    Log.d("TAG", "Day: "+currDay+" Month: "+currMonth+" Year: "+currYear);
-                                    if (currMonth.contains("current")) {
-                                        finMonth = currRange[11];
-                                    } else{
-                                        finMonth = currRange[10];
-                                    }
-
-                                    Log.d("TAG", "HERE 4");
-                                    Log.d("TAG", "Current Day: " + currDay + " Current Month: " + finMonth + " Current Year: " + currYear);
-                                    contDay = currDay.equals(" day=" + day);
-                                    contMonth = finMonth.equals(" month=" + month);
-                                    contYear = currYear.equals(" year=" + year);
-
-                                    verDay = Boolean.toString(contDay);
-                                    verMonth = Boolean.toString(contMonth);
-                                    verYear = Boolean.toString(contYear);
-                                    Log.d("TAG", "Date Check: " + verDay + " | " + verMonth + " | " + verYear);
-
-                                    if (verDay.equals("true") && verMonth.equals("true") && verYear.equals("true")) {
-                                        seat = document.getString("deskTitle");
-                                        deskKey = document.getString("deskID");
-                                        Toast.makeText(Signin.this, "You got a booking today!", Toast.LENGTH_SHORT).show();
-                                        finish();
-                                        startActivity(new Intent(Signin.this, Scanner.class));
-                                    } else {
-                                        finish();
-                                        startActivity(new Intent(Signin.this, MainActivity.class));
-                                    }
-                                }
-                           // }
+                            }
                         });
                         }
 
@@ -138,9 +108,7 @@ public class Signin extends AppCompatActivity {
     public  static String getSeat(){
         return seat;
     }
- /*   public void toScanner(){
-        startActivity(new Intent(Signin.this, Scanner.class));
-    }
+
     public void checkDate(String seatB, String desk, ArrayList collect){
         String  verDay, verMonth, verYear, finMonth;
         boolean contDay, contMonth, contYear;
@@ -157,7 +125,7 @@ public class Signin extends AppCompatActivity {
             }else
                 finMonth=splitDay[10];
 
-            Log.d("TAG", "Current Day: "+ currDay+" Current Month: "+finMonth+" Current Year: "+currYear);
+           // Log.d("TAG", "Current Day: "+ currDay+" Current Month: "+finMonth+" Current Year: "+currYear);
             contDay = currDay.equals(" day=" + day);
             contMonth = finMonth.equals(" month=" + month);
             contYear = currYear.equals(" year=" + year);
@@ -165,24 +133,19 @@ public class Signin extends AppCompatActivity {
             verDay = Boolean.toString(contDay);
             verMonth = Boolean.toString(contMonth);
             verYear = Boolean.toString(contYear);
-            Log.d("TAG", "Date Check: "+ verDay+" | "+verMonth+" | "+verYear);
+           // Log.d("TAG", "Date Check: "+ verDay+" | "+verMonth+" | "+verYear);
             if (verDay.equals("true") && verMonth.equals("true") && verYear.equals("true")) {
 
                 seat = seatB;
                 deskKey = desk;
+                Toast.makeText(Signin.this, "You got a booking today!", Toast.LENGTH_SHORT).show();
                 finish();
-                toScanner();
-
-               // status=true;
-
-
+                startActivity(new Intent(Signin.this, Scanner.class));
                 break;
             } else {
+                Toast.makeText(Signin.this, "No Bookings today.!", Toast.LENGTH_SHORT).show();
                 finish();
-                //status=false;
-                startActivity(new Intent(Signin.this, MainActivity.class));
             }
         }
-       // return status;
-    }*/
+    }
 }
