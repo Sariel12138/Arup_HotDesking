@@ -72,10 +72,19 @@ public class CheckinReports extends AppCompatActivity {
 
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    attempt.add(document.getString("Attempt"));
-                    datetime.add(document.getString("DateTime"));
-                    seatname.add(document.getString("SeatName"));
-                    user.add(document.getString("User"));
+
+                    final String floorSelected = checkingDateRange.getFloor();
+                    String currDesk = document.getString("SeatName");
+
+                    if (currDesk.startsWith(floorSelected)) {
+                        attempt.add(document.getString("Attempt"));
+                        datetime.add(document.getString("DateTime"));
+                        seatname.add(document.getString("SeatName"));
+                        user.add(document.getString("User"));
+                    }
+                    if (attempt.size() < 1) {
+                        Toast.makeText(CheckinReports.this, "No Data Retrieved for this filter." , Toast.LENGTH_SHORT).show();
+                    }
                 }
 
                     for (int i = 0; i < datetime.size(); i++) {
@@ -99,6 +108,9 @@ public class CheckinReports extends AppCompatActivity {
                         fromCal.setTime(fromObj);
                         toCal.setTime(toObj);
 
+                        fromCal.add(Calendar.DAY_OF_MONTH, -1);
+                        toCal.add(Calendar.DAY_OF_MONTH, 1);
+
                         if (cal.before(toCal) && cal.after(fromCal)) {
                             add(attempt.get(i).toString(), datetime.get(i).toString(), seatname.get(i).toString(), user.get(i).toString());
                             newattempt.add(attempt.get(i));
@@ -113,6 +125,7 @@ public class CheckinReports extends AppCompatActivity {
                 Toast.makeText(CheckinReports.this, "Error" + task.getException(), Toast.LENGTH_SHORT).show();
                 Log.d("TAG", "Error: " + task.getException());
             }
+
         }
 
     });

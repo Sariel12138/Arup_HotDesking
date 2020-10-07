@@ -79,22 +79,24 @@ public class BookingReports extends AppCompatActivity {
                         firebaseFirestore.collection("BookingRecords").document(id.get(i).toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                String currDeskTitle, currEmail, currDate;
+                                final String floorSelected= BookingDateRange.getFloor();
+                                String currDeskTitle, currEmail;
 
                                 DocumentSnapshot document = task.getResult();
                                 ArrayList<String> currBooking;
 
                                 currBooking = (ArrayList<String>) document.get("bookingRange");
-                                //Log.d("TAG: ", "Current: "+currBooking);
                                 currEmail = document.getString("email");
                                 currDeskTitle = document.getString("deskTitle");
-                                add(currEmail, currDeskTitle, currBooking);
-
+                                if(currDeskTitle.startsWith(floorSelected)){
+                                    add(currEmail, currDeskTitle, currBooking);
+                                }
 
                             }
                         });
 
                     }
+
                 } else {
                     Toast.makeText(BookingReports.this, "Error" + task.getException(), Toast.LENGTH_SHORT).show();
 
@@ -107,7 +109,7 @@ public class BookingReports extends AppCompatActivity {
                         StringBuilder data = new StringBuilder();
                         data.append("User,Desk,Booking Details");
 
-                        for (int i = 0; i < email.size(); i++) {
+                        for (int i = 0; i < newemail.size(); i++) {
                             data.append("\n" + newemail.get(i).toString() + "," + newdesktitle.get(i).toString() + "," + newbookingRange.get(i).toString());
                         }
 
@@ -149,8 +151,10 @@ public class BookingReports extends AppCompatActivity {
 
                 final String toCalendar = BookingDateRange.getBookingTo();
                 final String fromCalendar = BookingDateRange.getBookingFrom();
+
                 String[] CESplit;
                 String day, month, year;
+
 
                 for (int z = 0; z < collect.size(); z++) {
                     String newMonth, finMonth, finDay;
@@ -193,13 +197,14 @@ public class BookingReports extends AppCompatActivity {
                     fromCal.setTime(fromObj);
                     toCal.setTime(toObj);
 
+                    fromCal.add(Calendar.DAY_OF_MONTH, -1);
+                    toCal.add(Calendar.DAY_OF_MONTH, 1);
+
                     if (cal.before(toCal) && cal.after(fromCal)) {
 
                         newemail.add(emailB);
                         newdesktitle.add(deskname);
                         newbookingRange.add(date);
-                        //Log.d("TAG", "New date: " + newbookingRange);
-                        //Log.d("TAG", "Date Size: " + newbookingRange.size());
                         BookinRecords record = new BookinRecords(emailB, deskname, date);
                         complete.add(record);
 
@@ -208,7 +213,9 @@ public class BookingReports extends AppCompatActivity {
                     }
 
                 }
-
+                if (complete.size() < 1) {
+                    Toast.makeText(BookingReports.this, "No Data Retrieved for this filter." , Toast.LENGTH_SHORT).show();
+                }
             }
 
         }
