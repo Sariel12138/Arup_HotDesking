@@ -97,7 +97,7 @@ public class BookingReports extends AppCompatActivity {
                     }
 
                 } else {
-                    Toast.makeText(BookingReports.this, "Error" + task.getException(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BookingReports.this, "Error: " + task.getException(), Toast.LENGTH_SHORT).show();
 
                 }
                 export.setOnClickListener(new View.OnClickListener() {

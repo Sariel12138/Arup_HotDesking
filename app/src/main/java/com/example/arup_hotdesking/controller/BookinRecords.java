@@ -14,6 +14,10 @@ public class BookinRecords {
         this.deskTitle = deskTitle;
         this.bookingRange = bookingRange;
     }
+    public BookinRecords(String email, String deskTitle) {
+        this.email = email;
+        this.deskTitle = deskTitle;
+    }
 
     public String getDeskTitle() {
         return deskTitle;

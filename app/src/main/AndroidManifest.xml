@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".controller.BookingDateRange"></activity>
+        <activity android:name=".controller.ReleaseBooking" />
+        <activity android:name=".controller.BookingDateRange" />
         <activity android:name=".controller.checkingDateRange" />
         <activity android:name=".controller.BookingReports" />
         <activity android:name=".controller.CheckinReports" />
@@ -20,7 +21,6 @@
         <activity android:name=".controller.Signin" />
         <activity android:name=".controller.RegisterActivity" />
         <activity android:name=".controller.MainActivity">
-
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
