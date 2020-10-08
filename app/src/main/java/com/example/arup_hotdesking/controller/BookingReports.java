@@ -47,12 +47,11 @@ public class BookingReports extends AppCompatActivity {
     private ArrayList<String> id = new ArrayList<>();
     private ArrayList<String> email = new ArrayList<>();
     private ArrayList<String> desktitle = new ArrayList<>();
-    private ArrayList<String> bookingRange = new ArrayList<>();
     private ArrayList<String> newemail = new ArrayList<>();
     private ArrayList<String> newdesktitle = new ArrayList<>();
     private ArrayList<String> newbookingRange = new ArrayList<>();
     private ArrayList<BookinRecords> complete = new ArrayList<>();
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,12 +209,11 @@ public class BookingReports extends AppCompatActivity {
 
                         BookinListAdapter adapter = new BookinListAdapter(this, R.layout.bookin_item, complete);
                         listViewB.setAdapter(adapter);
+
                     }
 
                 }
-                if (complete.size() < 1) {
-                    Toast.makeText(BookingReports.this, "No Data Retrieved for this filter." , Toast.LENGTH_SHORT).show();
-                }
+
             }
 
         }

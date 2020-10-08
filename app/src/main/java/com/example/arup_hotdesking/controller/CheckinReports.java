@@ -51,7 +51,7 @@ public class CheckinReports extends AppCompatActivity {
     private ArrayList<String> newseatname = new ArrayList<>();
     private ArrayList<String> newuser = new ArrayList<>();
     private ArrayList<CheckinRecords> complete = new ArrayList<>();
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,15 +82,13 @@ public class CheckinReports extends AppCompatActivity {
                         seatname.add(document.getString("SeatName"));
                         user.add(document.getString("User"));
                     }
-                    if (attempt.size() < 1) {
-                        Toast.makeText(CheckinReports.this, "No Data Retrieved for this filter." , Toast.LENGTH_SHORT).show();
-                    }
+
                 }
 
                     for (int i = 0; i < datetime.size(); i++) {
 
                         String date = datetime.get(i);
-                        Log.d("TAG", "Current ArrayList date: " + date);
+
                         Date dateObj = null;
                         Date fromObj = null;
                         Date toObj = null;
@@ -122,7 +120,7 @@ public class CheckinReports extends AppCompatActivity {
                     }
 
             } else {
-                Toast.makeText(CheckinReports.this, "Error" + task.getException(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(CheckinReports.this, "Error: " + task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 Log.d("TAG", "Error: " + task.getException());
             }
 

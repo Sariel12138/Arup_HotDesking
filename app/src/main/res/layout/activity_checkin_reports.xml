@@ -11,13 +11,15 @@
         android:id="@+id/btn_export"
         android:layout_width="115dp"
         android:layout_height="48dp"
-        android:layout_marginTop="53dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="45dp"
+        android:layout_marginStart="268dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="29dp"
         android:text="Export"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/listView_checkins"
+        app:layout_constraintBottom_toTopOf="@+id/button5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
@@ -28,6 +30,36 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button4" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="201dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="107dp"
+        android:background="#03A9F4"
+        android:text="Emplyee Detail"
+        app:layout_constraintBottom_toTopOf="@+id/listView_checkins"
+        app:layout_constraintEnd_toStartOf="@+id/listView_checkins"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="210dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="4dp"
+        android:background="#03A9F4"
+        android:text="Attempt Status"
+        app:layout_constraintBottom_toTopOf="@+id/listView_checkins"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.995"
+        app:layout_constraintStart_toEndOf="@+id/listView_checkins"
         app:layout_constraintTop_toBottomOf="@+id/btn_export" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

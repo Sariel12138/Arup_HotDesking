@@ -127,6 +127,7 @@ public class BookingDateRange extends AppCompatActivity {
                     Toast.makeText(BookingDateRange.this, "Date range cannot be empty", Toast.LENGTH_SHORT).show();
                 } else if(toCalendar.before(fromCalendar)){
                     Toast.makeText(BookingDateRange.this, "Invalid 'To' date.", Toast.LENGTH_SHORT).show();
+                    tv_dateto.setText("");
                 }
 
                 if((actualFromDate!=null || actualToDate!=null)) {
