@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 mNavigationView.getMenu().getItem(4).setVisible(aBoolean);
                 mNavigationView.getMenu().getItem(5).setVisible(aBoolean);
                 mNavigationView.getMenu().getItem(6).setVisible(aBoolean);
+                mNavigationView.getMenu().getItem(7).setVisible(aBoolean);
 
             }
         });
