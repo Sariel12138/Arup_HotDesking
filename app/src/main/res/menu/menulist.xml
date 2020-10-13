@@ -25,6 +25,9 @@
         android:id="@+id/checkinRecord"
         android:title="Generate check in record" />
     <item
+        android:id="@+id/releaseBooking"
+        android:title="Release Booking" />
+    <item
         android:id="@+id/logout"
         android:title="Log out" />
 </menu>
