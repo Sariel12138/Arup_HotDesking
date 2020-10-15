@@ -1,0 +1,28 @@
+#google firebase integration service
+
+#Database name: Firestore
+#Database type: NoSQL
+
+#Database structure
+  -Collection BookingRecords
+  	-Document randomID
+		-ArrayList bookingRange
+			-Object Calendar.Class
+		-String deskID
+		-String deskTitle
+		-String email
+  -Collection CheckinRecords
+	-Document randomID
+		-String Attempt
+		-String DateTime
+		-String SeatName
+		-String User
+  -Collection Desks
+	-Document DeskTitle
+		-String Active
+		-String KEY
+		-String QR-code
+  -employees
+	-Document Email
+		-boolean admin
+		-String job
