@@ -43,7 +43,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_collectC"
+            android:id="@+id/tv_dateC"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="left"

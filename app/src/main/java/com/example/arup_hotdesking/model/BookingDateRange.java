@@ -1,4 +1,4 @@
-package com.example.arup_hotdesking.controller;
+package com.example.arup_hotdesking.model;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,10 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.arup_hotdesking.R;
+import com.example.arup_hotdesking.controller.BookingReports;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class BookingDateRange extends AppCompatActivity {
 

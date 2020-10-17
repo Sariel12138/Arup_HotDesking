@@ -1,4 +1,4 @@
-package com.example.arup_hotdesking.controller;
+package com.example.arup_hotdesking.model;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,7 +15,6 @@ import androidx.annotation.Nullable;
 import com.example.arup_hotdesking.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 class ViewHolder{
     TextView attempt;

@@ -11,7 +11,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -32,9 +31,11 @@ import com.dreamlive.hotimglibrary.entity.HotArea;
 import com.dreamlive.hotimglibrary.utils.FileUtils;
 import com.dreamlive.hotimglibrary.view.HotClickView;
 import com.example.arup_hotdesking.R;
+import com.example.arup_hotdesking.model.BookingDateRange;
 import com.example.arup_hotdesking.model.BookingRecord;
 import com.example.arup_hotdesking.model.MyAdapter;
 import com.example.arup_hotdesking.model.UserViewModel;
+import com.example.arup_hotdesking.model.checkingDateRange;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -126,6 +127,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.checkinRecord:
                         checkinReports();
                         break;
+                    case R.id.releaseBooking:
+                        releaseBooking();
+                        break;
                     case R.id.logout://log out
                         FirebaseAuth.getInstance().signOut();
                         signOutUI();
@@ -139,7 +143,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
+    public void releaseBooking(){
+        Intent intent= new Intent(MainActivity.this, ReleaseBooking.class);
+        startActivity(intent);
+    }
     public void bookingReports(){
         Intent intent= new Intent(MainActivity.this, BookingDateRange.class);
         startActivity(intent);

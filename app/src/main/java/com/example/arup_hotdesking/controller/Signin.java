@@ -143,7 +143,6 @@ public class Signin extends AppCompatActivity {
                 startActivity(new Intent(Signin.this, Scanner.class));
                 break;
             } else {
-                Toast.makeText(Signin.this, "No Bookings today.!", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }

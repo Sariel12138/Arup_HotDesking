@@ -1,4 +1,4 @@
-package com.example.arup_hotdesking.controller;
+package com.example.arup_hotdesking.model;
 
 import java.sql.Time;
 

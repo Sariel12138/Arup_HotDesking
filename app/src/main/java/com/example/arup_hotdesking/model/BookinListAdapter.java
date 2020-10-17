@@ -1,4 +1,4 @@
-package com.example.arup_hotdesking.controller;
+package com.example.arup_hotdesking.model;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,11 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.arup_hotdesking.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 
 class ViewHolderB{
     TextView email;

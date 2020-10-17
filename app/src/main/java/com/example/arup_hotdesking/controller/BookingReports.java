@@ -6,16 +6,17 @@ import androidx.core.content.FileProvider;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.arup_hotdesking.R;
+import com.example.arup_hotdesking.model.BookinListAdapter;
+import com.example.arup_hotdesking.model.BookinRecords;
+import com.example.arup_hotdesking.model.BookingDateRange;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,9 +24,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.protobuf.StringValue;
-
-import org.w3c.dom.Element;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -36,7 +34,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 public class BookingReports extends AppCompatActivity {
 
@@ -153,7 +150,6 @@ public class BookingReports extends AppCompatActivity {
 
                 String[] CESplit;
                 String day, month, year;
-
 
                 for (int z = 0; z < collect.size(); z++) {
                     String newMonth, finMonth, finDay;

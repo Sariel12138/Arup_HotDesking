@@ -1,4 +1,4 @@
-package com.example.arup_hotdesking.controller;
+package com.example.arup_hotdesking.model;
 
 import java.util.ArrayList;
 
@@ -13,10 +13,6 @@ public class BookinRecords {
         this.email = email;
         this.deskTitle = deskTitle;
         this.bookingRange = bookingRange;
-    }
-    public BookinRecords(String email, String deskTitle) {
-        this.email = email;
-        this.deskTitle = deskTitle;
     }
 
     public String getDeskTitle() {
