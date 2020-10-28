@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.arup_hotdesking.R;
 import com.example.arup_hotdesking.model.CheckinListAdapter;
-import com.example.arup_hotdesking.model.CheckinRecords;
+import com.example.arup_hotdesking.model.CheckinRecord;
 import com.example.arup_hotdesking.model.checkingDateRange;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -50,7 +50,7 @@ public class CheckinReports extends AppCompatActivity {
     private ArrayList<String> newdatetime = new ArrayList<>();
     private ArrayList<String> newseatname = new ArrayList<>();
     private ArrayList<String> newuser = new ArrayList<>();
-    private ArrayList<CheckinRecords> complete = new ArrayList<>();
+    private ArrayList<CheckinRecord> complete = new ArrayList<>();
     private SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy");
 
     @Override
@@ -170,7 +170,7 @@ public class CheckinReports extends AppCompatActivity {
 
         public void add (String attempt, String datetime, String seat, String user) {
 
-            CheckinRecords record = new CheckinRecords(attempt, datetime, seat, user);
+            CheckinRecord record = new CheckinRecord(attempt, datetime, seat, user);
                 complete.add(record);
             CheckinListAdapter adapter = new CheckinListAdapter(this, R.layout.checkin_item, complete);
               listView.setAdapter(adapter);

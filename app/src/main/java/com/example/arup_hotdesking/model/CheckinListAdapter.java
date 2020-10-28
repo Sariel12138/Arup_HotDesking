@@ -23,13 +23,13 @@ class ViewHolder{
     TextView user;
 }
 
-public class CheckinListAdapter extends ArrayAdapter<CheckinRecords> {
+public class CheckinListAdapter extends ArrayAdapter<CheckinRecord> {
 
     private Context mcontext;
     private int mresource;
     private int lastPosition=-1;
 
-    public CheckinListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<CheckinRecords> objects) {
+    public CheckinListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<CheckinRecord> objects) {
         super(context, resource, objects);
         this.mresource= resource;
         this.mcontext = context;
@@ -43,7 +43,7 @@ public class CheckinListAdapter extends ArrayAdapter<CheckinRecords> {
         String SeatName = getItem(position).getSeatName();
         String User = getItem(position).getUser();
 
-        CheckinRecords checkinRecords = new CheckinRecords(Attempt, DateTime, SeatName, User);
+        CheckinRecord checkinRecords = new CheckinRecord(Attempt, DateTime, SeatName, User);
         final View result;
         ViewHolder holder;
 

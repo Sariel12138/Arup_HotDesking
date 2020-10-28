@@ -2,15 +2,15 @@ package com.example.arup_hotdesking.model;
 
 import java.sql.Time;
 
-public class CheckinRecords {
+public class CheckinRecord {
 
     private String Attempt, DateTime, User, SeatName;
 
-    public CheckinRecords(){
+    public CheckinRecord(){
 
     }
 
-    public CheckinRecords(String attempt, String dateTime, String user, String seatName){
+    public CheckinRecord(String attempt, String dateTime, String user, String seatName){
         this.Attempt= attempt;
         this.DateTime=dateTime;
         this.User= user;

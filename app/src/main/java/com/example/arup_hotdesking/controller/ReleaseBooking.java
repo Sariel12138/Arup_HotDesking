@@ -2,6 +2,8 @@ package com.example.arup_hotdesking.controller;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.arup_hotdesking.R;
+import com.example.arup_hotdesking.model.CheckinRecord;
 import com.example.arup_hotdesking.model.ReleaseBookingAdapter;
 import com.example.arup_hotdesking.model.ReleaseBookingRecords;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class ReleaseBooking extends AppCompatActivity {
 
@@ -33,10 +37,12 @@ public class ReleaseBooking extends AppCompatActivity {
     private ListView listViewC;
     private TextView time;
     private ArrayList<String> id = new ArrayList<>();
-    private ArrayList<String> attempt = new ArrayList<>();
-    private ArrayList<String> dateArray = new ArrayList<>();
-    private ArrayList<String> desktitle = new ArrayList<>();
-    private ArrayList<String> email = new ArrayList<>();
+//    private ArrayList<String> attempt = new ArrayList<>();
+//    private ArrayList<String> dateArray = new ArrayList<>();
+//    private ArrayList<String> desktitle = new ArrayList<>();
+//    private ArrayList<String> email = new ArrayList<>();
+    private List<CheckinRecord> checkinRecords = new ArrayList<>();
+    private MutableLiveData<List<CheckinRecord>> LiveCheckinRecords = new MutableLiveData<>();
     private ArrayList<String> desktitleBook = new ArrayList<>();
     private ArrayList<String> emailBook = new ArrayList<>();
     private ArrayList<ReleaseBookingRecords> complete = new ArrayList<>();
@@ -83,17 +89,19 @@ public class ReleaseBooking extends AppCompatActivity {
 
                             if(sysDate.compareTo(recDate) == 0){
 
-                                attempt.add(document.getString("Attempt"));
-                                email.add(document.getString("User"));
-                                desktitle.add(document.getString("deskTitle"));
-                                dateArray.add(document.getString("DateTime"));
+//                                attempt.add(document.getString("Attempt"));
+//                                email.add(document.getString("User"));
+//                                desktitle.add(document.getString("deskTitle"));
+//                                dateArray.add(document.getString("DateTime"));
 
+                                CheckinRecord checkinRecord = document.toObject(CheckinRecord.class);
+                                checkinRecords.add(checkinRecord);
                             }
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-
                     }
+                    LiveCheckinRecords.setValue(checkinRecords);
                 }
 
             }
@@ -101,39 +109,41 @@ public class ReleaseBooking extends AppCompatActivity {
         });
 
 
-        firebaseFirestore.collection("BookingRecords").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        id.add(document.getId());
-                        desktitleBook.add(document.getString("deskTitle"));
-                        emailBook.add(document.getString("email"));
-                    }
+//        firebaseFirestore.collection("BookingRecords").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                        id.add(document.getId());
+//                        desktitleBook.add(document.getString("deskTitle"));
+//                        emailBook.add(document.getString("email"));
+//                    }
+//
+//                    for (int i = 0; i < id.size(); i++) {
+//                        firebaseFirestore.collection("BookingRecords").document(id.get(i).toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                                String currDeskTitle, currEmail;
+//                                DocumentSnapshot document = task.getResult();
+//                                ArrayList<String> currBooking;
+//
+//                                currBooking = (ArrayList<String>) document.get("bookingRange");
+//                                currEmail = document.getString("email");
+//
+//                                currDeskTitle = document.getString("deskTitle");
+//                                add(currEmail, currDeskTitle, currBooking);
+//                                //firebaseFirestore.collection("BookingRecords").document().delete()
+//                            }
+//                        });
+//
+//                    }
+//                }
+//
+//            }
+//
+//        });
 
-                    for (int i = 0; i < id.size(); i++) {
-                        firebaseFirestore.collection("BookingRecords").document(id.get(i).toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                String currDeskTitle, currEmail;
-                                DocumentSnapshot document = task.getResult();
-                                ArrayList<String> currBooking;
-
-                                currBooking = (ArrayList<String>) document.get("bookingRange");
-                                currEmail = document.getString("email");
-
-                                currDeskTitle = document.getString("deskTitle");
-                                add(currEmail, currDeskTitle, currBooking);
-                                //firebaseFirestore.collection("BookingRecords").document().delete()
-                            }
-                        });
-
-                    }
-                }
-
-            }
-
-        });
+        LiveCheckinRecords.observe(this, new CheckinRecordsObserver());
 
         release.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,6 +152,46 @@ public class ReleaseBooking extends AppCompatActivity {
 
             }
         });
+    }
+
+    class CheckinRecordsObserver implements Observer<List<CheckinRecord>>{
+
+        @Override
+        public void onChanged(List<CheckinRecord> checkinRecords) {
+            firebaseFirestore.collection("BookingRecords").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            id.add(document.getId());
+                            desktitleBook.add(document.getString("deskTitle"));
+                            emailBook.add(document.getString("email"));
+                        }
+
+                        for (int i = 0; i < id.size(); i++) {
+                            firebaseFirestore.collection("BookingRecords").document(id.get(i).toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    String currDeskTitle, currEmail;
+                                    DocumentSnapshot document = task.getResult();
+                                    ArrayList<String> currBooking;
+
+                                    currBooking = (ArrayList<String>) document.get("bookingRange");
+                                    currEmail = document.getString("email");
+
+                                    currDeskTitle = document.getString("deskTitle");
+                                    add(currEmail, currDeskTitle, currBooking);
+                                    //firebaseFirestore.collection("BookingRecords").document().delete()
+                                }
+                            });
+
+                        }
+                    }
+
+                }
+
+            });
+        }
     }
 
 
@@ -194,7 +244,7 @@ public class ReleaseBooking extends AppCompatActivity {
             currDate.setTime(recordTime);
 
             if (date.compareTo(strDate2) == 0) {
-                for(int a=0; a < attempt.size(); a++){
+                for(int a=0; a < checkinRecords.size(); a++){
                      if(!(emailB.equals(emailBook.get(a)) && deskname.equals(desktitleBook.get(a)))){
                         Log.d("TAG", "No Checkin");
                         Log.d("TAG", "Email: "+ emailB+" Desk: "+deskname+" Date: "+date);
