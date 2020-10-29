@@ -53,6 +53,7 @@ public class ReleaseBooking extends AppCompatActivity {
     //private SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     private SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy");
     private SimpleDateFormat dateFormat3 = new SimpleDateFormat("HH:mm a");
+    private String today = dateFormat.format(Calendar.getInstance().getTime());
     private String setTime= "09:30:50";
     //private String setTime2= "08:30:10";
 
@@ -69,6 +70,7 @@ public class ReleaseBooking extends AppCompatActivity {
         Date dateA = Calendar.getInstance().getTime();
         String strDateB = dateFormat3.format(dateA);
         time.setText(strDateB);
+        LiveCheckinRecords.observe(this, new CheckinRecordsObserver());
 
         firebaseFirestore.collection("CheckinRecords").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -80,14 +82,14 @@ public class ReleaseBooking extends AppCompatActivity {
 
                         currDate= document.getString("DateTime");
 
-                        Date date = Calendar.getInstance().getTime();
-                        String sysDate = dateFormat.format(date);
+//                        Date date = Calendar.getInstance().getTime();
+//                        String sysDate = dateFormat.format(date);
 
                         try {
                             Date date1=dateFormat.parse(currDate);
                             String recDate= dateFormat.format(date1);
 
-                            if(sysDate.compareTo(recDate) == 0){
+                            if(today.compareTo(recDate) == 0){
 
 //                                attempt.add(document.getString("Attempt"));
 //                                email.add(document.getString("User"));
@@ -143,7 +145,6 @@ public class ReleaseBooking extends AppCompatActivity {
 //
 //        });
 
-        LiveCheckinRecords.observe(this, new CheckinRecordsObserver());
 
         release.setOnClickListener(new View.OnClickListener() {
             @Override
