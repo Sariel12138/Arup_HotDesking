@@ -20,6 +20,9 @@ import com.haibin.calendarview.Calendar;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.MyViewHolder>{
 
     List<BookingRecord> bookingRecords = new ArrayList<>();
@@ -73,7 +76,9 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.MyVi
 
     }
 
-
+    /**
+     * a method to get the total number of booking records
+     */
     @Override
     public int getItemCount() {
         int itemCount = 0;
@@ -86,6 +91,9 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.MyVi
         return itemCount;
     }
 
+    /**
+     * a listener the delete record button
+     */
     private class DeleteClickListener implements View.OnClickListener{
         private BookingRecord bookingRecord;
         private Calendar bookDate;

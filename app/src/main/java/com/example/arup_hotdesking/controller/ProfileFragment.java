@@ -55,13 +55,6 @@ public class ProfileFragment extends Fragment {
 
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        FirebaseUser user = mAuth.getCurrentUser();
-//        initUI(user);
-//    }
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

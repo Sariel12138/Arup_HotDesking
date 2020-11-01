@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.bookseat://book a seat
                         navController.navigate(R.id.bookingFragment);
                         break;
-                    case R.id.myBookings://book a seat
+                    case R.id.myBookings://check my bookings
                         navController.navigate(R.id.myBookingFragment);
                         break;
                     case R.id.adminFragment://manage users
@@ -126,9 +126,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.checkinRecord:
                         checkinReports();
-                        break;
-                    case R.id.releaseBooking:
-                        releaseBooking();
                         break;
                     case R.id.logout://log out
                         FirebaseAuth.getInstance().signOut();

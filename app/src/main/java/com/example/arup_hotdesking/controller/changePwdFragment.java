@@ -57,7 +57,9 @@ public class changePwdFragment extends Fragment {
 
     }
 
-
+    /**
+     * a listener for new password text area, chaeck if the new password is valid
+     */
     private class PwdTextWatcher implements TextWatcher {
 
         EditText password;
@@ -97,6 +99,9 @@ public class changePwdFragment extends Fragment {
         }
     }
 
+    /**
+     * a listener for the confirm button
+     */
     private class changePwdBtnListener implements View.OnClickListener{
 
         @Override
@@ -120,10 +125,6 @@ public class changePwdFragment extends Fragment {
             });
         }
     }
-
-
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
